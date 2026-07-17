@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mobile Lab — Design System (Complete)</title>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* ===== COLOR ===== */
+    --accent:#FF0000; --accent-dk:#CC0000;
+    --ink:#111111; --body:#666666;
+    --divider:#CCCCCC; --hairline:#ECECEC;
+    --imgbg:#F4F4F4; --muted:#9A9A9A; --base:#FFFFFF;
+    /* ===== TYPE ===== */
+    --mono:"Courier New", Courier, monospace;
+    --serif:"Source Serif 4","Noto Serif",Georgia,serif;
+    /* ===== SPACE (px) ===== */
+    --s1:2px; --s2:6px; --s3:10px; --s4:16px; --s5:22px; --s6:26px;
+    --s7:34px; --s8:40px; --s9:52px; --s10:56px; --s11:64px; --s12:72px;
+    /* ===== LAYOUT ===== */
+    --content:607px; --header-h:72px; --radius:0px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--mono);color:var(--body);background:var(--base);line-height:1.5;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1000px;margin:0 auto;padding:48px 32px 120px}
+
+  /* section chrome */
+  .sec{padding:44px 0;border-top:1px solid var(--hairline)}
+  .kicker{font-family:var(--mono);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+  .sec > h2.title{font-family:var(--mono);font-size:26px;font-weight:700;color:var(--ink);margin:4px 0 6px;line-height:1.15}
+  .lead{font-size:13px;color:var(--body);max-width:680px;line-height:1.75;margin-bottom:10px}
+  code{font-family:var(--mono);background:#f6f6f6;padding:2px 6px;border-radius:3px;font-size:12.5px;color:#c0392b}
+  .card{border:1px solid var(--hairline);border-radius:8px;padding:24px;margin-top:16px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:760px){.grid2{grid-template-columns:1fr}}
+  .rowlabel{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:1px;width:210px;flex:none}
+
+  a{color:var(--accent);text-decoration:none;padding:1px 4px}
+  a:hover{color:#fff;background:var(--accent)}
+  .logo svg{display:block;height:52px;width:auto;color:var(--ink)}
+
+  /* ---------- TOC ---------- */
+  .toc{display:flex;flex-wrap:wrap;gap:6px 8px;margin-top:24px}
+  .toc a{font-family:var(--mono);font-size:12px;color:var(--body);border:1px solid var(--hairline);border-radius:20px;padding:5px 12px}
+  .toc a:hover{color:#fff;background:var(--accent);border-color:var(--accent)}
+
+  /* ---------- color ---------- */
+  .sw{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:14px;margin-top:6px}
+  .chip{border:1px solid var(--hairline);border-radius:6px;overflow:hidden}
+  .chip .c{height:66px}
+  .chip .m{padding:9px 11px;font-size:11.5px}
+  .chip .m b{display:block;color:var(--ink);margin-bottom:2px}
+  .chip .m span{color:var(--body)}
+
+  /* ---------- type specimens ---------- */
+  h1,.h1{font-family:var(--mono);font-weight:700;color:var(--ink);font-size:40px;line-height:1.05;letter-spacing:-.5px}
+  h2.h,.h2{font-family:var(--mono);font-weight:700;color:var(--ink);font-size:30px;line-height:1.12}
+  h3.h,.h3{font-family:var(--mono);font-weight:700;color:var(--ink);font-size:23px;line-height:1.2}
+  h4.h,.h4{font-family:var(--mono);font-weight:700;color:var(--ink);font-size:19px;line-height:1.25}
+  h5.h,.h5{font-family:var(--mono);font-weight:700;color:var(--ink);font-size:16px;line-height:1.3}
+  h6.h,.h6{font-family:var(--mono);font-weight:700;color:var(--body);font-size:13px;line-height:1.3;letter-spacing:2px;text-transform:uppercase}
+  .lede{font-family:var(--mono);font-size:19px;line-height:1.5;color:var(--ink)}
+  .p{font-family:var(--mono);font-size:16px;line-height:1.3;color:var(--body)}
+  .small{font-family:var(--mono);font-size:13px;color:var(--body)}
+  .overline{font-family:var(--mono);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--body)}
+  .serifH{font-family:var(--serif);font-weight:700;color:var(--ink);font-size:23px}
+  .typerow{display:flex;align-items:baseline;gap:18px;flex-wrap:wrap;border-top:1px dashed var(--hairline);padding:12px 0}
+
+  /* ---------- spacing scale ---------- */
+  .sprow{display:flex;align-items:center;gap:14px;padding:5px 0}
+  .spbar{height:14px;background:var(--accent);border-radius:2px}
+  .spname{font-family:var(--mono);font-size:12px;color:var(--body);width:130px;flex:none}
+
+  /* ---------- buttons ---------- */
+  .btns{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:6px}
+  .btn{font-family:var(--mono);font-size:14px;letter-spacing:.5px;padding:13px 24px;border-radius:var(--radius);cursor:pointer;border:1px solid transparent;display:inline-block}
+  .btn-primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .btn-primary:hover{background:var(--accent-dk);border-color:var(--accent-dk);color:#fff}
+  .btn-ghost{background:transparent;color:var(--ink);border-color:var(--ink)}
+  .btn-ghost:hover{background:var(--ink);color:#fff}
+  .btn-text{background:none;border:none;color:var(--accent);padding:2px 4px}
+  .btn-text:hover{color:#fff;background:var(--accent)}
+
+  /* ---------- forms ---------- */
+  .frm{max-width:var(--content);display:flex;flex-direction:column;gap:16px;margin-top:6px}
+  .field{display:flex;flex-direction:column;gap:6px}
+  .field label{font-family:var(--mono);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--body)}
+  .field input,.field textarea,.field select{font-family:var(--mono);font-size:15px;color:var(--ink);padding:11px 12px;border:1px solid var(--divider);border-radius:0;background:#fff;outline:none;width:100%}
+  .field input:focus,.field textarea:focus,.field select:focus{border-color:var(--accent)}
+  .check{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:14px;color:var(--ink)}
+  .check input{width:16px;height:16px;accent-color:var(--accent)}
+
+  /* ---------- content elements ---------- */
+  .rich{max-width:var(--content)}
+  .rich p{font-family:var(--mono);font-size:16px;line-height:1.4;color:var(--body);margin:0 0 14px}
+  .rich strong{font-family:var(--serif);font-weight:700;color:var(--ink)}
+  .rich ul,.rich ol{font-family:var(--mono);font-size:16px;color:var(--body);margin:0 0 14px 20px;line-height:1.5}
+  .rich blockquote{border-left:2px solid var(--accent);margin:0 0 14px;padding:4px 0 4px 16px;font-family:var(--mono);font-size:16px;line-height:1.4;color:var(--ink)}
+  hr.rule{border:none;border-top:1px solid var(--divider);margin:22px 0}
+  figure{margin:0}
+  figure .imgslot{width:100%;aspect-ratio:580/387;background:var(--imgbg);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:12px}
+  figcaption{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:8px}
+
+  /* ---------- patterns ---------- */
+  .measure{max-width:var(--content);border:1px dashed var(--accent);border-radius:4px;padding:20px;margin-top:6px}
+  .navbar{display:flex;align-items:center;justify-content:space-between;height:var(--header-h);padding:0 24px;border:1px solid var(--hairline);border-radius:6px;margin-top:6px}
+  .navbar .lk{display:flex;gap:24px;flex-wrap:wrap}
+  .navbar .lk a{font-family:var(--mono);font-size:16px;color:var(--accent)}
+  .navbar .lk a.active{font-weight:700;text-decoration:underline;color:var(--ink);background:none}
+  .navbar .lk a.active:hover{color:#fff;background:var(--accent)}
+  .feed .entry{border-top:1px solid var(--divider);padding:26px 0;display:flex;flex-direction:column;gap:14px}
+  .feed .entry:first-child{border-top:none;padding-top:0}
+  .pager{display:flex;gap:18px;flex-wrap:wrap;border-top:1px solid var(--divider);padding-top:22px;margin-top:8px}
+  .pager button{font-family:var(--mono);font-size:15px;letter-spacing:1px;cursor:pointer;background:none;border:none;padding:2px 4px;color:var(--accent)}
+  .pager button.active{color:var(--ink);font-weight:700;text-decoration:underline}
+  .cats{display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center}
+  .cats a{font-family:var(--mono);font-size:20px;line-height:1.9;color:var(--accent)}
+  .foot{display:flex;justify-content:center;gap:10px;border:1px solid var(--hairline);border-radius:6px;padding:22px;margin-top:6px;font-family:var(--mono);font-size:14px;color:var(--body);flex-wrap:wrap}
+  .foot .sep{color:var(--divider)}
+
+  /* ================= RESPONSIVE ================= */
+  img,svg,pre,table{max-width:100%}
+  body{overflow-x:hidden}
+  pre{overflow-x:auto}
+
+  /* tablet */
+  @media(max-width:900px){
+    .wrap{padding:40px 24px 100px}
+    h1,.h1{font-size:34px}
+    h2.h,.h2{font-size:26px}
+  }
+
+  /* mobile */
+  @media(max-width:640px){
+    .wrap{padding:30px 16px 80px}
+    .sec{padding:34px 0}
+    .sec > h2.title{font-size:21px}
+    h1,.h1{font-size:28px;letter-spacing:0}
+    h2.h,.h2{font-size:22px}
+    h3.h,.h3{font-size:20px}
+    .lede{font-size:17px}
+    .card{padding:18px}
+    /* type/spec rows stack */
+    .rowlabel,.spname{width:100%}
+    .typerow{gap:6px;padding:14px 0}
+    .sprow{flex-wrap:wrap}
+    /* nav demo: wrap instead of overflow */
+    .navbar{height:auto;flex-direction:column;align-items:flex-start;gap:14px;padding:16px}
+    .navbar .lk{gap:12px 16px}
+    .navbar .lk a{font-size:15px}
+    /* smaller heading logo */
+    .logo svg{height:40px}
+    /* tables shrink */
+    table{font-size:12px}
+    /* category list a touch smaller */
+    .cats a{font-size:18px}
+    /* buttons wrap */
+    .btns{gap:10px}
+    .btn{padding:12px 20px}
+  }
+
+  /* very small */
+  @media(max-width:380px){
+    h1,.h1{font-size:24px}
+    .navbar .lk{gap:10px 12px}
+    .navbar .lk a{font-size:14px}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ===== COVER ===== -->
+  <div class="logo"><svg viewBox="0 0 264 61" aria-label="Mobile Lab"><use href="#ml"/></svg></div>
+  <p class="lead" style="margin-top:14px;font-size:14px"><b style="color:var(--ink)">Design System</b> — หน่วยทั้งหมดตั้งเป็น token ใน <code>:root</code> / <code>theme.json</code></p>
+  <div class="toc">
+    <a href="#color">01 Color</a><a href="#type">02 Typography</a><a href="#headings">03 h1–h6</a>
+    <a href="#space">04 Spacing</a><a href="#layout">05 Layout</a><a href="#border">06 Borders</a>
+    <a href="#links">07 Links</a><a href="#buttons">08 Buttons</a><a href="#forms">09 Forms</a>
+    <a href="#content">10 Content</a><a href="#media">11 Media</a><a href="#nav">12 Nav</a>
+    <a href="#feed">13 Feed</a><a href="#pager">14 Pagination</a><a href="#cats">15 Category</a>
+    <a href="#footer">16 Footer</a><a href="#tokens">17 Tokens</a>
+  </div>
+
+  <!-- ===== 01 COLOR ===== -->
+  <section class="sec" id="color">
+    <div class="kicker">Foundations</div><h2 class="title">01 — Color</h2>
+    <p class="lead">accent มี option ใน editor: #FF0000 · #E4634A · #111111 · #666666 — ระบบใช้ <b>#FF0000</b></p>
+    <div class="sw">
+      <div class="chip"><div class="c" style="background:#FF0000"></div><div class="m"><b>Accent</b><span>#FF0000</span></div></div>
+      <div class="chip"><div class="c" style="background:#CC0000"></div><div class="m"><b>Accent dark</b><span>#CC0000 · btn hover</span></div></div>
+      <div class="chip"><div class="c" style="background:#FF0000;display:flex;align-items:center;justify-content:center;color:#fff;font:13px var(--mono)">link</div><div class="m"><b>Link hover</b><span>#FFF บน #FF0000</span></div></div>
+      <div class="chip"><div class="c" style="background:#111111"></div><div class="m"><b>Ink</b><span>#111111 · หัวข้อ</span></div></div>
+      <div class="chip"><div class="c" style="background:#666666"></div><div class="m"><b>Body</b><span>#666666 · เนื้อ</span></div></div>
+      <div class="chip"><div class="c" style="background:#9A9A9A"></div><div class="m"><b>Muted</b><span>#9A9A9A · placeholder</span></div></div>
+      <div class="chip"><div class="c" style="background:#CCCCCC"></div><div class="m"><b>Divider</b><span>#CCCCCC · คั่นรายการ</span></div></div>
+      <div class="chip"><div class="c" style="background:#ECECEC"></div><div class="m"><b>Hairline</b><span>#ECECEC · header/footer</span></div></div>
+      <div class="chip"><div class="c" style="background:#F4F4F4;border-right:1px solid #eee"></div><div class="m"><b>Image bg</b><span>#F4F4F4</span></div></div>
+      <div class="chip"><div class="c" style="background:#FFFFFF;border-right:1px solid #eee"></div><div class="m"><b>Base</b><span>#FFFFFF</span></div></div>
+      <div class="chip"><div class="c" style="background:#E4634A"></div><div class="m"><b>Coral (alt)</b><span>#E4634A</span></div></div>
+    </div>
+  </section>
+
+  <!-- ===== 02 TYPE ===== -->
+  <section class="sec" id="type">
+    <div class="kicker">Foundations</div><h2 class="title">02 — Typography</h2>
+    <p class="lead"><b>Mono</b> (Courier New) = ฟอนต์หลักเกือบทั้งหมด · <b>Serif</b> (Source Serif 4) = เน้น <code>&lt;strong&gt;</code>, blockquote, หัวข้อฟอร์ม</p>
+    <div class="grid2">
+      <div class="card"><div class="overline">Mono — Primary</div><div style="font-family:var(--mono);font-size:30px;color:var(--ink);margin-top:8px">AaBbCc 0123</div><div class="small" style="margin-top:6px">"Courier New", Courier, monospace</div></div>
+      <div class="card"><div class="overline">Serif — เน้นคำ (strong) เท่านั้น</div><div style="font-family:var(--serif);font-size:30px;color:var(--ink);margin-top:8px">AaBbCc 0123</div><div class="small" style="margin-top:6px">"Source Serif 4", "Noto Serif", serif · ใช้เฉพาะ &lt;strong&gt; · หัวข้อทั้งหมดเป็น mono</div></div>
+    </div>
+  </section>
+
+  <!-- ===== 03 HEADINGS ===== -->
+  <section class="sec" id="headings">
+    <div class="kicker">Foundations</div><h2 class="title">03 — Heading scale (h1–h6)</h2>
+    <p class="lead">Heading ทุกระดับ = Mono Bold, สี Ink, leading กระชับ · h6 ทำหน้าที่ overline/label (UPPER + tracking) · <span class="small">*h1/h2 ขยายต่อจาก build เพื่อให้สเกลครบ</span></p>
+    <div class="card">
+      <div class="typerow"><span class="rowlabel">h1 · 40 / 1.05 / -0.5</span><span class="h1">Mobile Lab</span></div>
+      <div class="typerow"><span class="rowlabel">h2 · 30 / 1.12</span><span class="h2">By the River</span></div>
+      <div class="typerow"><span class="rowlabel">h3 · 23 / 1.2  ← news title</span><span class="h3">DOI BOY @ NETFLIX</span></div>
+      <div class="typerow"><span class="rowlabel">h4 · 19 / 1.25</span><span class="h4">Soil Without Land</span></div>
+      <div class="typerow"><span class="rowlabel">h5 · 16 / 1.3</span><span class="h5">Cast &amp; Crew</span></div>
+      <div class="typerow"><span class="rowlabel">h6 · 13 / +2 / UPPER</span><span class="h6">November 2023</span></div>
+    </div>
+    <div class="card">
+      <div class="overline">Body & utility</div>
+      <div class="typerow"><span class="rowlabel">lede · 19 / 1.5</span><span class="lede">The other side of belief can always rise up.</span></div>
+      <div class="typerow"><span class="rowlabel">body · 16 / 1.3</span><span class="p">Mobile Lab experiments on new ways of human visual and sound perception.</span></div>
+      <div class="typerow"><span class="rowlabel">small · 13</span><span class="small">HD / 20 min / Color / 2011</span></div>
+      <div class="typerow"><span class="rowlabel">overline · 12 / +2 / UPPER</span><span class="overline">Synopsis</span></div>
+      <div class="typerow"><span class="rowlabel">serif · เน้นคำ &lt;strong&gt; เท่านั้น</span><span style="font-family:var(--serif);font-weight:700;font-size:19px;color:var(--ink)">Mobile Lab</span></div>
+    </div>
+  </section>
+
+  <!-- ===== 04 SPACING ===== -->
+  <section class="sec" id="space">
+    <div class="kicker">Foundations</div><h2 class="title">04 — Spacing scale</h2>
+    <p class="lead">สเกลระยะห่างที่ build ใช้จริง (px) — ใช้เป็น gap/padding/margin ให้สม่ำเสมอ</p>
+    <div class="card">
+      <div class="sprow"><span class="spname">s1 · 2</span><span class="spbar" style="width:2px"></span></div>
+      <div class="sprow"><span class="spname">s2 · 6</span><span class="spbar" style="width:6px"></span></div>
+      <div class="sprow"><span class="spname">s3 · 10</span><span class="spbar" style="width:10px"></span></div>
+      <div class="sprow"><span class="spname">s4 · 16</span><span class="spbar" style="width:16px"></span></div>
+      <div class="sprow"><span class="spname">s5 · 22</span><span class="spbar" style="width:22px"></span></div>
+      <div class="sprow"><span class="spname">s6 · 26</span><span class="spbar" style="width:26px"></span></div>
+      <div class="sprow"><span class="spname">s7 · 34</span><span class="spbar" style="width:34px"></span></div>
+      <div class="sprow"><span class="spname">s8 · 40</span><span class="spbar" style="width:40px"></span></div>
+      <div class="sprow"><span class="spname">s9 · 52</span><span class="spbar" style="width:52px"></span></div>
+      <div class="sprow"><span class="spname">s10 · 56</span><span class="spbar" style="width:56px"></span></div>
+      <div class="sprow"><span class="spname">s11 · 64</span><span class="spbar" style="width:64px"></span></div>
+      <div class="sprow"><span class="spname">s12 · 72</span><span class="spbar" style="width:72px"></span></div>
+    </div>
+  </section>
+
+  <!-- ===== 05 LAYOUT ===== -->
+  <section class="sec" id="layout">
+    <div class="kicker">Foundations</div><h2 class="title">05 — Layout & breakpoints</h2>
+    <p class="lead">คอลัมน์เนื้อหา <code>607px</code> จัดกึ่งกลาง · Header บาร์แนวนอน <code>72px</code> (โลโก้ซ้าย/เมนูขวา) sticky บน · Footer sticky ล่าง · โลโก้สูง 34 / 38 / 46px · hero aspect 607/405 · main padding 22 / 40 / 52-56px</p>
+    <div class="card">
+      <table style="width:100%;border-collapse:collapse;font-family:var(--mono);font-size:13px;color:var(--ink)">
+        <tr style="border-bottom:1px solid var(--hairline)"><td style="padding:8px 0;color:var(--body)">mobile</td><td>&lt; 640px</td><td style="color:var(--body)">drawer nav, 1 col, pad 22</td></tr>
+        <tr style="border-bottom:1px solid var(--hairline)"><td style="padding:8px 0;color:var(--body)">tablet</td><td>640–1023px</td><td style="color:var(--body)">pad 40</td></tr>
+        <tr><td style="padding:8px 0;color:var(--body)">desktop</td><td>≥ 1024px</td><td style="color:var(--body)">inline nav, pad 52–56</td></tr>
+      </table>
+    </div>
+    <div class="measure" style="text-align:center;font-family:var(--mono);font-size:11px;color:#c0392b;letter-spacing:1px">◄ 607px content column (centered) ►</div>
+  </section>
+
+  <!-- ===== 06 BORDERS ===== -->
+  <section class="sec" id="border">
+    <div class="kicker">Foundations</div><h2 class="title">06 — Borders & radius</h2>
+    <p class="lead">ทุกมุม <b>เหลี่ยม (radius 0)</b> ตามคาแรกเตอร์ typewriter · เส้น 2 ระดับ: <code>#CCCCCC</code> คั่นเนื้อหา (แทน &lt;hr&gt; เดิม) · <code>#ECECEC</code> เส้น chrome (header/footer)</p>
+    <div class="grid2">
+      <div class="card"><div class="overline">Divider #CCC</div><hr class="rule"></div>
+      <div class="card"><div class="overline">Hairline #ECEC</div><div style="border-top:1px solid var(--hairline);margin-top:22px"></div></div>
+    </div>
+  </section>
+
+  <!-- ===== 07 LINKS ===== -->
+  <section class="sec" id="links">
+    <div class="kicker">Elements</div><h2 class="title">07 — Links & states</h2>
+    <p class="lead">ลิงก์ = แดง · hover = <b>ตัวขาวบนพื้นแดง</b> (สไตล์เว็บเดิม) · active nav = ตัวหนา + ขีดเส้นใต้</p>
+    <div class="card" style="font-family:var(--mono);font-size:16px">
+      Default <a href="#">read more</a> &nbsp;·&nbsp; Hover <span style="color:#fff;background:var(--accent);padding:1px 4px">read more</span> &nbsp;·&nbsp; Active <span style="color:var(--ink);font-weight:700;text-decoration:underline">News</span>
+    </div>
+  </section>
+
+  <!-- ===== 08 BUTTONS ===== -->
+  <section class="sec" id="buttons">
+    <div class="kicker">Elements</div><h2 class="title">08 — Buttons</h2>
+    <p class="lead">Primary/submit = พื้นแดง ตัวขาว (hover เข้ม #CC0000) · Ghost = ขอบ ink (hover invert) · Text = ปุ่มตัวหนังสือ (year filter ก็ใช้แบบนี้)</p>
+    <div class="btns">
+      <button class="btn btn-primary">Send message</button>
+      <button class="btn btn-ghost">Secondary</button>
+      <button class="btn-text" style="font-family:var(--mono);font-size:15px;cursor:pointer">2023</button>
+    </div>
+  </section>
+
+  <!-- ===== 09 FORMS ===== -->
+  <section class="sec" id="forms">
+    <div class="kicker">Elements</div><h2 class="title">09 — Forms</h2>
+    <p class="lead">หัวข้อฟอร์ม (Contact/Shop) = <b>mono bold (h3)</b> ระบบเดียวกับหัวข้อ News/Press · Label = mono 12px UPPER +2px · input/textarea/select = ขอบ #CCC เหลี่ยม, focus = ขอบแดง · submit = ตัวขาวบนแดง</p>
+    <div class="card"><div class="frm">
+      <div class="h3" style="margin-bottom:4px">Get in touch</div>
+      <div class="field"><label>Name</label><input placeholder="Your name"></div>
+      <div class="field"><label>Email</label><input placeholder="you@email.com"></div>
+      <div class="field"><label>Subject</label><select><option>General</option><option>Print order</option><option>Press</option></select></div>
+      <div class="field"><label>Message</label><textarea placeholder="Your message…" style="min-height:90px"></textarea></div>
+      <label class="check"><input type="checkbox"> Subscribe to news updates</label>
+      <button class="btn btn-primary" style="align-self:flex-start">Send message</button>
+    </div></div>
+  </section>
+
+  <!-- ===== 10 CONTENT ===== -->
+  <section class="sec" id="content">
+    <div class="kicker">Elements</div><h2 class="title">10 — Content / rich text</h2>
+    <p class="lead">ย่อหน้า mono 16 · คำเน้น <code>&lt;strong&gt;</code> เป็น serif · list, blockquote, hr</p>
+    <div class="card"><div class="rich">
+      <p><strong>Mobile Lab</strong> Project experiments on new ways of human visual and sound perception different from normal human perception, researching historical, social, and political information recorded over many generations.</p>
+      <ul><li>Experimental documentary aesthetic</li><li>Border geographies of Southeast Asia</li><li>Living archives of marginalized people</li></ul>
+      <blockquote>“There is always the other side of established beliefs, and new beliefs can rise up.”</blockquote>
+      <hr class="rule">
+      <p class="small">a Project by <a href="#">Nontawat Numbenchapol</a></p>
+    </div></div>
+  </section>
+
+  <!-- ===== 11 MEDIA ===== -->
+  <section class="sec" id="media">
+    <div class="kicker">Elements</div><h2 class="title">11 — Media / figure</h2>
+    <p class="lead">รูปเต็มความกว้างคอลัมน์ · พื้นรอโหลด <code>#F4F4F4</code> · caption mono 12px muted · aspect ratio ตามรูปจริง</p>
+    <div class="measure"><figure><div class="imgslot">image slot · aspect 580/387</div><figcaption>photo by Itsara Ariyaeakanun</figcaption></figure></div>
+  </section>
+
+  <!-- ===== 12 NAV ===== -->
+  <section class="sec" id="nav">
+    <div class="kicker">Patterns</div><h2 class="title">12 — Navigation</h2>
+    <p class="lead">Desktop = บาร์แนวนอน เมนูชิดขวา, active หนา+ขีดเส้น · Mobile = hamburger → drawer เต็มจอ (ลิงก์ 28px กลาง, พื้นขาว 0.97, × มุมขวาบน)</p>
+    <div class="navbar">
+      <div class="logo"><svg viewBox="0 0 264 61" style="height:26px" aria-label="Mobile Lab"><use href="#ml"/></svg></div>
+      <div class="lk"><a class="active" href="#">News</a><a href="#">Press</a><a href="#">About</a><a href="#">Projects</a><a href="#">Communities</a><a href="#">Shop</a><a href="#">Contact</a></div>
+    </div>
+  </section>
+
+  <!-- ===== 13 FEED ===== -->
+  <section class="sec" id="feed">
+    <div class="kicker">Patterns</div><h2 class="title">13 — Feed entry (News / Press)</h2>
+    <p class="lead">date (h6/overline) → รูป → หัวข้อ (h3) → ย่อหน้า · คั่นด้วยเส้น #CCC ด้านบน (รายการแรกไม่มี)</p>
+    <div class="measure feed">
+      <div class="entry"><span class="overline">November 2023</span><div class="imgslot" style="aspect-ratio:580/580">image slot</div><span class="h3">DOI BOY @ NETFLIX</span><span class="p">Global release on NETFLIX — anywhere in the world.</span></div>
+      <div class="entry"><span class="overline">October 2023</span><div class="imgslot" style="aspect-ratio:580/388">image slot</div><span class="h3">DOI BOY — Rising Star Award</span><span class="p">Awat Ratanapintha received the Rising Star Award at BIFF 2023.</span></div>
+    </div>
+  </section>
+
+  <!-- ===== 14 PAGER ===== -->
+  <section class="sec" id="pager">
+    <div class="kicker">Patterns</div><h2 class="title">14 — Pagination = browse by year</h2>
+    <p class="lead">News &amp; Press กรองด้วย <b>ปุ่มปี</b> (ไม่ใช่เลข 1,2,3,4) · ปีที่เลือก = ink หนา ขีดเส้น · ปีอื่น = แดง</p>
+    <div class="measure"><div class="pager"><button class="active">2023</button><button>2022</button><button>2021</button><button>2014</button><button>2013</button><button>2012</button></div></div>
+  </section>
+
+  <!-- ===== 15 CATEGORY ===== -->
+  <section class="sec" id="cats">
+    <div class="kicker">Patterns</div><h2 class="title">15 — Category list</h2>
+    <p class="lead">Projects &amp; Communities: ลิสต์หมวดจัดกึ่งกลาง line-height 1.9</p>
+    <div class="measure"><div class="cats"><a href="#">Features</a><a href="#">Documentary</a><a href="#">Installations</a><a href="#">Performances</a></div></div>
+  </section>
+
+  <!-- ===== 16 FOOTER ===== -->
+  <section class="sec" id="footer">
+    <div class="kicker">Patterns</div><h2 class="title">16 — Footer</h2>
+    <p class="lead">Sticky ล่าง จัดกึ่งกลาง · เส้นบน #ECECEC · mono 13–14px</p>
+    <div class="foot"><span>© 2026 Mobile Lab Project Co., Ltd.</span><span class="sep">|</span><span>Site by <a href="#">SUFFIX</a></span></div>
+  </section>
+
+  <!-- ===== 17 TOKENS ===== -->
+  <section class="sec" id="tokens">
+    <div class="kicker">Handoff</div><h2 class="title">17 — Tokens</h2>
+    <p class="lead">ลง <code>theme.json</code> (WordPress) — สี/ฟอนต์/spacing/heading + hover ลง styles.css</p>
+    <pre style="font-family:var(--mono);font-size:12px;background:#f6f6f6;padding:18px;border-radius:6px;overflow:auto;line-height:1.5">"settings": {
+  "layout": { "contentSize": "607px", "wideSize": "1000px" },
+  "color": { "palette": [
+    {"slug":"accent","color":"#FF0000"}, {"slug":"accent-dk","color":"#CC0000"},
+    {"slug":"ink","color":"#111111"}, {"slug":"body","color":"#666666"},
+    {"slug":"muted","color":"#9A9A9A"}, {"slug":"divider","color":"#CCCCCC"},
+    {"slug":"hairline","color":"#ECECEC"}, {"slug":"image-bg","color":"#F4F4F4"},
+    {"slug":"base","color":"#FFFFFF"}
+  ]},
+  "typography": {
+    "fontFamilies": [
+      {"slug":"mono","fontFamily":"\"Courier New\", Courier, monospace"},
+      {"slug":"serif","fontFamily":"\"Source Serif 4\", \"Noto Serif\", Georgia, serif"}
+    ],
+    "fontSizes": [
+      {"slug":"h6","size":"13px"}, {"slug":"body","size":"16px"}, {"slug":"lede","size":"19px"},
+      {"slug":"h4","size":"19px"}, {"slug":"h3","size":"23px"}, {"slug":"h2","size":"30px"}, {"slug":"h1","size":"40px"}
+    ]
+  },
+  "spacing": { "spacingSizes": [
+    {"slug":"10","size":"2px"},{"slug":"20","size":"6px"},{"slug":"30","size":"10px"},
+    {"slug":"40","size":"16px"},{"slug":"50","size":"22px"},{"slug":"60","size":"26px"},
+    {"slug":"70","size":"34px"},{"slug":"80","size":"40px"},{"slug":"90","size":"56px"},{"slug":"100","size":"72px"}
+  ]}
+}
+/* styles.css */
+h1,h2,h3,h4,h5{font-family:var(--wp--preset--font-family--mono);font-weight:700;color:#111;line-height:1.2}
+a:hover{color:#fff;background:#FF0000}
+.btn-primary:hover{background:#CC0000}
+input:focus,textarea:focus,select:focus{border-color:#FF0000}</pre>
+  </section>
+
+</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="ml" viewBox="0 0 264 61">
+    <g transform="translate(0,61) scale(0.1,-0.1)" fill="currentColor" stroke="none"><path d="M656 483 c-13 -13 -5 -23 19 -23 l25 0 0 -140 c0 -77 4 -140 8 -140 4 0 13 5 19 11 8 8 13 8 17 0 4 -6 27 -11 50 -11 77 0 120 71 96 159 -6 22 -20 47 -33 56 -24 17 -92 20 -102 5 -15 -24 -26 -7 -23 37 l3 47 -36 2 c-21 2 -40 0 -43 -3z m189 -126 c35 -49 11 -136 -41 -151 -50 -15 -90 71 -65 137 18 48 77 55 106 14z"/><path d="M1070 474 c0 -8 8 -14 19 -14 23 0 31 -26 31 -101 0 -99 -10 -149 -31 -149 -11 0 -19 -6 -19 -14 0 -10 15 -14 60 -14 45 0 60 4 60 14 0 8 -9 14 -20 14 -19 0 -20 7 -20 139 l0 139 -40 0 c-28 1 -40 -3 -40 -14z"/><path d="M0 470 c0 -5 8 -10 18 -10 35 0 42 -21 42 -121 0 -114 -4 -129 -36 -129 -13 0 -24 -6 -24 -13 0 -10 18 -13 68 -13 66 1 95 16 50 26 -22 6 -23 9 -25 125 l-1 120 45 -138 c40 -121 48 -138 66 -135 16 2 27 27 60 131 22 70 44 127 49 127 9 0 1 -207 -9 -222 -2 -5 -13 -8 -24 -8 -10 0 -19 -6 -19 -14 0 -11 17 -13 73 -12 70 1 94 15 45 26 -19 5 -23 13 -26 53 -3 46 -2 47 25 47 53 0 70 -10 71 -41 3 -55 5 -60 21 -57 9 1 22 -1 30 -6 8 -5 27 -9 43 -8 18 0 33 -6 41 -19 6 -10 15 -19 19 -19 5 0 3 9 -4 20 -10 16 -9 23 10 43 32 34 39 81 16 114 -10 16 -17 31 -16 36 1 4 -5 7 -13 7 -12 0 -12 8 5 50 25 64 16 66 -11 3 -25 -59 -25 -59 -44 -43 -20 17 -90 -19 -90 -46 0 -21 -39 -30 -82 -19 -23 5 -24 9 -21 68 3 59 4 62 31 65 49 6 18 22 -42 22 l-58 0 -38 -125 c-22 -68 -41 -122 -44 -119 -3 2 -21 57 -41 122 l-35 117 -63 3 c-38 2 -62 -1 -62 -8z"/><path d="M954 465 c-4 -9 -2 -21 4 -27 15 -15 44 -1 40 19 -4 23 -36 29 -44 8z"/><path d="M1572 468 c3 -7 12 -13 22 -13 28 0 36 -26 36 -122 0 -108 -4 -123 -36 -123 -15 0 -24 -6 -24 -15 0 -13 19 -15 128 -13 l127 3 3 64 c2 48 0 62 -10 59 -7 -3 -14 -21 -16 -41 -4 -48 -20 -59 -84 -55 l-53 3 -3 109 c-3 111 5 139 36 134 8 -2 17 3 19 10 4 9 -15 12 -72 12 -57 0 -76 -3 -73 -12z"/><path d="M2095 461 c-3 -5 7 -11 22 -13 l28 -3 3 -122 3 -122 -28 -3 c-15 -2 -27 -7 -26 -13 3 -14 71 -19 86 -6 8 6 18 5 31 -5 38 -28 103 -14 138 30 28 34 24 117 -8 155 -30 36 -83 49 -128 33 -16 -7 -31 -10 -33 -8 -2 1 0 17 3 34 5 25 12 32 30 32 13 0 24 5 24 10 0 13 -137 13 -145 1z m215 -111 c15 -15 20 -33 20 -70 0 -59 -24 -90 -70 -90 -47 0 -70 31 -70 92 0 34 6 58 17 70 22 24 77 24 103 -2z"/><path d="M925 402 c-11 -11 -4 -22 15 -22 18 0 20 -7 20 -84 0 -80 -1 -85 -22 -88 -45 -6 -17 -23 42 -25 46 -1 60 1 60 13 0 8 -9 14 -20 14 -18 0 -20 8 -22 96 l-3 97 -32 2 c-18 1 -35 0 -38 -3z"/><path d="M1229 381 c-24 -25 -29 -37 -29 -81 0 -84 28 -119 96 -120 47 0 94 30 94 60 0 30 -19 34 -30 5 -25 -66 -130 -41 -130 30 0 11 20 15 83 17 81 3 82 3 85 31 2 20 -5 35 -27 57 -41 42 -100 42 -142 1z m119 -13 c6 -6 12 -19 12 -29 0 -17 -8 -19 -61 -19 -57 0 -60 1 -57 22 6 41 68 56 106 26z"/><path d="M1882 394 c-29 -20 -26 -59 3 -59 14 0 19 6 18 21 -2 16 5 24 23 28 31 8 64 -9 64 -33 0 -26 -18 -37 -70 -44 -108 -14 -105 -127 3 -127 24 0 48 5 55 12 8 8 15 8 26 -1 8 -7 27 -11 43 -9 25 3 28 7 31 46 2 25 -1 42 -7 42 -6 0 -11 -13 -11 -30 0 -20 -5 -30 -15 -30 -18 0 -17 -3 -20 88 -3 90 -19 112 -79 112 -23 0 -52 -7 -64 -16z m108 -126 c0 -31 -11 -45 -40 -56 -33 -12 -70 2 -70 26 0 32 18 41 98 51 6 0 12 -9 12 -21z"/><path d="M2384 216 c-8 -21 3 -36 27 -36 15 0 20 6 17 22 -4 27 -35 37 -44 14z"/></g>
+  </symbol>
+</svg>
+</body>
+</html>
