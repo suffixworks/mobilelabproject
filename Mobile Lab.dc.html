@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;600;700&amp;family=Source+Serif+4:wght@400;600;700&amp;family=Droid+Serif:wght@400;700&amp;display=swap" rel="stylesheet" type="text/css">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  html { scrollbar-gutter: stable; overflow-y: scroll; }
+  body { background: #ffffff; }
+  a { color: #FF0000; text-decoration: none; padding: 1px 4px; transition: color 0.25s ease, background-color 0.25s ease; }
+  a:hover { color: #ffffff; background: #FF0000; text-decoration: none; }
+  @keyframes mlPageFade { from { opacity: 0; } to { opacity: 1; } }
+</style>
+</helmet>
+<div style="{{ rootStyle }}">
+
+  <!-- ================= SIDEBAR / HEADER ================= -->
+  <header style="{{ sidebarStyle }}">
+    <div style="{{ brandRowStyle }}">
+      <a href="#" onClick="{{ goHome }}" style="{{ logoStyle }}" style-hover="{{ logoHoverStyle }}"><img src="assets/logo.svg" alt="Mobile Lab" style="{{ logoImgStyle }}"></a>
+      <sc-if value="{{ showHamburger }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ toggleDrawer }}" aria-label="Menu" style="{{ hamburgerStyle }}">
+          <span style="{{ barStyle }}"></span>
+          <span style="{{ barStyle }}"></span>
+          <span style="{{ barStyle }}"></span>
+        </button>
+      </sc-if>
+    </div>
+
+    <nav style="{{ navStyle }}">
+      <sc-for list="{{ pages }}" as="page" hint-placeholder-count="5">
+        <a href="#" onClick="{{ page.onSelect }}" style="{{ page.navLinkStyle }}">{{ page.name }}</a>
+      </sc-for>
+    </nav>
+  </header><main key="{{ activePage }}" style="{{ mainStyle }}">
+    <sc-if value="{{ isNews }}" hint-placeholder-val="{{ true }}">
+      <div style="{{ feedStyle }}">
+        <sc-for list="{{ news }}" as="item" hint-placeholder-count="4">
+          <article style="{{ item.entryStyle }}">
+            <p style="{{ dateStyle }}">{{ item.date }}</p>
+            <div style="{{ item.imgWrapStyle }}">
+              <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="{{ item.slotId }}" shape="rect" fit="cover" placeholder="{{ item.img }}" hint-size="100%,100%" style="position:absolute;top:0;left:0;width:100%;height:100%"></x-import>
+            </div>
+            <h2 style="{{ newsTitleStyle }}">{{ item.title }}</h2>
+            <sc-for list="{{ item.body }}" as="para" hint-placeholder-count="1">
+              <p style="{{ newsBodyStyle }}">{{ para }}</p>
+            </sc-for>
+          </article>
+        </sc-for>
+        <nav style="{{ pagerStyle }}">
+          <sc-for list="{{ yearButtons }}" as="yb" hint-placeholder-count="2">
+            <button onClick="{{ yb.onSelect }}" style="{{ yb.style }}">{{ yb.year }}</button>
+          </sc-for>
+        </nav>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isPress }}" hint-placeholder-val="{{ false }}">
+      <div style="{{ feedStyle }}">
+        <sc-for list="{{ press }}" as="item" hint-placeholder-count="4">
+          <article style="{{ item.entryStyle }}">
+            <p style="{{ dateStyle }}">{{ item.date }}</p>
+            <div style="{{ item.gridStyle }}">
+              <sc-for list="{{ item.images }}" as="im" hint-placeholder-count="1">
+                <div style="{{ im.wrapStyle }}">
+                  <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="{{ im.id }}" shape="rect" fit="cover" placeholder="{{ im.src }}" hint-size="100%,100%" style="position:absolute;top:0;left:0;width:100%;height:100%"></x-import>
+                </div>
+              </sc-for>
+            </div>
+            <h2 style="{{ newsTitleStyle }}">{{ item.title }}</h2>
+            <sc-for list="{{ item.body }}" as="para" hint-placeholder-count="1">
+              <p style="{{ newsBodyStyle }}">{{ para }}</p>
+            </sc-for>
+          </article>
+        </sc-for>
+        <nav style="{{ pagerStyle }}">
+          <sc-for list="{{ pressYearButtons }}" as="yb" hint-placeholder-count="2">
+            <button onClick="{{ yb.onSelect }}" style="{{ yb.style }}">{{ yb.year }}</button>
+          </sc-for>
+        </nav>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isAbout }}" hint-placeholder-val="{{ false }}">
+      <div style="{{ heroWrapStyle }}">
+        <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="mobilelab-hero" shape="rect" fit="cover" placeholder="opening.jpg" hint-size="100%,100%" style="position: static"></x-import>
+      </div>
+      <div style="{{ copyStyle }}">
+        <p style="position: static"><strong style="{{ strongStyle }}">Mobile Lab</strong> Project experiments and researches on new ways of human visual and sound perception different from normal human perception. The project researches historical, social, and political information recorded over many generations until they became living belief systems. The project aims to change the perception of those beliefs via recording and expression onto visual and aural media. The purpose is to open the minds of people who receive communications from Mobile Lab, so that there is always the another side of established beliefs and new beliefs can rise up.</p>
+        <p style="position: static">a Project by <a href="#">Nontawat Numbenchapol</a></p>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isProjects }}" hint-placeholder-val="{{ false }}">
+      <nav style="{{ projectsStyle }}">
+        <sc-for list="{{ projectCats }}" as="cat" hint-placeholder-count="4">
+          <a href="#" style="{{ projectLinkStyle }}">{{ cat }}</a>
+        </sc-for>
+      </nav>
+    </sc-if>
+
+    <sc-if value="{{ isCommunities }}" hint-placeholder-val="{{ false }}">
+      <nav style="{{ projectsStyle }}">
+        <sc-for list="{{ communityCats }}" as="cat" hint-placeholder-count="3">
+          <a href="#" style="{{ projectLinkStyle }}">{{ cat }}</a>
+        </sc-for>
+      </nav>
+    </sc-if>
+
+    <sc-if value="{{ isShop }}" hint-placeholder-val="{{ false }}">
+      <div style="{{ feedStyle }}">
+        <article style="{{ entryStyleFirst }}">
+          <div style="{{ shopImgWrapStyle }}">
+            <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="shop-poster" shape="rect" fit="cover" placeholder="poster.jpg" hint-size="100%,100%" style="position:absolute;top:0;left:0;width:100%;height:100%"></x-import>
+          </div>
+          <h2 style="{{ newsTitleStyle }}">Mr. Shadow — Limited Edition Print</h2>
+          <p style="{{ shopPriceStyle }}">THB 4,500 · Edition of 30</p>
+          <p style="{{ newsBodyStyle }}">Archival pigment print on Hahnemühle cotton paper, 42 × 59.4 cm (A2). Signed and numbered by Nontawat Numbenchapol. Each print ships rolled in a protective tube. To order or ask about international shipping, use the form below.</p>
+        </article>
+        <form onSubmit="{{ shopSubmit }}" style="{{ formStyle }}">
+          <h2 style="{{ formHeadStyle }}">Order / Enquiry</h2>
+          <div style="{{ fieldStyle }}">
+            <label style="{{ labelStyle }}">Name</label>
+            <input type="text" style="{{ inputStyle }}" placeholder="Your name">
+          </div>
+          <div style="{{ fieldStyle }}">
+            <label style="{{ labelStyle }}">Email</label>
+            <input type="email" style="{{ inputStyle }}" placeholder="you@email.com">
+          </div>
+          <div style="{{ fieldStyle }}">
+            <label style="{{ labelStyle }}">Message</label>
+            <textarea style="{{ textareaStyle }}" placeholder="Quantity, shipping country, questions…"></textarea>
+          </div>
+          <button type="submit" style="{{ submitStyle }}">Send enquiry</button>
+          <sc-if value="{{ shopSent }}" hint-placeholder-val="{{ false }}">
+            <p style="{{ sentStyle }}">Thank you — your enquiry has been noted. We’ll reply by email.</p>
+          </sc-if>
+        </form>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isContact }}" hint-placeholder-val="{{ false }}">
+      <div style="{{ feedStyle }}">
+        <article style="{{ entryStyleFirst }}">
+          <div style="{{ shopImgWrapStyle }}">
+            <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="contact-image" shape="rect" fit="cover" placeholder="contact.jpg" hint-size="100%,100%" style="position:absolute;top:0;left:0;width:100%;height:100%"></x-import>
+          </div>
+          <p style="{{ emailRowStyle }}">Email : <a href="mailto:nontawat@mobilelabproject.com" style="{{ emailLinkStyle }}">nontawat@mobilelabproject.com</a></p>
+        </article>
+        <form onSubmit="{{ contactSubmit }}" style="{{ formStyle }}">
+          <h2 style="{{ formHeadStyle }}">Get in touch</h2>
+          <div style="{{ fieldStyle }}">
+            <label style="{{ labelStyle }}">Name</label>
+            <input type="text" style="{{ inputStyle }}" placeholder="Your name">
+          </div>
+          <div style="{{ fieldStyle }}">
+            <label style="{{ labelStyle }}">Email</label>
+            <input type="email" style="{{ inputStyle }}" placeholder="you@email.com">
+          </div>
+          <div style="{{ fieldStyle }}">
+            <label style="{{ labelStyle }}">Message</label>
+            <textarea style="{{ textareaStyle }}" placeholder="Your message…"></textarea>
+          </div>
+          <button type="submit" style="{{ submitStyle }}">Send message</button>
+          <sc-if value="{{ contactSent }}" hint-placeholder-val="{{ false }}">
+            <p style="{{ sentStyle }}">Thank you — your message has been sent. We’ll reply by email.</p>
+          </sc-if>
+        </form>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isOther }}" hint-placeholder-val="{{ false }}">
+      <div style="{{ copyStyle }}">
+        <p style="{{ placeholderStyle }}">[ {{ activePage }} — content to be added ]</p>
+      </div>
+    </sc-if>
+  </main>
+
+  <!-- ================= MAIN CONTENT ================= -->
+  
+
+  <footer style="{{ footerStyle }}">
+    <span>© 2026 Mobile Lab Project Co., Ltd.</span>
+    <span style="{{ footerSepStyle }}">|</span>
+    <span>Site by <a href="#">SUFFIX</a></span>
+  </footer>
+
+  <!-- ================= MOBILE DRAWER OVERLAY ================= -->
+  <sc-if value="{{ drawerVisible }}" hint-placeholder-val="{{ false }}">
+    <div style="{{ scrimStyle }}" onClick="{{ toggleDrawer }}">
+      <nav style="{{ drawerNavStyle }}" onClick="{{ stop }}">
+        <button onClick="{{ toggleDrawer }}" aria-label="Close" style="{{ closeStyle }}">×</button>
+        <sc-for list="{{ pages }}" as="page" hint-placeholder-count="5">
+          <a href="#" onClick="{{ page.onSelectDrawer }}" style="{{ page.drawerLinkStyle }}">{{ page.name }}</a>
+        </sc-for>
+      </nav>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{
+  &quot;$preview&quot;: { &quot;width&quot;: &quot;100%&quot;, &quot;height&quot;: 760 },
+  &quot;mobileNav&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;stacked&quot;, &quot;drawer&quot;, &quot;topbar&quot;], &quot;default&quot;: &quot;drawer&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Mobile navigation&quot; },
+  &quot;accent&quot;: { &quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#FF0000&quot;, &quot;options&quot;: [&quot;#FF0000&quot;, &quot;#E4634A&quot;, &quot;#111111&quot;, &quot;#666666&quot;], &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Style&quot; }
+}">
+class Component extends DCLogic {
+  state = { bp: 'desktop', drawerOpen: false, active: 'News', newsYear: null, pressYear: null, shopSent: false, contactSent: false };
+
+  componentDidMount() {
+    this._onResize = () => {
+      const w = window.innerWidth;
+      const bp = w < 640 ? 'mobile' : (w < 1024 ? 'tablet' : 'desktop');
+      if (bp !== this.state.bp) this.setState({ bp, drawerOpen: false });
+    };
+    this._onResize();
+    window.addEventListener('resize', this._onResize);
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this._onResize); }
+
+  renderVals() {
+    const accent = this.props.accent || '#FF0000';
+    const ink = '#111111';
+    const body = '#666666';
+    const mono = "'Courier New', Courier, monospace";
+    const serif = "'Source Serif 4', 'Noto Serif', Georgia, serif";
+    const bp = this.state.bp;
+    const isMobile = bp === 'mobile';
+    const isTablet = bp === 'tablet';
+    const mobileNav = this.props.mobileNav || 'drawer';
+    const active = this.state.active;
+
+    const pageNames = ['News', 'Press', 'About', 'Projects', 'Communities', 'Shop', 'Contact'];
+
+    const newsItems = [
+      { slotId: 'news-doiboy-netflix', date: 'November 2023', img: 'doiboy_NF_poster.jpg', aspect: '580 / 859',
+        title: 'DOI BOY @ NETFLIX',
+        body: ['On 2023 November 24th, you can watch “DOI BOY” global release on NETFLIX. This is a new experience in the life of my filmmaking, where everyone can easily watch it anywhere in the world.',
+               'I apologize to the various film festivals that have been invited and had to decline, and to the audience who were expecting to watch it in movie theaters. The best and most suitable place for “DOI BOY” is on NETFLIX. I’m glad to hear feedback, both compliments and criticism.'] },
+      { slotId: 'news-doiboy-variety', date: 'October 2023', img: 'doiboy_varity.jpg', aspect: '580 / 719',
+        title: 'DOI BOY on VARIETY',
+        body: ['Gritty Thai Drama ‘Doi Boy’ Marks Feature Debut for Documentary Veteran Nontawat Numbenchapol: ‘Everyone Starts With a Dream’ (EXCLUSIVE). Read the full article by Patrick Frater.'] },
+      { slotId: 'news-doiboy-risingstar', date: 'October 2023', img: 'awat_risingstar.jpg', aspect: '580 / 388',
+        title: 'DOI BOY — Rising Star Award',
+        body: ['Congratulations! Awat Ratanapintha, from the movie ‘DOI BOY,’ received the Rising Star Award at the 28th Marie Claire with BIFF Asia Star Awards 2023, held during the 28th Busan International Film Festival (BIFF), October 4–13, 2023.'] },
+      { slotId: 'news-doiboy-biff', date: 'October 2023', img: 'doiboy_busan02.jpg', aspect: '580 / 580',
+        title: 'DOI BOY x BIFF',
+        body: ['Watching DOI BOY on the big screen at Busan International Film Festival (In competition, Jiseok section) was a special and more valuable moment than any my film before. It marked a transitional phase, entering new territories in both personal and era aspects.',
+               'A big thank you to everyone who made DOI BOY happen. If, in the near future, anyone watches and has feedback, whether positive or negative, please feel free to share it.'] },
+      { slotId: 'news-sake-bacc', date: 'June 2023', img: 'sake_bkk.jpg', aspect: '580 / 725',
+        title: 'An Imperial Sake Cup and I @ BACC, Bangkok',
+        body: ['An Imperial Sake Cup and I is a lecture-performance by Dr. Charnvit Kasetsiri, a renowned historian and specialist in Southeast Asia Studies, and recipient of the Fukuoka Academic Prize in 2012. Charnvit draws a connection between his relationship with the Japanese army in his hometown Nong Pla Duk, Ban Pong, during World War II.',
+               'He traces personal and micro-narratives to reflect objects and memories as well as his witnessing of the global social transformation from the Japanese presence in Thailand, the Vietnam War, and the 1970s student uprising in Thailand. Only 3 performances at BACC, 16–18 June 2023.'] },
+      { slotId: 'news-doiboy-udine', date: 'April 2023', img: 'dbudine.jpg', aspect: '580 / 725',
+        title: 'DOI BOY @ Udine Far East Film Festival',
+        body: ['DOI BOY heads to Udine Far East Film Festival — Focus Asia, Far East in Progress. The film is currently in post-production and was incubated through the EAVE Ties That Bind workshop in 2017.'] },
+      { slotId: 'news-achip-jtac', date: 'March 2023', img: 'achip.jpg', aspect: '580 / 387',
+        title: 'A Chip of the Old Block @ Jim Thompson Art Center',
+        body: ['Jim Thompson Art Center presents exhibitions that lead us to explore and rethink the Cold War era in Thailand and its aftermaths through Thai and international artists with various art forms. This exhibition presents absent stories in grand history and invites us to think about the possibility of alternative futures.'] },
+      { slotId: 'news-mrshadow-kadist', date: 'February 2023', img: 'kadist.jpg', aspect: '580 / 318',
+        title: 'Mr. Shadow @ KADIST',
+        body: ['The series of prints titled Mr. Shadow engages with the history of and current state of militarization in Thailand. Each print features an invisible person, their silhouette only outlined by the military fatigues that they wear.',
+               'Photographed on a mountain range at the border between Shan State in Myanmar and Northern Thailand, the series epitomizes the haunting presence and effects of a militarized modernity and nation-state building across the region.'] },
+      { slotId: 'news-sake-tokyo', date: 'October 2022', img: 'saketokyo.jpg', aspect: '580 / 434',
+        title: 'An Imperial Sake Cup and I @ Tokyo Festival',
+        body: ['Charnvit traces his personal history starting from the commemorative sake cup he received when the Crown Prince (later the Heisei Emperor Akihito) and his wife paid an official visit to Thailand in 1964, and goes on to outline events that ushered in social transformation around the world. The Japan event is the first overseas staging of this piece, which premiered in Chiang Mai in 2020.'] },
+      { slotId: 'news-idontcare-residenz', date: 'October 2022', img: 'idontcare.jpg', aspect: '580 / 467',
+        title: "I Don't Care @ Residenz Theater",
+        body: ['Based on interviews the journalist and writer Jürgen Berger conducted with trans* people in Thailand and Germany between 2017 and 2022, the production explores the gap in society which these people inhabit in both countries.',
+               'For this production by Jarunun Phantachat and the German director Anna-Elisabeth Frick, the video artist Nontawat Numbenchapol has evolved an entirely individual visual language.'] },
+    ];
+
+    const D2 = ['290 / 308', '290 / 308'];
+    const pressItems = [
+      { slotId: 'p-moscow', date: 'June 2014', imgs: [['moscow_gaze.jpg', '580 / 319']], title: 'Gaze & Hear', body: ["Shown in the group exhibition “A Brief History of Memory” at The 4th Moscow International Biennale for Young Art, Strategic Projects."] },
+      { slotId: 'p-metahouse', date: 'June 2014', imgs: [['metahouse.jpg', '580 / 310']], title: 'Boundary', body: ['Screening at Meta House, Phnom Penh, Cambodia.'] },
+      { slotId: 'p-yangon', date: 'June 2014', imgs: [['yangon.jpg', '580 / 409']], title: 'By the River', body: ['Screening, in competition, at Human Rights Human Dignity International Film Festival, Yangon, Myanmar.'] },
+      { slotId: 'p-boundary-yangon', date: 'June 2014', imgs: [['boundary_yangoon.jpg', '580 / 387']], title: 'Boundary', body: ['Screening, in competition, at Human Rights Human Dignity International Film Festival, Yangon, Myanmar.'] },
+      { slotId: 'p-green', date: 'May 2014', imgs: [['green.jpg', '580 / 422']], title: 'By the River', body: ['Screening at Green Film Festival in Seoul (GFFIS).'] },
+      { slotId: 'p-hk-gaze', date: 'May 2014', imgs: [['hk_gaze.jpg', '580 / 317']], title: 'Gaze & Hear', body: ['A group show “Chapter 3, State of Being — New Video Art From Thailand” at XXX Gallery, Hong Kong.'] },
+      { slotId: 'p-chopshot', date: 'April 2014', imgs: [['chopshot_river.jpg', '580 / 355']], title: 'By the River', body: ['Selected for ChopShots documentary film festival, international competition, Jakarta, Indonesia.'] },
+      { slotId: 'p-sidof', date: 'April 2014', imgs: [['boundarysidof.jpg', '580 / 394']], title: 'Boundary', body: ['Screening at Seoul Independent Documentary Film & Video Festival.'] },
+      { slotId: 'p-back-river', date: 'April 2014', imgs: [['back_to_the_river.jpg', '580 / 393']], title: 'By the River — back to The River', body: ['“It was the most impressive screening in my life, like a dream I’ve been imagining. Thank you everyone involved with this movie and everyone who made this screening happen. I was so happy I didn’t want to come back to the city.” — Nontawat Numbenchapol, Director', 'The premiere at Lower Klity village — where the documentary was shot — was accompanied by merit making for Karen ancestors and a discussion on the progress of Klity creek rehabilitation. Nontawat hopes the 16-year struggle of Klity villagers becomes an inspiration for people fighting for human rights and social justice.'] },
+      { slotId: 'p-young-director', date: 'February 2014', imgs: [['wonaward.jpg', '580 / 324']], title: 'Boundary', body: ['Received a Young Director award at the Bangkok Critics Assembly Awards, Thailand.'] },
+      { slotId: 'p-cambodia', date: 'December 2013', imgs: [['boundary_cambodia.jpg', '580 / 326']], title: 'Boundary', body: ['Screening at Cambodia International Film Festival, in the “A Glimpse of Cambodia” documentaries section.'] },
+      { slotId: 'p-popoli', date: 'December 2013', imgs: [['popoli_web.jpg', '580 / 390']], title: 'By the River', body: ['Screening at Festival dei Popoli, Florence, Italy, in the Far From Utopia section.'] },
+      { slotId: 'p-luang', date: 'December 2013', imgs: [['boundary_luangprabang.jpg', '580 / 325']], title: 'Boundary', body: ['Showing at Luang Prabang Film Festival.'] },
+      { slotId: 'p-ffd', date: 'November 2013', imgs: [['boundary_indo_web.jpg', '580 / 326']], title: 'Boundary', body: ['Screening at Festival Film Dokumenter, Yogyakarta, Indonesia, in the No Bond, No Boundaries section.'] },
+      { slotId: 'p-kolkata', date: 'November 2013', imgs: [['river_india_web.jpg', '580 / 448']], title: 'By the River', body: ['Screening at Kolkata International Film Festival, in the Focus: South East Asia section.'] },
+      { slotId: 'p-budapest', date: 'November 2013', imgs: [['boundary_budapest.jpg', '580 / 329']], title: 'Boundary', body: ['Screening in Budapest, Hungary, at Verzio International Human Rights Documentary Film Festival.'] },
+      { slotId: 'p-salamindanaw', date: 'November 2013', imgs: [['river_philipines.jpg', '580 / 425']], title: 'By the River', body: ['In the main competition of the SalaMindanaw International Film Festival, Philippines.'] },
+      { slotId: 'p-hkaff', date: 'November 2013', imgs: [['by_the_rive_hk.jpg', '580 / 392']], title: 'By the River', body: ['Competed for the New Talent Award at Hong Kong Asian Film Festival 2013 (HKAFF).'] },
+      { slotId: 'p-idfa', date: 'November 2013', imgs: [['boundary_idfa.jpg', '580 / 313']], title: 'Boundary', body: ['At IDFA — International Documentary Film Festival Amsterdam, in the special programme Emerging Voices from Southeast Asia.'] },
+      { slotId: 'p-yamagata', date: 'October 2013', imgs: [['yamagata2.jpg', '580 / 326']], title: 'Boundary', body: ['International Competition at Yamagata International Documentary Film Festival, Japan 2013.'] },
+      { slotId: 'p-milano', date: 'September 2013', imgs: [['boundary_milano_web.jpg', '580 / 308']], title: 'Boundary', body: ['Screening at Milano Film Festival 2013.'] },
+      { slotId: 'p-locarno-award', date: 'August 2013', imgs: [['award.jpg', D2[0]], ['nontawat.jpg', D2[1]]], title: 'By the River', body: ['Received a Special Mention award at Locarno International Film Festival 2013.'] },
+      { slotId: 'p-locarno-premiere', date: 'August 2013', imgs: [['locarno.jpg', D2[0]], ['river.jpg', D2[1]]], title: 'By the River', body: ['World premiere at Locarno International Film Festival 2013, Concorso Cineasti del Presente.'] },
+      { slotId: 'p-salaya', date: 'April 2013', imgs: [['Untitled-3.jpg', D2[0]], ['ord.jpg', D2[1]]], title: 'Boundary', body: ['Opening film at Salaya Doc, Thailand 2013.'] },
+      { slotId: 'p-berlin', date: 'February 2013', imgs: [['berlin.jpg', D2[0]], ['boundary_berlin_news.jpg', D2[1]]], title: 'Boundary', body: ['World premiere at Berlin International Film Festival 2013, Forum programme.'] },
+      { slotId: 'p-dig', date: 'December 2012', imgs: [['messy.jpg', D2[0]], ['dig.jpg', D2[1]]], title: '“DIG”', body: ['VDO installation & research materials of the forthcoming film “Boundary” by Nontawat Numbenchapol, at Messy, Bangkok, Thailand.'] },
+      { slotId: 'p-docnet', date: 'December 2012', imgs: [['chopshots.jpg', D2[0]], ['boundary_chopshots.jpg', D2[1]]], title: 'Boundary', body: ['Participated in DocNet Campus through the support of DocNet Southeast Asia.'] },
+      { slotId: 'p-ratchapruek', date: 'October 2012', imgs: [['ereck.jpg', D2[0]], ['news_ratchpruek.jpg', D2[1]]], title: 'Ratchapruek', body: ['Group Exhibition, Menam Art Fleuve, Ensapc Ygrec, Paris, France.'] },
+      { slotId: 'p-trace', date: 'August 2012', imgs: [['trace.jpg', D2[0]], ['talk.jpg', D2[1]]], title: 'Journeys Across Borders', body: ['Screening and Talk by Nontawat Numbenchapol, Jim Thompson Art Center, Bangkok, Thailand.'] },
+      { slotId: 'p-aurora', date: 'March 2012', imgs: [['fotr_logo.gif', D2[0]], ['auroranews.jpg', D2[1]]], title: 'Aurora Primary', body: ['Film on the Rocks Untamed — Winner, Yaonoi Island, Thailand.'] },
+      { slotId: 'p-8888', date: 'March 2012', imgs: [['salayadocposter.jpg', D2[0]], ['8888_news.jpg', D2[1]]], title: '8.8.88', body: ['Selected to competition at Salaya International Film Festival, Thailand.'] },
+      { slotId: 'p-busan', date: 'October 2011', imgs: [['busan_biff.jpg', D2[0]], ['whereyourboundariesposter_web.jpg', D2[1]]], title: 'Where Your Boundaries Are', body: ['Selected by the DMZ Fund from Asian Network of Documentary, Busan International Film Festival and the DMZ International Documentary, Busan, Korea.'] },
+      { slotId: 'p-eff', date: 'May 2011', imgs: [['2EFF2.jpg', D2[0]], ['gaze_hear_poster.jpg', D2[1]]], title: 'Gaze & Hear', body: ['Screened at Experimental Film Forum 2011 (Singapore).'] },
+      { slotId: 'p-ana', date: 'January 2011', imgs: [['analogo.jpg', D2[0]], ['mobile_lab_final_logo.jpg', D2[1]]], title: 'Mobile Lab', body: ['Won an Arts Network Asia (ANA) 2011 Award.'] },
+    ];
+
+    // ---- layout ----
+    const rootStyle = {
+      display: 'flex',
+      flexDirection: 'column',
+      minHeight: '100vh',
+      background: '#ffffff',
+      color: body,
+      fontFamily: mono,
+      WebkitFontSmoothing: 'antialiased',
+    };
+
+    const sidebarStyle = {
+      flexShrink: 0,
+      width: '100%',
+      height: isMobile ? 'auto' : '72px',
+      padding: isMobile ? '20px 22px' : (isTablet ? '0 40px' : '0 56px'),
+      borderBottom: '1px solid #ececec',
+      display: 'flex',
+      flexDirection: isMobile ? 'column' : 'row',
+      alignItems: isMobile ? 'stretch' : 'center',
+      justifyContent: 'space-between',
+      gap: isMobile ? '16px' : '40px',
+      position: 'sticky',
+      top: 0,
+      zIndex: 20,
+      background: '#ffffff',
+    };
+
+    const brandRowStyle = {
+      flex: 1,
+      width: '100%',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      gap: '16px',
+      flexShrink: 0,
+    };
+
+    const logoStyle = { display: 'inline-flex', lineHeight: 0, padding: 0, background: 'transparent' };
+    const logoHoverStyle = { background: 'transparent' };
+    const logoImgStyle = {
+      display: 'block',
+      height: isMobile ? '34px' : (isTablet ? '38px' : '46px'),
+      width: 'auto',
+    };
+
+    // ---- nav (inline in sidebar) ----
+    const navMobile = isMobile || isTablet;
+    const showHamburger = navMobile && mobileNav === 'drawer';
+    const showInlineNav = !navMobile || mobileNav !== 'drawer';
+    const navIsRow = navMobile && mobileNav === 'topbar';
+
+    const rowNav = !navMobile || navIsRow;
+    const navStyle = {
+      display: showInlineNav ? 'flex' : 'none',
+      flexDirection: rowNav ? 'row' : 'column',
+      flexWrap: 'wrap',
+      gap: rowNav ? (isMobile ? '18px' : '26px') : '10px',
+      alignItems: rowNav ? 'center' : 'flex-start',
+      justifyContent: 'flex-end',
+    };
+
+    const linkBase = {
+      fontFamily: mono,
+      color: accent,
+      textDecoration: 'none',
+      fontSize: isMobile ? '19px' : 'clamp(17px, 1.15vw, 19px)',
+      lineHeight: 1.35,
+      cursor: 'pointer',
+    };
+
+    const pages = pageNames.map((name) => {
+      const on = (e) => { if (e) e.preventDefault(); this.setState({ active: name }); };
+      const onD = (e) => { if (e) e.preventDefault(); this.setState({ active: name, drawerOpen: false }); };
+      return {
+        name,
+        onSelect: on,
+        onSelectDrawer: onD,
+        linkStyle: { ...linkBase, fontWeight: name === active ? 700 : 400, textDecoration: name === active ? 'underline' : 'none' },
+        drawerLinkStyle: { ...linkBase, color: accent, fontSize: '28px', fontWeight: name === active ? 700 : 400 },
+        navLinkStyle: { fontSize: '16px', fontWeight: name === active ? 700 : 400 },
+      };
+    });
+
+    const hamburgerStyle = {
+      display: 'flex', flexDirection: 'column', justifyContent: 'center', gap: '5px',
+      width: '44px', height: '44px', padding: '10px', margin: 0,
+      border: 'none', background: 'transparent', cursor: 'pointer',
+    };
+    const barStyle = { display: 'block', width: '100%', height: '2px', background: ink };
+
+    // ---- main ----
+    const mainStyle = {
+      animation: 'mlPageFade 0.35s ease',
+      flex: 1,
+      minWidth: 0,
+      padding: isMobile ? '22px' : (isTablet ? '40px 40px 56px' : '52px 56px 64px'),
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'flex-start',
+      alignItems: 'center',
+      gap: isMobile ? '26px' : '40px',
+    };
+
+    const heroWrapStyle = {
+      position: 'relative',
+      width: '100%',
+      maxWidth: isMobile ? '100%' : '607px',
+      aspectRatio: '607 / 405',
+    };
+
+    const projectCats = ['Features', 'Documentary', 'Installations', 'Performances'];
+    const communityCats = ['QUEER DIGITHAIZED', 'Root Lab', 'Percepto'];
+
+    // ---- shop ----
+    const shopImgWrapStyle = { position: 'relative', width: '100%', aspectRatio: '2 / 3', background: '#f4f4f4' };
+    const shopPriceStyle = { fontFamily: mono, color: accent, margin: 0, fontSize: '16px', letterSpacing: '1px' };
+    const formStyle = { width: '100%', maxWidth: '607px', display: 'flex', flexDirection: 'column', gap: '16px', borderTop: '1px solid #cccccc', paddingTop: isMobile ? '26px' : '34px', marginTop: '6px' };
+    const formHeadStyle = { fontFamily: mono, fontWeight: 700, color: ink, margin: 0, fontSize: isMobile ? '21px' : '23px' };
+    const fieldStyle = { display: 'flex', flexDirection: 'column', gap: '6px' };
+    const labelStyle = { fontFamily: mono, fontSize: '12px', letterSpacing: '2px', textTransform: 'uppercase', color: body };
+    const inputStyle = { fontFamily: mono, fontSize: '15px', color: ink, padding: '11px 12px', border: '1px solid #cccccc', borderRadius: '0', background: '#fff', outline: 'none', width: '100%' };
+    const textareaStyle = { ...inputStyle, minHeight: '110px', resize: 'vertical' };
+    const submitStyle = { fontFamily: mono, fontSize: '14px', letterSpacing: '.5px', color: '#fff', background: accent, border: 'none', padding: '13px 24px', cursor: 'pointer', alignSelf: 'flex-start' };
+    const sentStyle = { fontFamily: mono, fontSize: '15px', color: ink, margin: 0 };
+    const projectsStyle = { flex: 1, width: '100%', maxWidth: '607px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '2px', textAlign: 'center' };
+    const projectLinkStyle = { fontFamily: mono, color: accent, textDecoration: 'none', fontSize: isMobile ? '19px' : '20px', lineHeight: 1.9, cursor: 'pointer', alignSelf: 'center' };
+
+    const copyStyle = { width: '100%', maxWidth: '607px', display: 'flex', flexDirection: 'column', gap: '30px' };
+
+    const paraStyle = {
+      fontFamily: mono,
+      color: ink,
+      margin: 0,
+      fontSize: '16px',
+      lineHeight: 1.3,
+      textWrap: 'pretty',
+    };
+    const strongStyle = { fontFamily: serif, fontWeight: 700, color: ink };
+    const creditStyle = {
+      fontFamily: mono, margin: 0,
+      fontSize: isMobile ? '16px' : '17px', lineHeight: 1.6, color: ink,
+    };
+    const placeholderStyle = {
+      fontFamily: mono, margin: 0, color: '#9a9a9a',
+      fontSize: isMobile ? '17px' : '18px', lineHeight: 1.7,
+    };
+
+    // ---- news feed ----
+    const feedStyle = { width: '100%', maxWidth: '607px', display: 'flex', flexDirection: 'column' };
+    const entryStyle = {
+      borderTop: '1px solid #cccccc',
+      padding: isMobile ? '26px 0' : '34px 0',
+      display: 'flex', flexDirection: 'column', gap: '16px',
+    };
+    const entryStyleFirst = { ...entryStyle, borderTop: 'none', paddingTop: 0 };
+    const dateStyle = { fontFamily: mono, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase', color: body, margin: 0 };
+    const newsTitleStyle = { fontFamily: mono, fontWeight: 700, color: ink, margin: 0, fontSize: isMobile ? '21px' : '23px', lineHeight: 1.2 };
+    const newsBodyStyle = { fontFamily: mono, color: body, margin: 0, fontSize: '16px', lineHeight: 1.3, textWrap: 'pretty' };
+    const yearOf = (d) => d.trim().split(/\s+/).pop();
+    const newsYears = [];
+    for (let y = 2026; y >= 2010; y--) newsYears.push(String(y));
+    const yearsWithData = newsYears.filter((y) => newsItems.some((it) => yearOf(it.date) === y));
+    const activeYear = this.state.newsYear || yearsWithData[0] || newsYears[0];
+    const news = newsItems.filter((it) => yearOf(it.date) === activeYear).map((it, i) => ({
+      ...it,
+      entryStyle: i === 0 ? entryStyleFirst : entryStyle,
+      imgWrapStyle: { position: 'relative', width: '100%', aspectRatio: it.aspect, background: '#f4f4f4' },
+    }));
+    const pagerStyle = { display: 'flex', flexDirection: 'row', gap: '18px', flexWrap: 'wrap', borderTop: '1px solid #cccccc', paddingTop: '22px', marginTop: '8px' };
+    const yearButtons = newsYears.map((y) => ({
+      year: y,
+      onSelect: (e) => { if (e) e.preventDefault(); this.setState({ newsYear: y }); },
+      style: {
+        fontFamily: mono, fontSize: '15px', letterSpacing: '1px', cursor: 'pointer',
+        background: 'transparent', border: 'none', padding: '2px 4px',
+        color: y === activeYear ? ink : accent,
+        fontWeight: y === activeYear ? 700 : 400,
+        textDecoration: y === activeYear ? 'underline' : 'none',
+      },
+    }));
+    const pressYearsWithData = newsYears.filter((y) => pressItems.some((it) => yearOf(it.date) === y));
+    const pressActiveYear = this.state.pressYear || pressYearsWithData[0] || newsYears[0];
+    const pressYearButtons = newsYears.map((y) => ({
+      year: y,
+      onSelect: (e) => { if (e) e.preventDefault(); this.setState({ pressYear: y }); },
+      style: {
+        fontFamily: mono, fontSize: '15px', letterSpacing: '1px', cursor: 'pointer',
+        background: 'transparent', border: 'none', padding: '2px 4px',
+        color: y === pressActiveYear ? ink : accent,
+        fontWeight: y === pressActiveYear ? 700 : 400,
+        textDecoration: y === pressActiveYear ? 'underline' : 'none',
+      },
+    }));
+    const press = pressItems.filter((it) => yearOf(it.date) === pressActiveYear).map((it, i) => ({
+      slotId: it.slotId, date: it.date, title: it.title, body: it.body,
+      entryStyle: i === 0 ? entryStyleFirst : entryStyle,
+      gridStyle: { display: 'grid', gridTemplateColumns: '1fr', gap: '12px', width: '100%' },
+      images: it.imgs.map((im, i) => ({
+        id: it.slotId + '-' + i, src: im[0],
+        wrapStyle: { position: 'relative', width: '100%', aspectRatio: im[1], background: '#f4f4f4' },
+      })),
+    }));
+
+    // ---- drawer ----
+    const drawerVisible = showHamburger && this.state.drawerOpen;
+    const scrimStyle = {
+      position: 'fixed', inset: 0, zIndex: 50,
+      background: 'rgba(255,255,255,0.97)',
+      display: 'flex', flexDirection: 'column',
+    };
+    const drawerNavStyle = {
+      position: 'relative', flex: 1,
+      display: 'flex', flexDirection: 'column', gap: '22px',
+      padding: '80px 34px',
+      alignItems: 'center', justifyContent: 'center', textAlign: 'center',
+    };
+    const closeStyle = {
+      position: 'absolute', top: '22px', right: '22px',
+      width: '44px', height: '44px', border: 'none', background: 'transparent',
+      fontSize: '38px', lineHeight: 1, color: ink, cursor: 'pointer', fontFamily: serif,
+    };
+
+    const footerStyle = {
+      flexShrink: 0,
+      width: '100%',
+      position: 'sticky',
+      bottom: 0,
+      zIndex: 20,
+      background: '#ffffff',
+      padding: isMobile ? '20px 22px' : '22px 56px',
+      borderTop: '1px solid #ececec',
+      display: 'flex',
+      flexWrap: 'wrap',
+      justifyContent: 'center',
+      alignItems: 'center',
+      gap: '10px',
+      fontFamily: mono,
+      fontSize: isMobile ? '13px' : '14px',
+      letterSpacing: '.3px',
+      color: body,
+    };
+    const footerSepStyle = { color: '#cccccc' };
+
+    return {
+      rootStyle, sidebarStyle, brandRowStyle, logoStyle, logoHoverStyle, logoImgStyle, navStyle,
+      footerStyle, footerSepStyle,
+      showHamburger, hamburgerStyle, barStyle,
+      mainStyle, heroWrapStyle, copyStyle, paraStyle, strongStyle, creditStyle, placeholderStyle,
+      feedStyle, entryStyle, entryStyleFirst, dateStyle, newsTitleStyle, newsBodyStyle, news, press,
+      pagerStyle, yearButtons, pressYearButtons,
+      projectCats, communityCats, projectsStyle, projectLinkStyle,
+      pages,
+      isNews: active === 'News',
+      isPress: active === 'Press',
+      isAbout: active === 'About',
+      isProjects: active === 'Projects',
+      isCommunities: active === 'Communities',
+      isShop: active === 'Shop',
+      isContact: active === 'Contact',
+      isOther: !['News', 'Press', 'About', 'Projects', 'Communities', 'Shop', 'Contact'].includes(active),
+      shopImgWrapStyle, shopPriceStyle, formStyle, formHeadStyle, fieldStyle, labelStyle, inputStyle, textareaStyle, submitStyle, sentStyle,
+      shopSent: this.state.shopSent,
+      shopSubmit: (e) => { if (e) e.preventDefault(); this.setState({ shopSent: true }); },
+      contactSent: this.state.contactSent,
+      contactSubmit: (e) => { if (e) e.preventDefault(); this.setState({ contactSent: true }); },
+      emailLinkStyle: { fontFamily: mono, fontSize: isMobile ? '17px' : '19px', color: accent, wordBreak: 'break-all' },
+      emailRowStyle: { fontFamily: mono, fontSize: isMobile ? '17px' : '19px', color: ink, margin: 0 },
+      activePage: active,
+      drawerVisible, scrimStyle, drawerNavStyle, closeStyle,
+      goHome: (e) => { if (e) e.preventDefault(); this.setState({ active: 'News', drawerOpen: false }); },
+      toggleDrawer: (e) => { if (e) e.preventDefault(); this.setState(s => ({ drawerOpen: !s.drawerOpen })); },
+      stop: (e) => { if (e) e.stopPropagation(); },
+    };
+  }
+}
+</script>
+</body>
+</html>
