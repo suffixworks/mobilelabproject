@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mobile Lab — Design System (จากเว็บเดิม)</title>
+<style>
+  :root{
+    /* ===== COLOR (สกัดจาก stylesheet.css เว็บเดิม) ===== */
+    --ink:#111111;          /* โลโก้/หัวข้อ (เดิม #000) */
+    --red:#FF0000;          /* accent เดิมแท้ ๆ (a:link) — heritage */
+    --coral:#E4634A;        /* accent ใหม่ที่คุณเลือกใน nav (แดงนุ่มลง) */
+    --coral-dk:#C64A32;
+    --body:#666666;         /* สีตัวอักษรเนื้อหา (เดิม) */
+    --hairline:#ECECEC;     /* เส้นคั่น */
+    --rule:#CCCCCC;         /* เส้นคั่นในฟีดข่าวเดิม */
+    --base:#FFFFFF;
+
+    /* ===== TYPE (จากเว็บเดิม) ===== */
+    --mono:"Courier New", Courier, monospace;      /* body/nav/ลิงก์ เดิม */
+    --serif:"Noto Serif","Droid Serif",Georgia,serif; /* เดิมโหลด Droid Serif */
+    --slab:"American Typewriter","Rockwell",var(--mono); /* ฟอนต์โลโก้ */
+
+    /* ===== LAYOUT ===== */
+    --content:607px;        /* ความกว้างคอลัมน์เนื้อหา = เท่าเว็บเดิม */
+    --accent:var(--red);    /* accent ที่ระบบใช้จริง = แดงเดิม #FF0000 */
+    --red-dk:#CC0000;       /* แดงเข้มตอน hover */
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--mono);color:#333;background:var(--base);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:960px;margin:0 auto;padding:56px 32px 96px}
+  section{padding:40px 0;border-top:1px solid var(--hairline)}
+  h2{font-family:var(--mono);font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--body);margin-bottom:24px}
+  h3{font-family:var(--serif);font-weight:600;font-size:18px;color:var(--ink);margin:24px 0 10px}
+  p.note{font-size:13px;color:var(--body);max-width:640px;letter-spacing:.3px}
+  code{font-family:var(--mono);background:#f6f6f6;padding:2px 6px;border-radius:3px;font-size:13px;color:var(--coral-dk)}
+
+  /* ---- logo lockup ---- */
+  .brand-row{display:flex;align-items:center;gap:40px;flex-wrap:wrap}
+  .logo{color:var(--ink)}
+  .logo svg{display:block;height:44px;width:auto}
+  .logo.on-dark{color:#fff;background:var(--ink);padding:22px 28px;border-radius:4px}
+  .logo.small svg{height:24px}
+
+  /* ---- color swatches ---- */
+  .swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;margin-top:8px}
+  .sw{border:1px solid var(--hairline);border-radius:6px;overflow:hidden}
+  .sw .chip{height:76px}
+  .sw .meta{padding:10px 12px;font-size:12px;letter-spacing:.3px}
+  .sw .meta b{display:block;color:var(--ink);font-size:12px;margin-bottom:2px}
+  .sw .meta span{color:var(--body)}
+
+  /* ---- type specimens ---- */
+  .spec{border:1px solid var(--hairline);border-radius:6px;padding:22px;margin-top:14px}
+  .spec .tag{font-family:var(--mono);font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--coral-dk);margin-bottom:12px}
+  .mono-xl{font-family:var(--mono);font-size:34px;letter-spacing:1px;color:var(--ink)}
+  .serif-xl{font-family:var(--serif);font-size:34px;color:var(--ink);font-weight:600}
+  .slab-xl{font-family:var(--slab);font-size:38px;color:var(--ink);font-weight:700;letter-spacing:.5px}
+  .scale div{border-top:1px dashed var(--hairline);padding:9px 0;display:flex;align-items:baseline;gap:16px}
+  .scale .lbl{font-family:var(--mono);font-size:11px;color:var(--body);width:120px;flex:none}
+
+  /* ---- content-width demo ---- */
+  .measure{margin:18px auto 0;max-width:var(--content);border:1px dashed var(--coral);padding:20px;border-radius:4px}
+  .measure .cap{font-family:var(--mono);font-size:11px;color:var(--coral-dk);letter-spacing:1px;text-align:center;margin-bottom:12px}
+  .measure p{font-family:var(--serif);font-size:16px;color:#333}
+
+  /* ---- links & buttons ---- */
+  .demo-links a{color:var(--accent);text-decoration:none;margin-right:14px;font-size:15px;padding:1px 4px}
+  .demo-links a:hover{color:#fff;background:var(--accent);text-decoration:none} /* heritage hover: ขาวบนแดง */
+  .hoverchip{display:inline-block;font-family:var(--mono);font-size:15px;padding:1px 4px;background:var(--accent);color:#fff} /* ตัวอย่างสถานะ hover แบบตายตัว */
+  .btn{display:inline-block;font-family:var(--mono);font-size:14px;letter-spacing:.5px;padding:10px 22px;border-radius:3px;text-decoration:none;border:1px solid var(--ink)}
+  .btn.primary{background:var(--ink);color:#fff}
+  .btn.ghost{background:transparent;color:var(--ink)}
+  .btn.accent{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+  .lineage{display:flex;align-items:center;gap:12px;margin-top:14px;font-size:13px;color:var(--body)}
+  .dot{width:22px;height:22px;border-radius:50%;display:inline-block;border:1px solid rgba(0,0,0,.1)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- ============ HERO ============ -->
+  <div class="logo" style="margin-bottom:14px">
+    <svg viewBox="0 0 264 61" role="img" aria-label="Mobile Lab">
+      <g transform="translate(0,61) scale(0.1,-0.1)" fill="currentColor" stroke="none">
+        <path d="M656 483 c-13 -13 -5 -23 19 -23 l25 0 0 -140 c0 -77 4 -140 8 -140 4 0 13 5 19 11 8 8 13 8 17 0 4 -6 27 -11 50 -11 77 0 120 71 96 159 -6 22 -20 47 -33 56 -24 17 -92 20 -102 5 -15 -24 -26 -7 -23 37 l3 47 -36 2 c-21 2 -40 0 -43 -3z m189 -126 c35 -49 11 -136 -41 -151 -50 -15 -90 71 -65 137 18 48 77 55 106 14z"/>
+        <path d="M1070 474 c0 -8 8 -14 19 -14 23 0 31 -26 31 -101 0 -99 -10 -149 -31 -149 -11 0 -19 -6 -19 -14 0 -10 15 -14 60 -14 45 0 60 4 60 14 0 8 -9 14 -20 14 -19 0 -20 7 -20 139 l0 139 -40 0 c-28 1 -40 -3 -40 -14z"/>
+        <path d="M0 470 c0 -5 8 -10 18 -10 35 0 42 -21 42 -121 0 -114 -4 -129 -36 -129 -13 0 -24 -6 -24 -13 0 -10 18 -13 68 -13 66 1 95 16 50 26 -22 6 -23 9 -25 125 l-1 120 45 -138 c40 -121 48 -138 66 -135 16 2 27 27 60 131 22 70 44 127 49 127 9 0 1 -207 -9 -222 -2 -5 -13 -8 -24 -8 -10 0 -19 -6 -19 -14 0 -11 17 -13 73 -12 70 1 94 15 45 26 -19 5 -23 13 -26 53 -3 46 -2 47 25 47 53 0 70 -10 71 -41 3 -55 5 -60 21 -57 9 1 22 -1 30 -6 8 -5 27 -9 43 -8 18 0 33 -6 41 -19 6 -10 15 -19 19 -19 5 0 3 9 -4 20 -10 16 -9 23 10 43 32 34 39 81 16 114 -10 16 -17 31 -16 36 1 4 -5 7 -13 7 -12 0 -12 8 5 50 25 64 16 66 -11 3 -25 -59 -25 -59 -44 -43 -20 17 -90 -19 -90 -46 0 -21 -39 -30 -82 -19 -23 5 -24 9 -21 68 3 59 4 62 31 65 49 6 18 22 -42 22 l-58 0 -38 -125 c-22 -68 -41 -122 -44 -119 -3 2 -21 57 -41 122 l-35 117 -63 3 c-38 2 -62 -1 -62 -8z"/>
+        <path d="M954 465 c-4 -9 -2 -21 4 -27 15 -15 44 -1 40 19 -4 23 -36 29 -44 8z"/>
+        <path d="M1572 468 c3 -7 12 -13 22 -13 28 0 36 -26 36 -122 0 -108 -4 -123 -36 -123 -15 0 -24 -6 -24 -15 0 -13 19 -15 128 -13 l127 3 3 64 c2 48 0 62 -10 59 -7 -3 -14 -21 -16 -41 -4 -48 -20 -59 -84 -55 l-53 3 -3 109 c-3 111 5 139 36 134 8 -2 17 3 19 10 4 9 -15 12 -72 12 -57 0 -76 -3 -73 -12z"/>
+        <path d="M2095 461 c-3 -5 7 -11 22 -13 l28 -3 3 -122 3 -122 -28 -3 c-15 -2 -27 -7 -26 -13 3 -14 71 -19 86 -6 8 6 18 5 31 -5 38 -28 103 -14 138 30 28 34 24 117 -8 155 -30 36 -83 49 -128 33 -16 -7 -31 -10 -33 -8 -2 1 0 17 3 34 5 25 12 32 30 32 13 0 24 5 24 10 0 13 -137 13 -145 1z m215 -111 c15 -15 20 -33 20 -70 0 -59 -24 -90 -70 -90 -47 0 -70 31 -70 92 0 34 6 58 17 70 22 24 77 24 103 -2z"/>
+        <path d="M925 402 c-11 -11 -4 -22 15 -22 18 0 20 -7 20 -84 0 -80 -1 -85 -22 -88 -45 -6 -17 -23 42 -25 46 -1 60 1 60 13 0 8 -9 14 -20 14 -18 0 -20 8 -22 96 l-3 97 -32 2 c-18 1 -35 0 -38 -3z"/>
+        <path d="M1229 381 c-24 -25 -29 -37 -29 -81 0 -84 28 -119 96 -120 47 0 94 30 94 60 0 30 -19 34 -30 5 -25 -66 -130 -41 -130 30 0 11 20 15 83 17 81 3 82 3 85 31 2 20 -5 35 -27 57 -41 42 -100 42 -142 1z m119 -13 c6 -6 12 -19 12 -29 0 -17 -8 -19 -61 -19 -57 0 -60 1 -57 22 6 41 68 56 106 26z"/>
+        <path d="M1882 394 c-29 -20 -26 -59 3 -59 14 0 19 6 18 21 -2 16 5 24 23 28 31 8 64 -9 64 -33 0 -26 -18 -37 -70 -44 -108 -14 -105 -127 3 -127 24 0 48 5 55 12 8 8 15 8 26 -1 8 -7 27 -11 43 -9 25 3 28 7 31 46 2 25 -1 42 -7 42 -6 0 -11 -13 -11 -30 0 -20 -5 -30 -15 -30 -18 0 -17 -3 -20 88 -3 90 -19 112 -79 112 -23 0 -52 -7 -64 -16z m108 -126 c0 -31 -11 -45 -40 -56 -33 -12 -70 2 -70 26 0 32 18 41 98 51 6 0 12 -9 12 -21z"/>
+        <path d="M2384 216 c-8 -21 3 -36 27 -36 15 0 20 6 17 22 -4 27 -35 37 -44 14z"/>
+      </g>
+    </svg>
+  </div>
+  <p class="note">Design System — สกัดจากเว็บเดิม mobilelabproject.com เพื่อใช้เป็นฐานทำ WordPress block theme ใหม่ · ทุก token เปลี่ยนที่เดียวใน <code>:root</code> / <code>theme.json</code></p>
+
+  <!-- ============ LOGO ============ -->
+  <section>
+    <h2>01 — Logo</h2>
+    <p class="note">wordmark "Mobile Lab." ตัว <b>o</b> เป็น ink-splat · ดึงจาก <code>mobile_lab_final_logo.jpg</code> เดิมแล้ว vectorize เป็น <b>SVG พื้นโปร่ง</b> (คมทุกขนาด/retina) ใช้ <code>currentColor</code> จึงพลิกสีตามพื้นได้</p>
+    <div class="brand-row" style="margin-top:20px">
+      <div class="logo"><svg viewBox="0 0 264 61" aria-label="Mobile Lab"><use href="#ml"/></svg></div>
+    </div>
+    <div class="brand-row" style="margin-top:20px">
+      <div class="logo on-dark">
+        <svg viewBox="0 0 264 61" aria-label="Mobile Lab" style="height:34px">
+          <g transform="translate(0,61) scale(0.1,-0.1)" fill="currentColor" stroke="none"><path d="M656 483 c-13 -13 -5 -23 19 -23 l25 0 0 -140 c0 -77 4 -140 8 -140 4 0 13 5 19 11 8 8 13 8 17 0 4 -6 27 -11 50 -11 77 0 120 71 96 159 -6 22 -20 47 -33 56 -24 17 -92 20 -102 5 -15 -24 -26 -7 -23 37 l3 47 -36 2 c-21 2 -40 0 -43 -3z m189 -126 c35 -49 11 -136 -41 -151 -50 -15 -90 71 -65 137 18 48 77 55 106 14z"/><path d="M1070 474 c0 -8 8 -14 19 -14 23 0 31 -26 31 -101 0 -99 -10 -149 -31 -149 -11 0 -19 -6 -19 -14 0 -10 15 -14 60 -14 45 0 60 4 60 14 0 8 -9 14 -20 14 -19 0 -20 7 -20 139 l0 139 -40 0 c-28 1 -40 -3 -40 -14z"/><path d="M0 470 c0 -5 8 -10 18 -10 35 0 42 -21 42 -121 0 -114 -4 -129 -36 -129 -13 0 -24 -6 -24 -13 0 -10 18 -13 68 -13 66 1 95 16 50 26 -22 6 -23 9 -25 125 l-1 120 45 -138 c40 -121 48 -138 66 -135 16 2 27 27 60 131 22 70 44 127 49 127 9 0 1 -207 -9 -222 -2 -5 -13 -8 -24 -8 -10 0 -19 -6 -19 -14 0 -11 17 -13 73 -12 70 1 94 15 45 26 -19 5 -23 13 -26 53 -3 46 -2 47 25 47 53 0 70 -10 71 -41 3 -55 5 -60 21 -57 9 1 22 -1 30 -6 8 -5 27 -9 43 -8 18 0 33 -6 41 -19 6 -10 15 -19 19 -19 5 0 3 9 -4 20 -10 16 -9 23 10 43 32 34 39 81 16 114 -10 16 -17 31 -16 36 1 4 -5 7 -13 7 -12 0 -12 8 5 50 25 64 16 66 -11 3 -25 -59 -25 -59 -44 -43 -20 17 -90 -19 -90 -46 0 -21 -39 -30 -82 -19 -23 5 -24 9 -21 68 3 59 4 62 31 65 49 6 18 22 -42 22 l-58 0 -38 -125 c-22 -68 -41 -122 -44 -119 -3 2 -21 57 -41 122 l-35 117 -63 3 c-38 2 -62 -1 -62 -8z"/><path d="M954 465 c-4 -9 -2 -21 4 -27 15 -15 44 -1 40 19 -4 23 -36 29 -44 8z"/><path d="M1572 468 c3 -7 12 -13 22 -13 28 0 36 -26 36 -122 0 -108 -4 -123 -36 -123 -15 0 -24 -6 -24 -15 0 -13 19 -15 128 -13 l127 3 3 64 c2 48 0 62 -10 59 -7 -3 -14 -21 -16 -41 -4 -48 -20 -59 -84 -55 l-53 3 -3 109 c-3 111 5 139 36 134 8 -2 17 3 19 10 4 9 -15 12 -72 12 -57 0 -76 -3 -73 -12z"/><path d="M2095 461 c-3 -5 7 -11 22 -13 l28 -3 3 -122 3 -122 -28 -3 c-15 -2 -27 -7 -26 -13 3 -14 71 -19 86 -6 8 6 18 5 31 -5 38 -28 103 -14 138 30 28 34 24 117 -8 155 -30 36 -83 49 -128 33 -16 -7 -31 -10 -33 -8 -2 1 0 17 3 34 5 25 12 32 30 32 13 0 24 5 24 10 0 13 -137 13 -145 1z m215 -111 c15 -15 20 -33 20 -70 0 -59 -24 -90 -70 -90 -47 0 -70 31 -70 92 0 34 6 58 17 70 22 24 77 24 103 -2z"/><path d="M925 402 c-11 -11 -4 -22 15 -22 18 0 20 -7 20 -84 0 -80 -1 -85 -22 -88 -45 -6 -17 -23 42 -25 46 -1 60 1 60 13 0 8 -9 14 -20 14 -18 0 -20 8 -22 96 l-3 97 -32 2 c-18 1 -35 0 -38 -3z"/><path d="M1229 381 c-24 -25 -29 -37 -29 -81 0 -84 28 -119 96 -120 47 0 94 30 94 60 0 30 -19 34 -30 5 -25 -66 -130 -41 -130 30 0 11 20 15 83 17 81 3 82 3 85 31 2 20 -5 35 -27 57 -41 42 -100 42 -142 1z m119 -13 c6 -6 12 -19 12 -29 0 -17 -8 -19 -61 -19 -57 0 -60 1 -57 22 6 41 68 56 106 26z"/><path d="M1882 394 c-29 -20 -26 -59 3 -59 14 0 19 6 18 21 -2 16 5 24 23 28 31 8 64 -9 64 -33 0 -26 -18 -37 -70 -44 -108 -14 -105 -127 3 -127 24 0 48 5 55 12 8 8 15 8 26 -1 8 -7 27 -11 43 -9 25 3 28 7 31 46 2 25 -1 42 -7 42 -6 0 -11 -13 -11 -30 0 -20 -5 -30 -15 -30 -18 0 -17 -3 -20 88 -3 90 -19 112 -79 112 -23 0 -52 -7 -64 -16z m108 -126 c0 -31 -11 -45 -40 -56 -33 -12 -70 2 -70 26 0 32 18 41 98 51 6 0 12 -9 12 -21z"/><path d="M2384 216 c-8 -21 3 -36 27 -36 15 0 20 6 17 22 -4 27 -35 37 -44 14z"/></g>
+        </svg>
+      </div>
+      <div class="logo small"><svg viewBox="0 0 264 61" aria-label="Mobile Lab"><use href="#ml"/></svg></div>
+    </div>
+    <p class="note" style="margin-top:16px">ไฟล์ที่ส่งให้: <code>mobile-lab-logo.svg</code> (เวกเตอร์—ใช้บนเว็บ), <code>mobile-lab-logo.png</code> + <code>@2x</code> (พื้นโปร่ง—fallback) · clear space รอบโลโก้ ≥ ความสูงตัว "M" · ขนาดเล็กสุดแนะนำ 24px</p>
+  </section>
+
+  <!-- ============ COLOR ============ -->
+  <section>
+    <h2>02 — Color</h2>
+    <p class="note">สกัดจาก <code>css-jquery/stylesheet.css</code> เดิม · <b>ระบบตั้ง accent = แดงเดิม #FF0000</b> (heritage red) ตามที่เลือก · คอรัลเก็บไว้เป็นตัวเลือกสำรอง</p>
+    <div class="lineage">Accent:
+      <span class="dot" style="background:#FF0000"></span> <b>#FF0000 — ใช้จริง (แดงเดิม)</b>
+      &nbsp;·&nbsp; hover = <span class="hoverchip" style="font-size:12px">ขาวบนแดง</span>
+      &nbsp;·&nbsp; สำรอง <span class="dot" style="background:#E4634A"></span> #E4634A (coral)
+    </div>
+    <div class="swatches">
+      <div class="sw"><div class="chip" style="background:#111111"></div><div class="meta"><b>Ink</b><span>#111111 · โลโก้/หัวข้อ</span></div></div>
+      <div class="sw"><div class="chip" style="background:#FF0000"></div><div class="meta"><b>Accent — Red ✓</b><span>#FF0000 · nav/ลิงก์ (ใช้จริง)</span></div></div>
+      <div class="sw"><div class="chip" style="background:#FF0000;display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--mono);font-size:13px">About</div><div class="meta"><b>Link hover</b><span>ขาว #FFF บนแดง #FF0000</span></div></div>
+      <div class="sw"><div class="chip" style="background:#E4634A"></div><div class="meta"><b>Coral (สำรอง)</b><span>#E4634A</span></div></div>
+      <div class="sw"><div class="chip" style="background:#666666"></div><div class="meta"><b>Body</b><span>#666666 · เนื้อความ</span></div></div>
+      <div class="sw"><div class="chip" style="background:#CCCCCC"></div><div class="meta"><b>Rule</b><span>#CCCCCC · เส้นในฟีด</span></div></div>
+      <div class="sw"><div class="chip" style="background:#ECECEC"></div><div class="meta"><b>Hairline</b><span>#ECECEC · เส้นคั่น UI</span></div></div>
+      <div class="sw"><div class="chip" style="background:#FFFFFF;border-right:1px solid #eee"></div><div class="meta"><b>Base</b><span>#FFFFFF · พื้นหลัง</span></div></div>
+    </div>
+  </section>
+
+  <!-- ============ TYPE ============ -->
+  <section>
+    <h2>03 — Typography</h2>
+    <p class="note">เว็บเดิมใช้ <b>Courier New</b> (monospace) เป็นฟอนต์หลักทั้ง body/nav/ลิงก์ และโหลด <b>Droid Serif</b> ไว้ (ปัจจุบันแทนด้วย <b>Noto Serif</b> ซึ่งเป็นสายพันธุ์เดียวกัน) · โลโก้เป็น slab-serif แนวพิมพ์ดีด</p>
+
+    <div class="spec">
+      <div class="tag">Mono — Primary · "Courier New", monospace</div>
+      <div class="mono-xl">Mobile Lab Project</div>
+      <div class="scale">
+        <div><span class="lbl">nav / label 16</span><span style="font-family:var(--mono);font-size:16px;letter-spacing:.5px;color:var(--accent)">News · About · Projects</span></div>
+        <div><span class="lbl">body 15/1.6</span><span style="font-family:var(--mono);font-size:15px">The other side of belief can always rise up.</span></div>
+        <div><span class="lbl">meta 12</span><span style="font-family:var(--mono);font-size:12px;color:var(--body)">HD / 20 min / Color / 2011</span></div>
+      </div>
+    </div>
+
+    <div class="spec">
+      <div class="tag">Serif — Reading · Noto Serif (เดิม Droid Serif)</div>
+      <div class="serif-xl">By the River — 2013</div>
+      <p style="font-family:var(--serif);font-size:16px;color:#333;margin-top:10px">ใช้กับเนื้อหายาว/บทความ/synopsis เพื่ออ่านสบายกว่า monospace เมื่อข้อความยาว ๆ</p>
+    </div>
+
+    <div class="spec">
+      <div class="tag">Display / Logo — slab serif · American Typewriter / Rockwell</div>
+      <div class="slab-xl">Mobile Lab.</div>
+      <p class="note" style="margin-top:8px">ใช้เฉพาะหัวข้อใหญ่/โลโก้ ให้เข้าคู่ ink-splat wordmark — ไม่ใช้กับ body</p>
+    </div>
+  </section>
+
+  <!-- ============ LAYOUT ============ -->
+  <section>
+    <h2>04 — Layout · Content width</h2>
+    <p class="note">เนื้อหาทุกหน้า <b>จัดกึ่งกลางใต้ nav</b> ความกว้างคอลัมน์ = <code>607px</code> (เท่าเว็บเดิม, ตรงกับ <code>#wrapper</code>/<code>#wrapper2</code>) · WordPress ตั้ง <code>contentSize: 607px</code> · รูป/hero ปล่อย full-bleed ได้</p>
+    <div class="measure">
+      <div class="cap">◄  607px — content column (centered)  ►</div>
+      <p>ทุกบล็อกเนื้อหา (About, ผลงาน, ข่าว) วางในคอลัมน์นี้ จัดกึ่งกลางหน้าจอ ส่วนรูปภาพขยายเต็มความกว้างคอลัมน์ (max-width:100%) แล้ว WordPress เสิร์ฟ responsive srcset ให้เอง</p>
+    </div>
+  </section>
+
+  <!-- ============ LINKS & BUTTONS ============ -->
+  <section>
+    <h2>05 — Links & Buttons</h2>
+    <p class="note">ลิงก์ = แดง #FF0000 · <b>hover = ตัวอักษรขาวบนพื้นแดง</b> (สไตล์ดั้งเดิมของเว็บเดิม <code>a:hover{color:#FFF;background:#F00}</code> — เอากลับมาใช้ตามที่เลือก)</p>
+    <p class="note" style="margin-top:10px">Default → <span style="color:var(--accent)">About</span> &nbsp; · &nbsp; Hover → <span class="hoverchip">About</span></p>
+    <p class="demo-links" style="margin-top:14px">ลองเอาเมาส์วาง: <a href="#">News</a><a href="#">About</a><a href="#">Projects</a><a href="#">Communities</a><a href="#">Contact</a></p>
+    <div style="margin-top:22px;display:flex;gap:14px;flex-wrap:wrap">
+      <a class="btn primary" href="#">Primary</a>
+      <a class="btn accent" href="#">Accent</a>
+      <a class="btn ghost" href="#">Ghost</a>
+    </div>
+  </section>
+
+  <!-- ============ TOKENS ============ -->
+  <section>
+    <h2>06 — Tokens สำหรับ theme.json</h2>
+    <p class="note">คัดลอกลง block theme ได้เลย · เปลี่ยน accent จาก coral เป็น red แค่สลับค่า</p>
+    <pre style="font-family:var(--mono);font-size:12px;background:#f6f6f6;padding:18px;border-radius:6px;overflow:auto;margin-top:10px;line-height:1.5">"settings": {
+  "layout": { "contentSize": "607px", "wideSize": "1000px" },
+  "color": { "palette": [
+    {"slug":"ink","color":"#111111","name":"Ink"},
+    {"slug":"accent","color":"#FF0000","name":"Accent (red)"},
+    {"slug":"accent-hover","color":"#CC0000","name":"Accent hover"},
+    {"slug":"accent-alt","color":"#E4634A","name":"Coral (alt)"},
+    {"slug":"body","color":"#666666","name":"Body"},
+    {"slug":"hairline","color":"#ECECEC","name":"Hairline"},
+    {"slug":"base","color":"#FFFFFF","name":"Base"}
+  ]},
+  "typography": { "fontFamilies": [
+    {"slug":"mono","name":"Mono","fontFamily":"\"Courier New\", Courier, monospace"},
+    {"slug":"serif","name":"Serif","fontFamily":"\"Noto Serif\", Georgia, serif"},
+    {"slug":"slab","name":"Display","fontFamily":"\"American Typewriter\",\"Rockwell\", monospace"}
+  ]}
+}</pre>
+  </section>
+
+</div>
+
+<!-- reusable symbol -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="ml" viewBox="0 0 264 61">
+    <g transform="translate(0,61) scale(0.1,-0.1)" fill="currentColor" stroke="none"><path d="M656 483 c-13 -13 -5 -23 19 -23 l25 0 0 -140 c0 -77 4 -140 8 -140 4 0 13 5 19 11 8 8 13 8 17 0 4 -6 27 -11 50 -11 77 0 120 71 96 159 -6 22 -20 47 -33 56 -24 17 -92 20 -102 5 -15 -24 -26 -7 -23 37 l3 47 -36 2 c-21 2 -40 0 -43 -3z m189 -126 c35 -49 11 -136 -41 -151 -50 -15 -90 71 -65 137 18 48 77 55 106 14z"/><path d="M1070 474 c0 -8 8 -14 19 -14 23 0 31 -26 31 -101 0 -99 -10 -149 -31 -149 -11 0 -19 -6 -19 -14 0 -10 15 -14 60 -14 45 0 60 4 60 14 0 8 -9 14 -20 14 -19 0 -20 7 -20 139 l0 139 -40 0 c-28 1 -40 -3 -40 -14z"/><path d="M0 470 c0 -5 8 -10 18 -10 35 0 42 -21 42 -121 0 -114 -4 -129 -36 -129 -13 0 -24 -6 -24 -13 0 -10 18 -13 68 -13 66 1 95 16 50 26 -22 6 -23 9 -25 125 l-1 120 45 -138 c40 -121 48 -138 66 -135 16 2 27 27 60 131 22 70 44 127 49 127 9 0 1 -207 -9 -222 -2 -5 -13 -8 -24 -8 -10 0 -19 -6 -19 -14 0 -11 17 -13 73 -12 70 1 94 15 45 26 -19 5 -23 13 -26 53 -3 46 -2 47 25 47 53 0 70 -10 71 -41 3 -55 5 -60 21 -57 9 1 22 -1 30 -6 8 -5 27 -9 43 -8 18 0 33 -6 41 -19 6 -10 15 -19 19 -19 5 0 3 9 -4 20 -10 16 -9 23 10 43 32 34 39 81 16 114 -10 16 -17 31 -16 36 1 4 -5 7 -13 7 -12 0 -12 8 5 50 25 64 16 66 -11 3 -25 -59 -25 -59 -44 -43 -20 17 -90 -19 -90 -46 0 -21 -39 -30 -82 -19 -23 5 -24 9 -21 68 3 59 4 62 31 65 49 6 18 22 -42 22 l-58 0 -38 -125 c-22 -68 -41 -122 -44 -119 -3 2 -21 57 -41 122 l-35 117 -63 3 c-38 2 -62 -1 -62 -8z"/><path d="M954 465 c-4 -9 -2 -21 4 -27 15 -15 44 -1 40 19 -4 23 -36 29 -44 8z"/><path d="M1572 468 c3 -7 12 -13 22 -13 28 0 36 -26 36 -122 0 -108 -4 -123 -36 -123 -15 0 -24 -6 -24 -15 0 -13 19 -15 128 -13 l127 3 3 64 c2 48 0 62 -10 59 -7 -3 -14 -21 -16 -41 -4 -48 -20 -59 -84 -55 l-53 3 -3 109 c-3 111 5 139 36 134 8 -2 17 3 19 10 4 9 -15 12 -72 12 -57 0 -76 -3 -73 -12z"/><path d="M2095 461 c-3 -5 7 -11 22 -13 l28 -3 3 -122 3 -122 -28 -3 c-15 -2 -27 -7 -26 -13 3 -14 71 -19 86 -6 8 6 18 5 31 -5 38 -28 103 -14 138 30 28 34 24 117 -8 155 -30 36 -83 49 -128 33 -16 -7 -31 -10 -33 -8 -2 1 0 17 3 34 5 25 12 32 30 32 13 0 24 5 24 10 0 13 -137 13 -145 1z m215 -111 c15 -15 20 -33 20 -70 0 -59 -24 -90 -70 -90 -47 0 -70 31 -70 92 0 34 6 58 17 70 22 24 77 24 103 -2z"/><path d="M925 402 c-11 -11 -4 -22 15 -22 18 0 20 -7 20 -84 0 -80 -1 -85 -22 -88 -45 -6 -17 -23 42 -25 46 -1 60 1 60 13 0 8 -9 14 -20 14 -18 0 -20 8 -22 96 l-3 97 -32 2 c-18 1 -35 0 -38 -3z"/><path d="M1229 381 c-24 -25 -29 -37 -29 -81 0 -84 28 -119 96 -120 47 0 94 30 94 60 0 30 -19 34 -30 5 -25 -66 -130 -41 -130 30 0 11 20 15 83 17 81 3 82 3 85 31 2 20 -5 35 -27 57 -41 42 -100 42 -142 1z m119 -13 c6 -6 12 -19 12 -29 0 -17 -8 -19 -61 -19 -57 0 -60 1 -57 22 6 41 68 56 106 26z"/><path d="M1882 394 c-29 -20 -26 -59 3 -59 14 0 19 6 18 21 -2 16 5 24 23 28 31 8 64 -9 64 -33 0 -26 -18 -37 -70 -44 -108 -14 -105 -127 3 -127 24 0 48 5 55 12 8 8 15 8 26 -1 8 -7 27 -11 43 -9 25 3 28 7 31 46 2 25 -1 42 -7 42 -6 0 -11 -13 -11 -30 0 -20 -5 -30 -15 -30 -18 0 -17 -3 -20 88 -3 90 -19 112 -79 112 -23 0 -52 -7 -64 -16z m108 -126 c0 -31 -11 -45 -40 -56 -33 -12 -70 2 -70 26 0 32 18 41 98 51 6 0 12 -9 12 -21z"/><path d="M2384 216 c-8 -21 3 -36 27 -36 15 0 20 6 17 22 -4 27 -35 37 -44 14z"/></g>
+  </symbol>
+</svg>
+</body>
+</html>

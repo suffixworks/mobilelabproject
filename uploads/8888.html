@@ -1,0 +1,156 @@
+<html>
+<head>
+<title>Mobile Lab</title>
+<link rel="stylesheet" type="text/css" href="../../css-jquery/stylesheet.css">	
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+	<script>
+		!window.jQuery && document.write('<script src="jquery-1.4.3.min.js"><\/script>');
+	</script>
+	<script type="text/javascript" src="../../fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+	<script type="text/javascript" src="../../fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+	<link rel="stylesheet" type="text/css" href="../../fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+	<script type="text/javascript">
+		$(document).ready(function() {
+			/*
+			*   Examples - images
+			*/
+
+			$("a#example1").fancybox();
+
+			$("a#example2").fancybox({
+				'overlayShow'	: false,
+				'transitionIn'	: 'elastic',
+				'transitionOut'	: 'elastic'
+			});
+
+			$("a#example3").fancybox({
+				'transitionIn'	: 'none',
+				'transitionOut'	: 'none'	
+			});
+
+			$("a#example4").fancybox({
+				'opacity'		: true,
+				'overlayShow'	: false,
+				'transitionIn'	: 'elastic',
+				'transitionOut'	: 'none'
+			});
+
+			$("a#example5").fancybox();
+
+			$("a#example6").fancybox({
+				'titlePosition'		: 'outside',
+				'overlayColor'		: '#000',
+				'overlayOpacity'	: 0.9
+			});
+
+			$("a#example7").fancybox({
+				'titlePosition'	: 'inside'
+			});
+
+			$("a#example8").fancybox({
+				'titlePosition'	: 'over'
+			});
+
+			$("a[rel=example_group]").fancybox({
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none',
+				'titlePosition' 	: 'over',
+				'titleFormat'		: function(title, currentArray, currentIndex, currentOpts) {
+					return '<span id="fancybox-title-over">Image ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>';
+				}
+			});
+
+			/*
+			*   Examples - various
+			*/
+
+			$("#various1").fancybox({
+				'titlePosition'		: 'inside',
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none'
+			});
+
+			$("#various2").fancybox();
+
+			$("#various3").fancybox({
+				'width'				: '75%',
+				'height'			: '75%',
+				'autoScale'			: false,
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none',
+				'type'				: 'iframe'
+			});
+
+			$("#various4").fancybox({
+				'padding'			: 0,
+				'autoScale'			: false,
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none'
+			});
+		});
+	</script>
+		
+		</head><body>
+		<div id="wrapper2">
+		  <tr>
+		    <td><img src="../../images/projects/8888/8888_poster_web.jpg" width="607" height="898" alt="8.8.88"></td>
+	      </tr>
+		  <tr>
+		    <td><p>&nbsp;</p>
+		      <p><br>
+              <strong>8.8.88 </strong>(2012)</p>
+		      <p>Documentary / Sound / HD / Colour / 25 mins. </p>
+		      <p>&nbsp;</p>
+		      <p>Director's Statement</p>
+		      <p><br>
+		        This documentary tells the story of alienation, the feeling of alienation in terms of country (Burma-Thai), nationality (Burmese-Thai), ethnic (Burmese-Mon) and language (Thai-Burmese-Mon). It also observes the human rights in the social classes in order to show the right and the equality in humanity.</p>
+		      <p>&nbsp;</p>
+		      <p>Synopsis</p>
+		      <p><br>
+		        After the crackdown of the pro-democracy protesters in the 8888 Uprising on 8th August 1988, Tarji's parents were students who joined the protest in Rangoon, left Burma to Thailand through Koh Song Island (Victoria Point) of Ranong Province. They moved and worked in the Southern region of Thailand.<br>
+		        Tarji was born under a labouring environment. He is ethnic Mon. He was born in Thailand and he is now 12 years old. He can speak 3 languages which are Mon, Burmese and Thai language. Tarji lives with his younger brothers in a rented room near the fish market, which karaoke bars and brothels are around. Tarji used to work on a fish boat when he was 11. He has to help his mother raise his 4 brothers. Tarji and his brothers want to go to school at the Children center near their house, but their parents don't have many, so the kids have to work instead. Every morning, Tarji has to sort the fishes at the fish market. The payment is up to the amount of the fishes each day.<br>
+		        Tarji has a Burmese friend. His name is Nia-Su. They're the same age. Nia-Su usually goes to Kanorm power plant beach and resorts in the area to sell toys. They became friends after some incident occured to Tarji.</p>
+		      <p><br>
+	          Cast &amp; Crew </p>
+		      <p><br>
+		        Director / Screenplay : <a href="../../crew/joke.html">Vichart Somkaew</a><br>
+		        Producer : <a href="../../nontawat.html">Nontawat Numbenchapol</a> ,<a href="../../crew/joke.html">Vichart Somkaew</a><br>
+		        Line Producer : Saengtawan  Ngamkalong<br>
+		        Camera : <a href="../../nontawat.html">Nontawat Numbenchapol</a> ,<a href="../../crew/joke.html">Vichart Somkaew</a><br>
+		        Editor &amp; Sound designer : <a href="../../nontawat.html">Nontawat Numbenchapol</a> <br>
+		        Production : Mobile Lab<br>
+		        Burmese Translate : Maung Myint<br>
+	          English Subtitle : Donsaron Kovitvanitcha</p>
+		      <p><br>
+	          </p>
+		      <p>
+              <!--00-->
+              <a id="example1" href="../../images/projects/8888/still01.jpg">
+              <img src="../../images/projects/8888/still_small01.jpg" alt="00" width="300" /></a> 
+              <!--01-->
+              <a id="example1" href="../../images/projects/8888/still02.jpg">
+              <img src="../../images/projects/8888/still_small02.jpg" alt="01" width="300" /></a> 
+              <br><br>
+              <!--02-->
+		        <a id="example1" href="../../images/projects/8888/still03.jpg">
+                <img src="../../images/projects/8888/still_small03.jpg" alt="02" width="300" /></a> 
+               <!--03-->
+                <a id="example1" href="../../images/projects/8888/still05.jpg">
+                <img src="../../images/projects/8888/still_small05.jpg" alt="03" width="300" /></a> 
+        <br><br>
+                  <!--04-->
+		        <a id="example1" href="../../images/projects/8888/still06.jpg">
+                <img src="../../images/projects/8888/still_small06.jpg" alt="04" width="300" /></a> 
+                  <!--05-->
+                <a id="example1" href="../../images/projects/8888/still08.jpg">
+                <img src="../../images/projects/8888/still_small08.jpg" alt="05" width="300" /></a> 
+                <br><br>
+                <!--06--><br>
+		        <br>
+		        <br>
+		        <br>
+	          </p>
+		      </p></td>
+        </div>
+		</body>
+</html>
