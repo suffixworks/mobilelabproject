@@ -13,7 +13,8 @@ real cross-page navigation links.
 index.html          News (home)
 press.html          Press
 about.html          About
-projects.html       Projects index (categories → links to each project page)
+projects.html       Projects — the four categories (Features, Documentary, …)
+projects/<cat>.html    Category list (features/documentary/installations/performances)
 communities.html    Communities
 shop.html           Shop
 contact.html        Contact
