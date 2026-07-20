@@ -31,8 +31,14 @@ source/             Original reference files — NOT used by the live site:
                       uploads/, screenshots/
 ```
 
-Content is **text-only** (typographic), sourced solely from the HTML in the *Mobile Lab
-Project* folder — no content artwork/photography, only the brand logo.
+This is a faithful static rendering of `source/Mobile Lab.dc.html` (the Claude Design
+file) — same layout, same content, no real photography pulled in:
+
+- The **hero video** area is the design's placeholder banner. Drop a file at
+  `assets/hero.mp4` (and optional `assets/hero-poster.jpg`) and it plays automatically.
+- **Image slots** render as empty grey boxes at their intended aspect ratios (exactly
+  as the `.dc.html` shows them). Each keeps its intended filename in a `data-img`
+  attribute, so real images can be wired in later.
 
 Plain HTML/CSS/JS with **no framework or runtime dependency** — pages open directly in a
 browser (`file://`) or over HTTP. The only external request is the Source Serif 4 web
