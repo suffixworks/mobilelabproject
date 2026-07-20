@@ -45,7 +45,12 @@
         <a href="#" onClick="{{ page.onSelect }}" style="{{ page.navLinkStyle }}">{{ page.name }}</a>
       </sc-for>
     </nav>
-  </header><main key="{{ pageKey }}" style="{{ mainStyle }}">
+  </header>
+  <sc-if value="{{ showProjHero }}" hint-placeholder-val="{{ false }}">
+    <div style="{{ videoBannerStyle }}">
+      <video src="assets/hero.mp4" poster="assets/hero-poster.jpg" autoplay muted loop playsinline style="{{ videoElStyle }}"></video>
+    </div>
+  </sc-if><main key="{{ pageKey }}" style="{{ mainStyle }}">
     <sc-if value="{{ isNews }}" hint-placeholder-val="{{ true }}">
       <div style="{{ feedStyle }}">
         <sc-for list="{{ news }}" as="item" hint-placeholder-count="4">
@@ -149,11 +154,37 @@
     </sc-if>
 
     <sc-if value="{{ isCommunities }}" hint-placeholder-val="{{ false }}">
-      <nav style="{{ projectsStyle }}">
-        <sc-for list="{{ communityCats }}" as="cat" hint-placeholder-count="3">
-          <a href="#" style="{{ projectLinkStyle }}">{{ cat }}</a>
-        </sc-for>
-      </nav>
+      <sc-if value="{{ comShowList }}" hint-placeholder-val="{{ true }}">
+        <nav style="{{ projectsStyle }}">
+          <sc-for list="{{ communityCats }}" as="c" hint-placeholder-count="3">
+            <a href="#" onClick="{{ c.onOpen }}" style="{{ projectLinkStyle }}">{{ c.title }}</a>
+          </sc-for>
+        </nav>
+      </sc-if>
+      <sc-if value="{{ comShowDetail }}" hint-placeholder-val="{{ false }}">
+        <div style="{{ projDetailStyle }}">
+          <button onClick="{{ comBack }}" style="{{ projBackStyle }}">← {{ comBackLabel }}</button>
+          <sc-for list="{{ comDetailBlocks }}" as="b" hint-placeholder-count="4">
+            <sc-if value="{{ b.isImage }}" hint-placeholder-val="{{ false }}">
+              <figure style="{{ b.figStyle }}">
+                <div style="{{ b.wrapStyle }}">
+                  <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="{{ b.slotId }}" shape="rect" fit="cover" placeholder="{{ b.ph }}" hint-size="100%,100%" style="position:absolute;top:0;left:0;width:100%;height:100%"></x-import>
+                </div>
+                <sc-if value="{{ b.hasCaption }}" hint-placeholder-val="{{ false }}"><figcaption style="{{ b.capStyle }}">{{ b.caption }}</figcaption></sc-if>
+              </figure>
+            </sc-if>
+            <sc-if value="{{ b.isTitle }}" hint-placeholder-val="{{ false }}">
+              <div style="{{ b.titleWrapStyle }}">
+                <h2 style="{{ b.titleStyle }}">{{ b.text }}</h2>
+                <sc-if value="{{ b.hasMeta }}" hint-placeholder-val="{{ false }}"><p style="{{ b.metaStyle }}">{{ b.meta }}</p></sc-if>
+              </div>
+            </sc-if>
+            <sc-if value="{{ b.isHead }}" hint-placeholder-val="{{ false }}"><h3 style="{{ b.headStyle }}">{{ b.text }}</h3></sc-if>
+            <sc-if value="{{ b.isPara }}" hint-placeholder-val="{{ false }}"><p style="{{ b.paraStyle }}">{{ b.text }}</p></sc-if>
+            <sc-if value="{{ b.isVideo }}" hint-placeholder-val="{{ false }}"><a href="{{ b.url }}" target="_blank" style="{{ b.linkStyle }}">{{ b.label }} ↗</a></sc-if>
+          </sc-for>
+        </div>
+      </sc-if>
     </sc-if>
 
     <sc-if value="{{ isShop }}" hint-placeholder-val="{{ false }}">
@@ -254,11 +285,11 @@
   &quot;accent&quot;: { &quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#0000FF&quot;, &quot;options&quot;: [&quot;#0000FF&quot;, &quot;#FF0000&quot;, &quot;#111111&quot;, &quot;#666666&quot;], &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Style&quot; }
 }">
 class Component extends DCLogic {
-  state = { bp: 'desktop', drawerOpen: false, active: 'News', newsYear: null, pressYear: null, shopSent: false, contactSent: false, projCat: null, projId: null, projects: null, projectCatMap: null };
+  state = { bp: 'desktop', drawerOpen: false, active: 'News', newsYear: null, pressYear: null, shopSent: false, contactSent: false, projCat: null, projId: null, comId: null, projects: null, projectCatMap: null, communities: null, communityList: null };
 
   componentDidMount() {
     import('./projects-data.js')
-      .then((m) => this.setState({ projects: m.PROJECTS, projectCatMap: m.PROJECT_CATS }))
+      .then((m) => this.setState({ projects: m.PROJECTS, projectCatMap: m.PROJECT_CATS, communities: m.COMMUNITIES, communityList: m.COMMUNITY_LIST }))
       .catch(() => {});
     this._onResize = () => {
       const w = window.innerWidth;
@@ -442,8 +473,8 @@ class Component extends DCLogic {
     };
 
     const pages = pageNames.map((name) => {
-      const on = (e) => { if (e) e.preventDefault(); this.setState({ active: name, projCat: null, projId: null }); };
-      const onD = (e) => { if (e) e.preventDefault(); this.setState({ active: name, projCat: null, projId: null, drawerOpen: false }); };
+      const on = (e) => { if (e) e.preventDefault(); this.setState({ active: name, projCat: null, projId: null, comId: null }); };
+      const onD = (e) => { if (e) e.preventDefault(); this.setState({ active: name, projCat: null, projId: null, comId: null, drawerOpen: false }); };
       return {
         name,
         onSelect: on,
@@ -481,7 +512,18 @@ class Component extends DCLogic {
       aspectRatio: '607 / 405',
     };
 
-    const communityCats = ['QUEER DIGITHAIZED', 'Root Lab', 'Percepto'];
+    // ---- communities (2-level: list -> detail, reuses project detail styles) ----
+    const communityData = this.state.communities || {};
+    const communityList = this.state.communityList || [];
+    const comId = this.state.comId;
+    const comShowList = !comId;
+    const comShowDetail = !!comId;
+    const communityCats = communityList.map((id) => ({
+      id,
+      title: (communityData[id] && communityData[id].title) || id,
+      onOpen: (e) => { if (e) e.preventDefault(); this.setState({ comId: id }); },
+    }));
+    const comBack = (e) => { if (e) e.preventDefault(); this.setState({ comId: null }); };
 
     // ---- projects (3-level: categories -> list -> detail) ----
     const projectData = this.state.projects || {};
@@ -517,16 +559,22 @@ class Component extends DCLogic {
     const blkCapStyle = { fontFamily: mono, color: body, margin: '7px 0 0', fontSize: '13px', lineHeight: 1.4, fontStyle: 'italic' };
     const blkVideoStyle = { fontFamily: mono, color: accent, fontSize: '15px', letterSpacing: '.5px', textDecoration: 'none', alignSelf: 'flex-start' };
 
-    const curProj = projId ? projectData[projId] : null;
-    const projTitle = curProj ? curProj.title : '';
-    const projDetailBlocks = ((curProj && curProj.blocks) || []).map((b, i) => {
-      const key = (projId || 'x') + '-' + i;
+    const mapBlocks = (id, blocks) => (blocks || []).map((b, i) => {
+      const key = (id || 'x') + '-' + i;
       if (b.k === 'img') return { key, isImage: true, slotId: 'sd-' + key, ph: b.ph || '', figStyle: { margin: 0 }, wrapStyle: { position: 'relative', width: '100%', aspectRatio: (b.a || '3/2').replace('/', ' / '), background: '#f2f2f2' }, hasCaption: !!b.cap, caption: b.cap || '', capStyle: blkCapStyle };
       if (b.k === 'title') return { key, isTitle: true, text: b.x, titleStyle: { fontFamily: mono, fontWeight: 700, color: ink, margin: 0, fontSize: isMobile ? '21px' : '23px', lineHeight: 1.2 }, titleWrapStyle: blkTitleWrapStyle, hasMeta: !!b.m, meta: b.m || '', metaStyle: blkMetaStyle };
       if (b.k === 'head') return { key, isHead: true, text: b.x, headStyle: blkHeadStyle };
       if (b.k === 'video') return { key, isVideo: true, label: b.x, url: b.u, linkStyle: blkVideoStyle };
       return { key, isPara: true, text: b.x, paraStyle: blkParaStyle };
     });
+
+    const curProj = projId ? projectData[projId] : null;
+    const projTitle = curProj ? curProj.title : '';
+    const projDetailBlocks = mapBlocks(projId, curProj && curProj.blocks);
+
+    const curCom = comId ? communityData[comId] : null;
+    const comDetailBlocks = mapBlocks(comId, curCom && curCom.blocks);
+    const comBackLabel = 'Communities';
 
     // ---- shop ----
     const shopImgWrapStyle = { position: 'relative', width: '100%', aspectRatio: '2 / 3', background: '#f4f4f4' };
@@ -663,6 +711,7 @@ class Component extends DCLogic {
       rootStyle, sidebarStyle, brandRowStyle, logoStyle, logoHoverStyle, logoImgStyle, navStyle,
       videoBannerStyle, videoElStyle,
       showHero: active === 'News' && !projCat && !projId,
+      showProjHero: active === 'Projects' && !!projId,
       footerStyle, footerSepStyle,
       showHamburger, hamburgerStyle, barStyle,
       mainStyle, heroWrapStyle, copyStyle, paraStyle, strongStyle, creditStyle, placeholderStyle,
@@ -671,6 +720,7 @@ class Component extends DCLogic {
       projectCats, communityCats, projectsStyle, projectLinkStyle,
       projShowCats, projShowList, projShowDetail, projListItems, projDetailBlocks,
       projBack, projBackLabel, projTitle, projDetailStyle, projListWrapStyle, projBackStyle,
+      comShowList, comShowDetail, comDetailBlocks, comBack, comBackLabel,
       pages,
       isNews: active === 'News',
       isPress: active === 'Press',
@@ -688,9 +738,9 @@ class Component extends DCLogic {
       emailLinkStyle: { fontFamily: mono, fontSize: isMobile ? '17px' : '19px', color: accent, wordBreak: 'break-all' },
       emailRowStyle: { fontFamily: mono, fontSize: isMobile ? '17px' : '19px', color: ink, margin: 0 },
       activePage: active,
-      pageKey: active + (projId ? ':' + projId : (projCat ? ':' + projCat : '')),
+      pageKey: active + (projId ? ':' + projId : (projCat ? ':' + projCat : '')) + (comId ? ':' + comId : ''),
       drawerVisible, scrimStyle, drawerNavStyle, closeStyle,
-      goHome: (e) => { if (e) e.preventDefault(); this.setState({ active: 'News', projCat: null, projId: null, drawerOpen: false }); },
+      goHome: (e) => { if (e) e.preventDefault(); this.setState({ active: 'News', projCat: null, projId: null, comId: null, drawerOpen: false }); },
       toggleDrawer: (e) => { if (e) e.preventDefault(); this.setState(s => ({ drawerOpen: !s.drawerOpen })); },
       stop: (e) => { if (e) e.stopPropagation(); },
     };

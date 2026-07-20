@@ -17,7 +17,8 @@ projects.html       Projects index (categories → links to each project page)
 communities.html    Communities
 shop.html           Shop
 contact.html        Contact
-projects/<slug>.html   Individual project pages (doiboy, boundary, bkky, …)
+projects/<slug>.html      Individual project pages (doiboy, boundary, bkky, …)
+communities/<slug>.html   Individual community pages (qdigithaized, rootlab, percepto)
 
 styles.css          Digital Blue theme — Courier New + Source Serif 4, 607px column
 app.js              Vanilla JS: mobile drawer + News/Press year filter (no framework)

@@ -12,6 +12,57 @@ export const PROJECT_CATS = {
   Performances:  ['idontcare', 'sakecup'],
 };
 
+export const COMMUNITY_LIST = ['qdigithaized', 'rootlab', 'percepto'];
+
+export const COMMUNITIES = {
+  qdigithaized: {
+    title: 'QUEER DIGITHAIZED',
+    blocks: [
+      { k: 'img', a: '580/580', ph: 'queer_digithaized.jpg' },
+      { k: 'title', x: 'QUEER DIGITHAIZED', m: 'Curated by Nontawat Numbenchapol for Lesbisch Schwule Filmtage Hamburg — International Queer Film Festival' },
+      { k: 'para', x: '“At the intersection of contemporary Thailand’s cultural and political historiographies lie queer bodies. These five filmmakers explore the place of queer bodies in a society that simultaneously accepts their bodies under certain controlled scenarios while rejecting their existence as a whole.”' },
+      { k: 'para', x: 'The five Thai queer films presented in the program were made in different years under different circumstances and social terms — 2002, 2005, 2012, 2014 and 2017 — informing audiences of Thailand’s shifting social, cultural and political landscape, as well as the evolution of contemporary cinematic storytelling. Reflecting on the history of Thai queer cinema and the larger context of LGBTQ rights, these films were the direct result of the digital age that democratized filmmaking and put it in the hands of individuals in the form of home videos.' },
+      { k: 'head', x: 'Program' },
+      { k: 'para', x: 'Deep Inside — Tanwarin Sukkhapisit · Thailand · 2002 · 23 min\nVous Vous Souvenez De Moi? — Thunska Pansittivorakul · Thailand · 2005 · 10 min\nErotic Fragments No. 1,2,3 — Anucha Boonyawatana · Thailand · 2011 · 6 min\nShe is My Best Friend — Jirassaya Wongsutin · Thailand · 2013 · 13 min\nUpside Down — Natchanon Vana · Thailand · 2017 · 35 min\nAll films Thai with English subtitles' },
+    ],
+  },
+
+  rootlab: {
+    title: 'Root Lab',
+    blocks: [
+      { k: 'img', a: '607/955', ph: 'rootlabposter.jpg' },
+      { k: 'title', x: 'Root Lab' },
+      { k: 'para', x: 'Root Lab is a genetic experiment about social space. We are interested in visual and sound media based on contexts of society, politics and culture, focusing on works from newcomers who are still studying or fresh graduates. We hope this visual and sound art showcase will be a space where artists of the same age and interest can meet up and exchange points of view in order to develop their works later on.' },
+      { k: 'head', x: 'Experimental Program' },
+      { k: 'para', x: 'The first step of the new beginning (of mine) — Wachara Gunha\nMV Ram Wong Songkran — Wassachol Sirichanthanun\nHe in me — Kittikhun Kittisowan\nReflect — Machima Ungsriwong\nWoman in democracy — Arthawut Boonyuang\nChay, Gayvah-rar the Machupicchu — Chaloemkiat Saeyong' },
+      { k: 'head', x: 'Documentary Program' },
+      { k: 'para', x: 'Duty of time — Nuntawat Jarusruangnil\nLost — Yingsiwat Yamolyong\nHistory in the air — Chaloemkiat Saeyong\nRemembrance — Sittiporn Racha\ntime to be … — Arthawut Boonyuang\nWho Can Forget — Wassachol Sirichanthanun' },
+      { k: 'head', x: 'Fiction Program' },
+      { k: 'para', x: 'Fabricative — Panapan Tangsomboon\nPRISONER OF LOVE — Wachara Gunha\nThe Womb In Aquarium — Napat Treepalawisetkun\nEmployees leaving the Lumiere factory — Chaloemkiat Saeyong\nBLUE BLANK — Wachara Gunha\nWe Will Forget It Again — Napat Treepalawisetkun\nEnlighten — Thanachart Siripatrachai' },
+      { k: 'para', x: 'Poster design by Phim Umari · Root Lab with support from Siam Inception' },
+    ],
+  },
+
+  percepto: {
+    title: 'Percepto',
+    blocks: [
+      { k: 'img', a: '607/341', ph: 'percepto_logo.jpg' },
+      { k: 'title', x: 'Percepto', m: 'Twisted Visual and Sound Workshop' },
+      { k: 'para', x: '“Percepto” is a twisted visual and sound workshop about changing the visual and sound perception of humans. The targets of this workshop are students or those interested in visual arts. Participants are sent to record video or sound, and must try to change human visual and sound perception.' },
+      { k: 'para', x: 'For this project we select artists from the Root Lab program and assign them to positions: Screenplay Writer, Directing, Sound, Cinematography and Editing. Each individual works independently in their field. When the screenplay is finished, the director has total freedom to interpret and experiment with it — as do the other positions. The point is to let new-generation artists learn to work in diverse methods and respect one another’s different thoughts.' },
+      { k: 'img', a: '607/843', ph: 'sound_of_psycho_poster.jpg' },
+      { k: 'head', x: 'Sound of Psycho' },
+      { k: 'para', x: 'HD · 20 min · Sound · Colour · 2011' },
+      { k: 'para', x: 'Mobile Lab experimented with the twisted visual and sound project into a proper film from two new-generation artists: Wachara Kanha and Chaloemkiat Saeyong — “Percepto 01: Sound of Psycho”. Mobile Lab assisted them in production and necessary equipment.' },
+      { k: 'para', x: 'Wachara Kanha wrote the screenplay, telling the story of a man whose family has been massacred and who is himself seriously injured and loses his hearing. He investigates to find out who is behind his misfortune. The plot was inspired by the May 2010 military crackdown in Ratchaprasong. Wachara also directed the film himself. Chaloemkiat Saeyong was in charge of editing, and experimented with the unwanted footage usually cut from a film — evolving the short fiction into a documentary style.' },
+      { k: 'head', x: 'Cast & Crew' },
+      { k: 'para', x: 'Producer / Camera / Colour Correction / Sound Design — Nontawat Numbenchapol\nDirector / Script Writer / Art Director — Wachara Kanha\nEditor — Chaloemkiat Saeyong\nCast — Alwa Ritsila and Kanha’s family' },
+      { k: 'img', a: '290/193', ph: 'percepto_small01.jpg' },
+      { k: 'img', a: '290/193', ph: 'percepto_small_02.jpg' },
+    ],
+  },
+};
+
 export const PROJECTS = {
   doiboy: {
     title: 'DOI BOY',
