@@ -14,17 +14,23 @@
   html, body { margin: 0; padding: 0; }
   html { scrollbar-gutter: stable; overflow-y: scroll; }
   body { background: #ffffff; }
-  a { color: #FF0000; text-decoration: none; padding: 1px 4px; transition: color 0.25s ease, background-color 0.25s ease; }
-  a:hover { color: #ffffff; background: #FF0000; text-decoration: none; }
+  a { color: #0000FF; text-decoration: none; padding: 1px 4px; transition: color 0.25s ease, background-color 0.25s ease; }
+  a:hover { color: #ffffff; background: #0000FF; text-decoration: none; }
   @keyframes mlPageFade { from { opacity: 0; } to { opacity: 1; } }
 </style>
 </helmet>
 <div style="{{ rootStyle }}">
+  <!-- ================= HERO VIDEO ================= -->
+  <sc-if value="{{ showHero }}" hint-placeholder-val="{{ true }}">
+    <div style="{{ videoBannerStyle }}">
+      <video src="assets/hero.mp4" poster="assets/hero-poster.jpg" autoplay muted loop playsinline style="{{ videoElStyle }}"></video>
+    </div>
+  </sc-if>
 
   <!-- ================= SIDEBAR / HEADER ================= -->
   <header style="{{ sidebarStyle }}">
     <div style="{{ brandRowStyle }}">
-      <a href="#" onClick="{{ goHome }}" style="{{ logoStyle }}" style-hover="{{ logoHoverStyle }}"><img src="assets/logo.svg" alt="Mobile Lab" style="{{ logoImgStyle }}"></a>
+      <a href="#" onClick="{{ goHome }}" style="{{ logoStyle }}" style-hover="{{ logoHoverStyle }}"><img src="assets/logo.png" alt="Mobile Lab" style="{{ logoImgStyle }}"></a>
       <sc-if value="{{ showHamburger }}" hint-placeholder-val="{{ false }}">
         <button onClick="{{ toggleDrawer }}" aria-label="Menu" style="{{ hamburgerStyle }}">
           <span style="{{ barStyle }}"></span>
@@ -39,7 +45,7 @@
         <a href="#" onClick="{{ page.onSelect }}" style="{{ page.navLinkStyle }}">{{ page.name }}</a>
       </sc-for>
     </nav>
-  </header><main key="{{ activePage }}" style="{{ mainStyle }}">
+  </header><main key="{{ pageKey }}" style="{{ mainStyle }}">
     <sc-if value="{{ isNews }}" hint-placeholder-val="{{ true }}">
       <div style="{{ feedStyle }}">
         <sc-for list="{{ news }}" as="item" hint-placeholder-count="4">
@@ -99,11 +105,47 @@
     </sc-if>
 
     <sc-if value="{{ isProjects }}" hint-placeholder-val="{{ false }}">
-      <nav style="{{ projectsStyle }}">
-        <sc-for list="{{ projectCats }}" as="cat" hint-placeholder-count="4">
-          <a href="#" style="{{ projectLinkStyle }}">{{ cat }}</a>
-        </sc-for>
-      </nav>
+      <sc-if value="{{ projShowCats }}" hint-placeholder-val="{{ true }}">
+        <nav style="{{ projectsStyle }}">
+          <sc-for list="{{ projectCats }}" as="cat" hint-placeholder-count="4">
+            <a href="#" onClick="{{ cat.onOpen }}" style="{{ projectLinkStyle }}">{{ cat.name }}</a>
+          </sc-for>
+        </nav>
+      </sc-if>
+      <sc-if value="{{ projShowList }}" hint-placeholder-val="{{ false }}">
+        <div style="{{ projListWrapStyle }}">
+          <button onClick="{{ projBack }}" style="{{ projBackStyle }}">← {{ projBackLabel }}</button>
+          <nav style="{{ projectsStyle }}">
+            <sc-for list="{{ projListItems }}" as="p" hint-placeholder-count="3">
+              <a href="#" onClick="{{ p.onOpen }}" style="{{ projectLinkStyle }}">{{ p.title }}</a>
+            </sc-for>
+          </nav>
+        </div>
+      </sc-if>
+      <sc-if value="{{ projShowDetail }}" hint-placeholder-val="{{ false }}">
+        <div style="{{ projDetailStyle }}">
+          <button onClick="{{ projBack }}" style="{{ projBackStyle }}">← {{ projBackLabel }}</button>
+          <sc-for list="{{ projDetailBlocks }}" as="b" hint-placeholder-count="4">
+            <sc-if value="{{ b.isImage }}" hint-placeholder-val="{{ false }}">
+              <figure style="{{ b.figStyle }}">
+                <div style="{{ b.wrapStyle }}">
+                  <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="{{ b.slotId }}" shape="rect" fit="cover" placeholder="{{ b.ph }}" hint-size="100%,100%" style="position:absolute;top:0;left:0;width:100%;height:100%"></x-import>
+                </div>
+                <sc-if value="{{ b.hasCaption }}" hint-placeholder-val="{{ false }}"><figcaption style="{{ b.capStyle }}">{{ b.caption }}</figcaption></sc-if>
+              </figure>
+            </sc-if>
+            <sc-if value="{{ b.isTitle }}" hint-placeholder-val="{{ false }}">
+              <div style="{{ b.titleWrapStyle }}">
+                <h2 style="{{ b.titleStyle }}">{{ b.text }}</h2>
+                <sc-if value="{{ b.hasMeta }}" hint-placeholder-val="{{ false }}"><p style="{{ b.metaStyle }}">{{ b.meta }}</p></sc-if>
+              </div>
+            </sc-if>
+            <sc-if value="{{ b.isHead }}" hint-placeholder-val="{{ false }}"><h3 style="{{ b.headStyle }}">{{ b.text }}</h3></sc-if>
+            <sc-if value="{{ b.isPara }}" hint-placeholder-val="{{ false }}"><p style="{{ b.paraStyle }}">{{ b.text }}</p></sc-if>
+            <sc-if value="{{ b.isVideo }}" hint-placeholder-val="{{ false }}"><a href="{{ b.url }}" target="_blank" style="{{ b.linkStyle }}">{{ b.label }} ↗</a></sc-if>
+          </sc-for>
+        </div>
+      </sc-if>
     </sc-if>
 
     <sc-if value="{{ isCommunities }}" hint-placeholder-val="{{ false }}">
@@ -138,7 +180,7 @@
             <label style="{{ labelStyle }}">Message</label>
             <textarea style="{{ textareaStyle }}" placeholder="Quantity, shipping country, questions…"></textarea>
           </div>
-          <button type="submit" style="{{ submitStyle }}">Send enquiry</button>
+          <button type="submit" style="{{ submitStyle }}" style-hover="{{ submitHoverStyle }}">Send enquiry</button>
           <sc-if value="{{ shopSent }}" hint-placeholder-val="{{ false }}">
             <p style="{{ sentStyle }}">Thank you — your enquiry has been noted. We’ll reply by email.</p>
           </sc-if>
@@ -168,7 +210,7 @@
             <label style="{{ labelStyle }}">Message</label>
             <textarea style="{{ textareaStyle }}" placeholder="Your message…"></textarea>
           </div>
-          <button type="submit" style="{{ submitStyle }}">Send message</button>
+          <button type="submit" style="{{ submitStyle }}" style-hover="{{ submitHoverStyle }}">Send message</button>
           <sc-if value="{{ contactSent }}" hint-placeholder-val="{{ false }}">
             <p style="{{ sentStyle }}">Thank you — your message has been sent. We’ll reply by email.</p>
           </sc-if>
@@ -209,12 +251,15 @@
 <script type="text/x-dc" data-dc-script data-props="{
   &quot;$preview&quot;: { &quot;width&quot;: &quot;100%&quot;, &quot;height&quot;: 760 },
   &quot;mobileNav&quot;: { &quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;stacked&quot;, &quot;drawer&quot;, &quot;topbar&quot;], &quot;default&quot;: &quot;drawer&quot;, &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Mobile navigation&quot; },
-  &quot;accent&quot;: { &quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#FF0000&quot;, &quot;options&quot;: [&quot;#FF0000&quot;, &quot;#E4634A&quot;, &quot;#111111&quot;, &quot;#666666&quot;], &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Style&quot; }
+  &quot;accent&quot;: { &quot;editor&quot;: &quot;color&quot;, &quot;default&quot;: &quot;#0000FF&quot;, &quot;options&quot;: [&quot;#0000FF&quot;, &quot;#FF0000&quot;, &quot;#111111&quot;, &quot;#666666&quot;], &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Style&quot; }
 }">
 class Component extends DCLogic {
-  state = { bp: 'desktop', drawerOpen: false, active: 'News', newsYear: null, pressYear: null, shopSent: false, contactSent: false };
+  state = { bp: 'desktop', drawerOpen: false, active: 'News', newsYear: null, pressYear: null, shopSent: false, contactSent: false, projCat: null, projId: null, projects: null, projectCatMap: null };
 
   componentDidMount() {
+    import('./projects-data.js')
+      .then((m) => this.setState({ projects: m.PROJECTS, projectCatMap: m.PROJECT_CATS }))
+      .catch(() => {});
     this._onResize = () => {
       const w = window.innerWidth;
       const bp = w < 640 ? 'mobile' : (w < 1024 ? 'tablet' : 'desktop');
@@ -226,7 +271,8 @@ class Component extends DCLogic {
   componentWillUnmount() { window.removeEventListener('resize', this._onResize); }
 
   renderVals() {
-    const accent = this.props.accent || '#FF0000';
+    const accent = this.props.accent || '#0000FF';
+    const accentDark = '#0000CC';
     const ink = '#111111';
     const body = '#666666';
     const mono = "'Courier New', Courier, monospace";
@@ -315,6 +361,15 @@ class Component extends DCLogic {
       { slotId: 'p-ana', date: 'January 2011', imgs: [['analogo.jpg', D2[0]], ['mobile_lab_final_logo.jpg', D2[1]]], title: 'Mobile Lab', body: ['Won an Arts Network Asia (ANA) 2011 Award.'] },
     ];
 
+    const videoBannerStyle = {
+      width: '100%',
+      height: '100vh',
+      background: '#111111',
+      overflow: 'hidden',
+      flexShrink: 0,
+    };
+    const videoElStyle = { width: '100%', height: '100%', objectFit: 'cover', display: 'block' };
+
     // ---- layout ----
     const rootStyle = {
       display: 'flex',
@@ -387,8 +442,8 @@ class Component extends DCLogic {
     };
 
     const pages = pageNames.map((name) => {
-      const on = (e) => { if (e) e.preventDefault(); this.setState({ active: name }); };
-      const onD = (e) => { if (e) e.preventDefault(); this.setState({ active: name, drawerOpen: false }); };
+      const on = (e) => { if (e) e.preventDefault(); this.setState({ active: name, projCat: null, projId: null }); };
+      const onD = (e) => { if (e) e.preventDefault(); this.setState({ active: name, projCat: null, projId: null, drawerOpen: false }); };
       return {
         name,
         onSelect: on,
@@ -426,19 +481,64 @@ class Component extends DCLogic {
       aspectRatio: '607 / 405',
     };
 
-    const projectCats = ['Features', 'Documentary', 'Installations', 'Performances'];
     const communityCats = ['QUEER DIGITHAIZED', 'Root Lab', 'Percepto'];
+
+    // ---- projects (3-level: categories -> list -> detail) ----
+    const projectData = this.state.projects || {};
+    const projectCatMap = this.state.projectCatMap || { Features: [], Documentary: [], Installations: [], Performances: [] };
+    const projCat = this.state.projCat;
+    const projId = this.state.projId;
+    const projShowCats = !projCat;
+    const projShowList = !!projCat && !projId;
+    const projShowDetail = !!projId;
+
+    const projectCats = ['Features', 'Documentary', 'Installations', 'Performances'].map((name) => ({
+      name,
+      onOpen: (e) => { if (e) e.preventDefault(); this.setState({ projCat: name, projId: null }); },
+    }));
+
+    const projListItems = (projCat ? (projectCatMap[projCat] || []) : []).map((id) => ({
+      id,
+      title: (projectData[id] && projectData[id].title) || id,
+      onOpen: (e) => { if (e) e.preventDefault(); this.setState({ projId: id }); },
+    }));
+
+    const projBack = (e) => { if (e) e.preventDefault(); if (this.state.projId) this.setState({ projId: null }); else this.setState({ projCat: null }); };
+    const projBackLabel = projId ? projCat : 'Projects';
+
+    const projDetailStyle = { width: '100%', maxWidth: '607px', display: 'flex', flexDirection: 'column', gap: '15px', textAlign: 'left', alignSelf: 'center' };
+    const projListWrapStyle = { flex: 1, width: '100%', maxWidth: '607px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '2px', alignSelf: 'center' };
+    const projBackStyle = { fontFamily: mono, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase', color: body, background: 'none', border: 'none', padding: '2px 6px 8px 0', cursor: 'pointer', alignSelf: 'flex-start' };
+
+    const blkTitleWrapStyle = { display: 'flex', flexDirection: 'column', gap: '7px', margin: '4px 0 2px' };
+    const blkMetaStyle = { fontFamily: mono, color: body, margin: 0, fontSize: '14px', lineHeight: 1.5, whiteSpace: 'pre-line' };
+    const blkHeadStyle = { fontFamily: mono, fontWeight: 700, color: ink, margin: '12px 0 -2px', fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase' };
+    const blkParaStyle = { fontFamily: mono, color: body, margin: 0, fontSize: '16px', lineHeight: 1.3, whiteSpace: 'pre-line', textWrap: 'pretty' };
+    const blkCapStyle = { fontFamily: mono, color: body, margin: '7px 0 0', fontSize: '13px', lineHeight: 1.4, fontStyle: 'italic' };
+    const blkVideoStyle = { fontFamily: mono, color: accent, fontSize: '15px', letterSpacing: '.5px', textDecoration: 'none', alignSelf: 'flex-start' };
+
+    const curProj = projId ? projectData[projId] : null;
+    const projTitle = curProj ? curProj.title : '';
+    const projDetailBlocks = ((curProj && curProj.blocks) || []).map((b, i) => {
+      const key = (projId || 'x') + '-' + i;
+      if (b.k === 'img') return { key, isImage: true, slotId: 'sd-' + key, ph: b.ph || '', figStyle: { margin: 0 }, wrapStyle: { position: 'relative', width: '100%', aspectRatio: (b.a || '3/2').replace('/', ' / '), background: '#f2f2f2' }, hasCaption: !!b.cap, caption: b.cap || '', capStyle: blkCapStyle };
+      if (b.k === 'title') return { key, isTitle: true, text: b.x, titleStyle: { fontFamily: mono, fontWeight: 700, color: ink, margin: 0, fontSize: isMobile ? '21px' : '23px', lineHeight: 1.2 }, titleWrapStyle: blkTitleWrapStyle, hasMeta: !!b.m, meta: b.m || '', metaStyle: blkMetaStyle };
+      if (b.k === 'head') return { key, isHead: true, text: b.x, headStyle: blkHeadStyle };
+      if (b.k === 'video') return { key, isVideo: true, label: b.x, url: b.u, linkStyle: blkVideoStyle };
+      return { key, isPara: true, text: b.x, paraStyle: blkParaStyle };
+    });
 
     // ---- shop ----
     const shopImgWrapStyle = { position: 'relative', width: '100%', aspectRatio: '2 / 3', background: '#f4f4f4' };
     const shopPriceStyle = { fontFamily: mono, color: accent, margin: 0, fontSize: '16px', letterSpacing: '1px' };
     const formStyle = { width: '100%', maxWidth: '607px', display: 'flex', flexDirection: 'column', gap: '16px', borderTop: '1px solid #cccccc', paddingTop: isMobile ? '26px' : '34px', marginTop: '6px' };
-    const formHeadStyle = { fontFamily: serif, fontWeight: 700, color: ink, margin: 0, fontSize: isMobile ? '21px' : '23px' };
+    const formHeadStyle = { fontFamily: mono, fontWeight: 700, color: ink, margin: 0, fontSize: isMobile ? '21px' : '23px' };
     const fieldStyle = { display: 'flex', flexDirection: 'column', gap: '6px' };
     const labelStyle = { fontFamily: mono, fontSize: '12px', letterSpacing: '2px', textTransform: 'uppercase', color: body };
     const inputStyle = { fontFamily: mono, fontSize: '15px', color: ink, padding: '11px 12px', border: '1px solid #cccccc', borderRadius: '0', background: '#fff', outline: 'none', width: '100%' };
     const textareaStyle = { ...inputStyle, minHeight: '110px', resize: 'vertical' };
     const submitStyle = { fontFamily: mono, fontSize: '14px', letterSpacing: '.5px', color: '#fff', background: accent, border: 'none', padding: '13px 24px', cursor: 'pointer', alignSelf: 'flex-start' };
+    const submitHoverStyle = { background: accentDark };
     const sentStyle = { fontFamily: mono, fontSize: '15px', color: ink, margin: 0 };
     const projectsStyle = { flex: 1, width: '100%', maxWidth: '607px', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', gap: '2px', textAlign: 'center' };
     const projectLinkStyle = { fontFamily: mono, color: accent, textDecoration: 'none', fontSize: isMobile ? '19px' : '20px', lineHeight: 1.9, cursor: 'pointer', alignSelf: 'center' };
@@ -561,12 +661,16 @@ class Component extends DCLogic {
 
     return {
       rootStyle, sidebarStyle, brandRowStyle, logoStyle, logoHoverStyle, logoImgStyle, navStyle,
+      videoBannerStyle, videoElStyle,
+      showHero: active === 'News' && !projCat && !projId,
       footerStyle, footerSepStyle,
       showHamburger, hamburgerStyle, barStyle,
       mainStyle, heroWrapStyle, copyStyle, paraStyle, strongStyle, creditStyle, placeholderStyle,
       feedStyle, entryStyle, entryStyleFirst, dateStyle, newsTitleStyle, newsBodyStyle, news, press,
       pagerStyle, yearButtons, pressYearButtons,
       projectCats, communityCats, projectsStyle, projectLinkStyle,
+      projShowCats, projShowList, projShowDetail, projListItems, projDetailBlocks,
+      projBack, projBackLabel, projTitle, projDetailStyle, projListWrapStyle, projBackStyle,
       pages,
       isNews: active === 'News',
       isPress: active === 'Press',
@@ -576,7 +680,7 @@ class Component extends DCLogic {
       isShop: active === 'Shop',
       isContact: active === 'Contact',
       isOther: !['News', 'Press', 'About', 'Projects', 'Communities', 'Shop', 'Contact'].includes(active),
-      shopImgWrapStyle, shopPriceStyle, formStyle, formHeadStyle, fieldStyle, labelStyle, inputStyle, textareaStyle, submitStyle, sentStyle,
+      shopImgWrapStyle, shopPriceStyle, formStyle, formHeadStyle, fieldStyle, labelStyle, inputStyle, textareaStyle, submitStyle, submitHoverStyle, sentStyle,
       shopSent: this.state.shopSent,
       shopSubmit: (e) => { if (e) e.preventDefault(); this.setState({ shopSent: true }); },
       contactSent: this.state.contactSent,
@@ -584,8 +688,9 @@ class Component extends DCLogic {
       emailLinkStyle: { fontFamily: mono, fontSize: isMobile ? '17px' : '19px', color: accent, wordBreak: 'break-all' },
       emailRowStyle: { fontFamily: mono, fontSize: isMobile ? '17px' : '19px', color: ink, margin: 0 },
       activePage: active,
+      pageKey: active + (projId ? ':' + projId : (projCat ? ':' + projCat : '')),
       drawerVisible, scrimStyle, drawerNavStyle, closeStyle,
-      goHome: (e) => { if (e) e.preventDefault(); this.setState({ active: 'News', drawerOpen: false }); },
+      goHome: (e) => { if (e) e.preventDefault(); this.setState({ active: 'News', projCat: null, projId: null, drawerOpen: false }); },
       toggleDrawer: (e) => { if (e) e.preventDefault(); this.setState(s => ({ drawerOpen: !s.drawerOpen })); },
       stop: (e) => { if (e) e.stopPropagation(); },
     };
