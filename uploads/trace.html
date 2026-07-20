@@ -1,0 +1,129 @@
+<html>
+<head>
+<title>Mobile Lab</title>
+<link rel="stylesheet" type="text/css" href="../../css-jquery/stylesheet.css">	
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+	<script>
+		!window.jQuery && document.write('<script src="jquery-1.4.3.min.js"><\/script>');
+	</script>
+	<script type="text/javascript" src="../../fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+	<script type="text/javascript" src="../../fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+	<link rel="stylesheet" type="text/css" href="../../fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+	<script type="text/javascript">
+		$(document).ready(function() {
+			/*
+			*   Examples - images
+			*/
+
+			$("a#example1").fancybox();
+
+			$("a#example2").fancybox({
+				'overlayShow'	: false,
+				'transitionIn'	: 'elastic',
+				'transitionOut'	: 'elastic'
+			});
+
+			$("a#example3").fancybox({
+				'transitionIn'	: 'none',
+				'transitionOut'	: 'none'	
+			});
+
+			$("a#example4").fancybox({
+				'opacity'		: true,
+				'overlayShow'	: false,
+				'transitionIn'	: 'elastic',
+				'transitionOut'	: 'none'
+			});
+
+			$("a#example5").fancybox();
+
+			$("a#example6").fancybox({
+				'titlePosition'		: 'outside',
+				'overlayColor'		: '#000',
+				'overlayOpacity'	: 0.9
+			});
+
+			$("a#example7").fancybox({
+				'titlePosition'	: 'inside'
+			});
+
+			$("a#example8").fancybox({
+				'titlePosition'	: 'over'
+			});
+
+			$("a[rel=example_group]").fancybox({
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none',
+				'titlePosition' 	: 'over',
+				'titleFormat'		: function(title, currentArray, currentIndex, currentOpts) {
+					return '<span id="fancybox-title-over">Image ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>';
+				}
+			});
+
+			/*
+			*   Examples - various
+			*/
+
+			$("#various1").fancybox({
+				'titlePosition'		: 'inside',
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none'
+			});
+
+			$("#various2").fancybox();
+
+			$("#various3").fancybox({
+				'width'				: '75%',
+				'height'			: '75%',
+				'autoScale'			: false,
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none',
+				'type'				: 'iframe'
+			});
+
+			$("#various4").fancybox({
+				'padding'			: 0,
+				'autoScale'			: false,
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none'
+			});
+		});
+	</script>
+		
+		</head><body>
+		<div id="wrapper2">
+		  <tr>
+		    <td><img src="488192_10151011055583016_1848845342_n.jpg" width="700" height="466"></td>
+	      </tr>
+		  <tr>
+		    <td><p>&nbsp;</p>
+		      <p>&nbsp;</p>
+		      <p><strong>JOURNIES ACROSS BORDERS</strong><br>
+	          Screening and Talk By Nontawat Numbenchapol<br>
+	          @Jim Thomson Art Center, Bangkok, Thailand
+	          <br>
+		        <br>
+		        <br>
+		        Political conflict during the past decade has shaken Thailand’s social and cultural structure. History made over the last half century and seemingly long understand is questioned and some traces reinvestigated.<br>
+		        <br>
+		        The connections between beliefs, society, culture and history that give birth to a country will often surprisingly impact adjoining countries even a whole region but actually if we just take away the lines on a map, we easily understand that it is all just one world.<br>
+		        <br>
+		        Nontawat had a conversation with a young decommissioned solider who was traveling back to his home town in Srisaket on the Thai - Cambodia border. He told him that he began army life choosing to be transferred down south on peace-keeping duties during the upheaval there. Before being decommissioned he was sent to put down a red-shirt riot in Bangkok. Nontawat decided to follow him to Srisaket as during that time there was a dispute there between Thailand and Cambodia concerning the Preah Vihear Temple historical site and make a semi-documentary film called Where Your Boundaries Are<br>
+		        <br>
+		        Nontawat will talk about his initial inspiration and how it changed to working on seeking a grant. The difficulties of the various problems encountered during production time on real locations. The work experiences in an unfamiliar environment and also the issue of cultural sensitivity especially for Thai people there, coming from a country that had just bombed their area.<br>
+		        <br>
+		        <br>
+		        Besides this Nontawat will talk about the independent filmmaking scene in Cambodia which has only just emerged during the last two years. The emergence of a group called Kon Khmer Koun Khmer and their activities such as a filmmaking workshop called "Film Camp" and the first short film festival competition called the "1st Chaktomuk Short film Contest" which was held early this year. Also, the Cambodia Film Commission (CFC), a non-profit organization dedicated to film professionals. Nontawat will also present a selected programme of Cambodian short films from these two organisations.<br>
+		        <br>
+		        <br>
+		      </p>
+		      <p><br>
+	          </p>
+		      <p><br>
+		        <br>
+		        <br>
+		      </p>
+		      </p></td>
+        </div>
+		</body>
+</html>

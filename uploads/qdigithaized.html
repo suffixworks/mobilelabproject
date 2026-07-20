@@ -1,0 +1,154 @@
+<html>
+<head>
+<title>Mobile Lab</title>
+<link rel="stylesheet" type="text/css" href="../../css-jquery/stylesheet.css">	
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+	<script>
+		!window.jQuery && document.write('<script src="jquery-1.4.3.min.js"><\/script>');
+	</script>
+	<script type="text/javascript" src="../../fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+	<script type="text/javascript" src="../../fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+	<link rel="stylesheet" type="text/css" href="../../fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+	<script type="text/javascript">
+		$(document).ready(function() {
+			/*
+			*   Examples - images
+			*/
+
+			$("a#example1").fancybox();
+
+			$("a#example2").fancybox({
+				'overlayShow'	: false,
+				'transitionIn'	: 'elastic',
+				'transitionOut'	: 'elastic'
+			});
+
+			$("a#example3").fancybox({
+				'transitionIn'	: 'none',
+				'transitionOut'	: 'none'	
+			});
+
+			$("a#example4").fancybox({
+				'opacity'		: true,
+				'overlayShow'	: false,
+				'transitionIn'	: 'elastic',
+				'transitionOut'	: 'none'
+			});
+
+			$("a#example5").fancybox();
+
+			$("a#example6").fancybox({
+				'titlePosition'		: 'outside',
+				'overlayColor'		: '#000',
+				'overlayOpacity'	: 0.9
+			});
+
+			$("a#example7").fancybox({
+				'titlePosition'	: 'inside'
+			});
+
+			$("a#example8").fancybox({
+				'titlePosition'	: 'over'
+			});
+
+			$("a[rel=example_group]").fancybox({
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none',
+				'titlePosition' 	: 'over',
+				'titleFormat'		: function(title, currentArray, currentIndex, currentOpts) {
+					return '<span id="fancybox-title-over">Image ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>';
+				}
+			});
+
+			/*
+			*   Examples - various
+			*/
+
+			$("#various1").fancybox({
+				'titlePosition'		: 'inside',
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none'
+			});
+
+			$("#various2").fancybox();
+
+			$("#various3").fancybox({
+				'width'				: '75%',
+				'height'			: '75%',
+				'autoScale'			: false,
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none',
+				'type'				: 'iframe'
+			});
+
+			$("#various4").fancybox({
+				'padding'			: 0,
+				'autoScale'			: false,
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none'
+			});
+		});
+	</script>
+		
+		</head><body>
+		<div id="wrapper2">
+		  <tr>
+		    <td><img src="../../images/news/new2ndhalf2017/queer_digithaized.jpg" width="580" height="580"></td>
+	      </tr>
+		  <tr>
+		    <td><p>		  QUEER DIGITHAIZED <br>
+		      curated by Nontawat Numbenchapol for Lesbisch Schwule Filmtage Hamburg – International Queer Film Festival<br>
+            </p>
+		      <p>&quot;At the intersection of contemporary Thailand's cultural and political historiographies lie queer bodies. These five filmmakers explore the place of queer bodies in a society that simultaneously accepts their bodies under certain controlled scenarios while rejecting their existence as a whole.&quot; </p>
+		      <p>The five Thai queer films presented in the program were made in different years under different circumstances and social terms. From 2002, 2005, 2012, 2014, and 2017, these films inform the audiences of Thailand's shifting social, cultural, and political landscape as well as the evolution of contemporary cinematic storytelling and editing. Reflecting on the history of Thai queer cinema and the larger context of LGBTQ rights, these films were the direct result of the digital age that democratized filmmaking and put it in the hands of the individuals in the form of home videos. Without the unprecedented access to technology, it would be hard to imagine a public space in Thai society inclusive of queer stories and films such as the ones that exist now. The growing use of portable technology has increased the ability for queer storytellers to create, express themselves and gain exposure within the community. This has lead to greater acceptance as well as a film movement.<br>
+		        <br>
+<br>
+		        <br>
+		        FILM TITLE : Deep Inside<br>
+		        DIRECTOR : Tanwarin Sukkhapisit<br>
+		        COUNTRY : Thailand<br>
+		        YEAR OF PRODUCTION : 2002<br>
+		        LENGTH : 23mins <br>
+	          LANGUAGE/SUBTITLES : Thai with english subtitle.              </p>
+		      <p>&nbsp;</p>
+		      <p>FILM TITLE : Vous Vous Soviens De Moi? <br>
+		        DIRECTOR : Thunska Pansittivorakul<br>
+		        COUNTRY : Thailand<br>
+		        YEAR OF PRODUCTION : 2005 <br>
+		        LENGTH : 10 mins<br>
+	          LANGUAGE/SUBTITLES :Thai with english subtitle </p>
+		      <p>&nbsp;</p>
+		      <p>FILM TITLE : Erotic Fragments No. 1,2,3<br>
+		        DIRECTOR : Anucha Boonyawatana<br>
+		        COUNTRY : Thailand<br>
+		        YEAR OF PRODUCTION : 2011 <br>
+		        LENGTH : 6 mins<br>
+	          LANGUAGE/SUBTITLES : Thai with english subtitle </p>
+		      <p>&nbsp;</p>
+		      <p>FILM TITLE : She is My Best Friend<br>
+		        DIRECTOR : Jirassaya Wongsutin <br>
+		        COUNTRY : Thailand<br>
+		        YEAR OF PRODUCTION : 2013 <br>
+		        LENGTH : 13 mins<br>
+	          LANGUAGE/SUBTITLES : Thai with english subtitle </p>
+		      <p>&nbsp;</p>
+		      <p>FILM TITLE : Upside Down<br>
+		        DIRECTOR : Natchanon Vana<br>
+		        COUNTRY : Thailand<br>
+		        YEAR OF PRODUCTION : 2017<br>
+		        LENGTH : 35 mins<br>
+	          LANGUAGE/SUBTITLES : Thai with english subtitle </p>
+		      <p><br>
+	          </p>
+		      <p>&nbsp;</p>
+		      <p>&nbsp;</p>
+		      <p>&nbsp;</p>
+		      <p><br>
+		        <br>
+		        <br>
+		        <br>
+		      </p>
+	        </p></td>
+        </div>
+		</body>
+</html>

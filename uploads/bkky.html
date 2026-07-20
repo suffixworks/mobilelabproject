@@ -1,0 +1,199 @@
+<html>
+<head>
+<title>Mobile Lab</title>
+<link rel="stylesheet" type="text/css" href="../../css-jquery/stylesheet.css">	
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+	<script>
+		!window.jQuery && document.write('<script src="jquery-1.4.3.min.js"><\/script>');
+	</script>
+	<script type="text/javascript" src="../../fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+	<script type="text/javascript" src="../../fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+	<link rel="stylesheet" type="text/css" href="../../fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+	<script type="text/javascript">
+		$(document).ready(function() {
+			/*
+			*   Examples - images
+			*/
+
+			$("a#example1").fancybox();
+
+			$("a#example2").fancybox({
+				'overlayShow'	: false,
+				'transitionIn'	: 'elastic',
+				'transitionOut'	: 'elastic'
+			});
+
+			$("a#example3").fancybox({
+				'transitionIn'	: 'none',
+				'transitionOut'	: 'none'	
+			});
+
+			$("a#example4").fancybox({
+				'opacity'		: true,
+				'overlayShow'	: false,
+				'transitionIn'	: 'elastic',
+				'transitionOut'	: 'none'
+			});
+
+			$("a#example5").fancybox();
+
+			$("a#example6").fancybox({
+				'titlePosition'		: 'outside',
+				'overlayColor'		: '#000',
+				'overlayOpacity'	: 0.9
+			});
+
+			$("a#example7").fancybox({
+				'titlePosition'	: 'inside'
+			});
+
+			$("a#example8").fancybox({
+				'titlePosition'	: 'over'
+			});
+
+			$("a[rel=example_group]").fancybox({
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none',
+				'titlePosition' 	: 'over',
+				'titleFormat'		: function(title, currentArray, currentIndex, currentOpts) {
+					return '<span id="fancybox-title-over">Image ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>';
+				}
+			});
+
+			/*
+			*   Examples - various
+			*/
+
+			$("#various1").fancybox({
+				'titlePosition'		: 'inside',
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none'
+			});
+
+			$("#various2").fancybox();
+
+			$("#various3").fancybox({
+				'width'				: '75%',
+				'height'			: '75%',
+				'autoScale'			: false,
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none',
+				'type'				: 'iframe'
+			});
+
+			$("#various4").fancybox({
+				'padding'			: 0,
+				'autoScale'			: false,
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none'
+			});
+		});
+	</script>
+		
+		</head><body>
+		<div id="wrapper2">
+		  <tr>
+		    <td><img src="bkky_page.jpg" width="607" height="848"></td>
+	      </tr>
+		  <tr>
+		    <td><p>&nbsp;</p>
+		      <p><br>
+		      <strong>#BKKY </strong></p>
+		      <p>Docu-Drama / 5.1 / DCP / Colour / 75 mins. </p>
+		      <p>&nbsp;</p>
+		      <p>Director's Statement</p>
+		      <p><br></p>
+		      <div title="Page 3">
+		        <div>
+		          <div>
+		            <div>
+		              <p>I started my project by interviewing 100 teenagers who are between 17-20 years old and live in Bangkok. My personal rationale is that this period is<br/>
+		                the turning point of life, my life as well. Moving from high-school to college, regardless of di erent attitudes and experiences, teenagers’ love and dream are revolved around the same cliché. But when that cliché happens in di erent context, we can see di erent aspects and outcomes that are individually meaningful. </p>
+		              <p>From the past 10 years, I had been so excited about growing up. I had enjoyed exploring new space where I had dreamt of when I was younger. Now I have learnt many things. I am now in the place that I always wanted to be. Looking back upon my life with faded memories,it motivates me to bring those pictures from the past back and reconsider it in modern context. </p>
+		              <p>Not only documenting a modern story of teenagers growing up in Bangkok, this film also reminds me of my past, and allows me to document my own story. Some parts are similar yet some parts are di erent from my life. It makes me think of the first time in my life that<br/>
+		                I have tried new things, including making a film. </p>
+	                </div>
+	              </div>
+	            </div>
+	          </div>
+<p>&nbsp;</p>
+		      <p>Synopsis</p>
+		      <p><br></p>
+		      <div title="Page 2">
+		        <div>
+		          <div>
+		            <div>
+		              <p>The  lm is based on interviews of 100 Thai teenagers age between 17-19 with diverse gender iden- tities. They have shared their experiences, personal life, and attitude towards their social life in Bangkok,<br/>
+		                the capital of Thailand, where they have grown up in. The common theme of these stories are their coming of age, confusion with dreams and love, while parenting is the major factor. </p>
+		              <p>#BKKY is narrated through teenager’s interview by creating a new character named JoJo, a 17-year-old girl who represents all stories during the transitioning moment from 12th grade to university, the moment that they have many  rst experiences of life and simultaneously try to discover their true identities. </p>
+	                </div>
+	              </div>
+	            </div>
+	          </div>
+<p><br>
+	          Cast &amp; Crew </p>
+		      <p>DIRECTOR	<br>
+		        Nontawat NUMBENCHAPOL<br>
+		        <br>
+		        PRODUCER	<br>
+		        Laddawan Rattanadilokchai<br>
+		        <br>
+		        CAST	<br>
+		        Ploiyukhon Rojanakatanyoo <br>
+		        Anongnart Yusananda <br>
+		        Jeff Watson Kiatmontri <br>
+		        Kesavatana Dohrs<br>
+		        <br>
+		        SCREENPLAY	<br>
+		        Nontawat Numbenchapol<br>
+		        <br>
+		        CINEMATOGRAPHY	<br>
+		        Abhichon Rattanabhayon<br>
+		        <br>
+		        ART DIRECTOR	<br>
+		        Songvut Limmahakhun <br>
+		        Solod Charoensri<br>
+		        <br>
+		        EDITOR	<br>
+	          Wasunan Hutawet <br>
+	          Nontawat Numbenchapol<br>
+		        <br>
+		        SOUND	<br>
+		        Nopawat Likitwong<br>
+		        <br>
+		        MUSIC	<br>
+		        Vichaya Vatanasapt<br>
+		        <br>
+		        PRODUCTION COMPANY	Talent1<br>
+		        Thailand Address 4 soi Sukhumvit 36, Napasap Yak 2, Sukhumvit Rd., Klongton, Klongteay, Bangkok 10110<br>
+		        Tel: 66 22617899<br>
+		        Fax: 66 22617890<br>
+		        laddawan@talent-1.com<br>
+		        <br>
+		        WORLD SALES	<br>
+		        John Badalu<br>
+		        Indonesia <br>
+		        Tel: 62 81285325864<br>
+	          johnbadalu@gmail.com<br>
+	          <br>
+              <img src="bkky_main.jpg" width="607" height="405"><br>
+              <img src="bkky02.jpg" width="607" height="405"><br>
+              <img src="bkky03.jpg" width="607" height="405"><br>
+		      <img src="bkky04.jpg" width="607" height="405"><br>
+		      <img src="bkky05.jpg" width="607" height="405"></p>
+<p><iframe src="https://player.vimeo.com/video/181949172" width="607" height="341" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<p><a href="https://vimeo.com/181949172">#BKKY : Official trailer Busan version.</a> from <a href="https://vimeo.com/mobilelabproject">Mobile Lab</a> on <a href="https://vimeo.com">Vimeo</a>.</p>&nbsp;</p>
+		      <p>&nbsp;</p>
+		      <p><br>
+	          </p>
+		      <p>
+              <!--00--><br><br>
+                <!--06--><br>
+		        <br>
+		        <br>
+		        <br>
+	          </p>
+		      </p></td>
+        </div>
+		</body>
+</html>

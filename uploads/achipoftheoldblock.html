@@ -1,0 +1,169 @@
+<html>
+<head>
+<title>Mobile Lab</title>
+<link rel="stylesheet" type="text/css" href="../../css-jquery/stylesheet.css">	
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+	<script>
+		!window.jQuery && document.write('<script src="jquery-1.4.3.min.js"><\/script>');
+	</script>
+	<script type="text/javascript" src="../../fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+	<script type="text/javascript" src="../../fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+	<link rel="stylesheet" type="text/css" href="../../fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+	<link href="vacilandobookshop@gmail.com.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript">
+		$(document).ready(function() {
+			/*
+			*   Examples - images
+			*/
+
+			$("a#example1").fancybox();
+
+			$("a#example2").fancybox({
+				'overlayShow'	: false,
+				'transitionIn'	: 'elastic',
+				'transitionOut'	: 'elastic'
+			});
+
+			$("a#example3").fancybox({
+				'transitionIn'	: 'none',
+				'transitionOut'	: 'none'	
+			});
+
+			$("a#example4").fancybox({
+				'opacity'		: true,
+				'overlayShow'	: false,
+				'transitionIn'	: 'elastic',
+				'transitionOut'	: 'none'
+			});
+
+			$("a#example5").fancybox();
+
+			$("a#example6").fancybox({
+				'titlePosition'		: 'outside',
+				'overlayColor'		: '#000',
+				'overlayOpacity'	: 0.9
+			});
+
+			$("a#example7").fancybox({
+				'titlePosition'	: 'inside'
+			});
+
+			$("a#example8").fancybox({
+				'titlePosition'	: 'over'
+			});
+
+			$("a[rel=example_group]").fancybox({
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none',
+				'titlePosition' 	: 'over',
+				'titleFormat'		: function(title, currentArray, currentIndex, currentOpts) {
+					return '<span id="fancybox-title-over">Image ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>';
+				}
+			});
+
+			/*
+			*   Examples - various
+			*/
+
+			$("#various1").fancybox({
+				'titlePosition'		: 'inside',
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none'
+			});
+
+			$("#various2").fancybox();
+
+			$("#various3").fancybox({
+				'width'				: '75%',
+				'height'			: '75%',
+				'autoScale'			: false,
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none',
+				'type'				: 'iframe'
+			});
+
+			$("#various4").fancybox({
+				'padding'			: 0,
+				'autoScale'			: false,
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none'
+			});
+		});
+	</script>
+		
+		</head><body>
+		<div id="wrapper2">
+		  <tr>
+		    <td><p>&nbsp;</p>
+	        <p><img src="../../images/news/2023/achip.jpg" width="580" height="387" alt=""/></p></td>
+	      </tr>
+		  <tr>
+		    <td><p><strong>A CHIP OF THE OLD BLOCK</strong>		      </p>
+		      <p>2023/ Sound / B&amp;W /88 min / 3 Channel synchronize</p>
+		      <div dir="auto">Since 2020, a new generation of Thais have arisen who have bravely questioned and protested the deep structural inequalities of Thai society. Many of these individuals have ended up charged with lèse majesté — a heavy criminal offense under Thai law, and a tool of conservative judicial activism. The heavy-handed use of what many consider the &ldquo;nuclear option&rdquo; of Thai law was an eye-opening event for many Thai people that  exposed the leanings of an ostensibly &ldquo;neutral&rdquo; judiciary, and has inspired us to investigate Thai history. To our surprise and astonishment, we found that the lèse majesté law is directly connected to the 1960s cold war context — a period that expanded and changed Thailand&rsquo;s political actors drastically. <br>
+		      </div>
+		      <p dir="ltr">On the dawn of 24 June 1932, the Khana Ratsadon ("Peoples' Party") ended almost 800 years of absolute monarchy in a near-bloodless coup. Siam began the transition from an absolute to a democratic, constitutional monarchy, and the Khana Ratsadon insisted that the power of the nation state belonged to the people. </p>
+		      <br>
+		      <p dir="ltr">Thai political scientist Somkiat Wanthana (1987) has proposed that the Siamese nation-state started to take shape between 1892-1932, but that Thai absolute monarchists made concerted efforts to impede its full formation. According to Somkiat, Thailand can be considered a nation state for only a short a few years after the 1932 revolution. Tensions between nationalists and royalists continued and intensified in the 1940s-1950s.</p>
+		      <br>
+		      <p dir="ltr">In the early years after the revolution, lèse majesté laws were abolished. However, throughout the next two decades, royalists tried to revive monarchical power, and the lèse majesté law was successfully restored under section 112 of the Thai criminal code in 1956. Section 112 stipulates a sentence of 7 years imprisonment for those found guilty of slandering, insulting, or acting with malice towards the king, queen, royal heir or regent.</p>
+		      <br>
+		      <p dir="ltr">Throughout the 1940s and 1950s, royalists worked to restore monarchical power through changes to laws, political institutions, and in popular culture. The Thai historian Nattapol Chaiching (2011) suggests that the US government under Eisenhower approved the glorification of King Bhumibol Adulyadej as the father of the nation as part of an anti-communist psychological strategy. At the same time many parts of Thailand hosted US military personnel and equipment during the Indochina wars, and played a role in the domestic Thai political conflict between military parties (such as of Sarit Thanarat and Thanom Kittikachorn) and civilian parties for two decades.  </p>
+		      <br>
+		      <p dir="ltr">In the 1950s, Field Marshal Sarit Thanarat mingled the lèse majesté law with issues of state security, for example in the execution of Khrong Chandawong, a politician and pro-democracy activist accused of communist anti-monarchy activity. </p>
+		      <p dir="ltr">The Thai historian Thongchai Winichakul (2013) suggests that, after the uprising of 14 October 1973, the royal institution was perceived as &ldquo;above politics&rdquo; in contrast to civilian political parties that were perceived as dirty and fraudulent. Charges of lèse majesté were treated as synonymous with communist activity throughout the 1970s. </p>
+		      <br>
+		      <p dir="ltr">Immediately after the military coup of 6 October 1976 came a violent crackdown by Thai police and lynchings of students and leftist protesters by right-wing paramilitaries. The military government also increased the sentence for lèse majesté law charges to 15 years imprisonment.</p>
+		      <br>
+		      <p dir="ltr">By the end of the 1970s, the role of the Communist Party of Thailand in Thai politics petered out as the American military retreated from their cold war buildup. Somsak Jeamteerasakul (2001), Thai historian, describes the &ldquo;mass monarchy&rdquo; of the era; a populist imagining of the Thai royal institution, constructed and propagandized through new mass media, reiterating royalist discourses.These monarchist tropes included the &ldquo;heavy royal duties&rdquo; (song ngan nak) of a king dedicated to working for the country, or the palace-promoted &ldquo;sufficiency economy,&rdquo; an alternative to the American-style capitalism that was spreading throughout the country as Thailand became industrialized, giving rise to an expanding middle class.</p>
+		      <br>
+		      <p dir="ltr">The section 112 lèse majesté law has returned to use since the coup of 2006, which itself was the outcome of a behind-the-scenes power struggle between former prime minister Thaksin Shinawatra along with his Thai Rak Thai party and the &ldquo;network monarchy&rdquo; helmed by General Prem Tinsulanonda. Political activism and protest by the &ldquo;Red Shirts&rdquo; supporters of deposed prime minister Thaksin throughout 2008-2010 culminated in a dramatic and violent crackdown by the army using military-grade weapons in the heart of Bangkok. In the aftermath many Red Shirt protesters were charged under the lèse majesté law, such as Noom Red Non, Somyot Prueksakasemsuk, Surachai Danwattananusorn and also caught up in the dragnet were peripheral or unrelated individuals, as in the case of  &ldquo;Arkong SMS.&rdquo;</p>
+		      <br>
+		      <p dir="ltr">The 2014 coup led by General Prayut Chan-o-cha was followed by another round of pursuit and arrest of dissenters (some of them are these three people who are cases of enforced disappearances, such as Wanchalearm Satsaksit, Surachai Danwattananusorn, and Siam Theerawut), rationalized by the government under the rubric of &ldquo;national security.&rdquo; through the lèse majesté law.  This long and perhaps most repressive period of Thai political history has fueled the birth of a new, young generation of dissenters and protesters, the first group of people to widely and openly challenge the system since the Red Shirt demonstrations of the late 2000&rsquo;s and early 2010&rsquo;s.</p>
+		      <br>
+		      <p dir="ltr">Public criticism of the royal institution has risen to an unprecedented level, to the consternation of royalists. In a speech given in the evening of 3 August 2020 at the Democracy Monument in Bangkok, Anon Nampa, a human rights lawyer and activist,  openly broke the taboo on directly criticizing the Thai monarchy. Within days he was detained and charged with sedition. The number of criminal charges and detentions quickly climbed thereafter. According to iLaw Thailand (a Thai human rights NGO), by 9 February of 2021 the total number of lèse majesté cases had risen to 44, with the youngest charged under section 112 a 16 year old minor whose crime was to dress in Thai traditional costume for a 29 October 2020 protest called &ldquo;Common Art Activism&rdquo; (Silapa Ratsadorn).</p>
+		      <br>
+		      <p dir="ltr">The revival of and enforcement of the lèse majesté law is directly related to attempts to restore hegemonic — if not absolute — royal power. The authority of the monarchy has been developed from seeds laid by the collaborative efforts of the Thai military and American government during the cold war.  Today&rsquo;s lèse majesté law (section 112), royal authority and hyper-royalism are products and remnants of the cold war holding back the forward movement of Thai society. The new generation of young Thai people live in an atmosphere of despair, with political leaders such as Parit Chiwarak (Penguin), Anon Nampa, Panupong Jadnok (Mike), Panusaya Sithijirawattanakul, Somyot Prueksakasemsuk, Jatupat Boonpattararaksa (Pai), Piyarat Chongthep, and Chaiamorn Kaewwiboonpan all detained and charged.</p>
+		      <br>
+		      <p dir="ltr">Our aim with this work is to inspire and attempt to heal the scars left over from the cold war that still inflict pain on Thailand to this day. This is not just for us as artists, but for everyone who has and continues to defy state oppression and release their full humanity. </p>
+		      <br>
+		      <p dir="ltr">&ldquo;I tried to find him everywhere, I couldn&rsquo;t find him, I asked the civil authorities, they didn&rsquo;t give any information. I feel pain and question why Chao Sao Mha Pa (political stage performance) could lead Siam to live in exile. I don&rsquo;t understand why they did this to my son. This was like trying to find the pin in the ocean, I couldn&rsquo;t say any words, there were just tears. The life of the people is meaningless to them.&rdquo;</p>
+		      <br>
+		      <p dir="ltr">The words of Sitanan Satsaksit, mother of Wanchalearm Satsaksit, a prominent Thai pro-democracy activist who had lived in exile in Cambodia since 2014, has not been seen since. He is the ninth exiled critic of Thailand's military and monarchy to become a victim of enforced disappearance in recent years, inspire us and begs us to question how these exiles - born after the 1960s and raised under a constant stream of cold war propaganda - how did these exiles free themselves from the hyper-royalist ideology that dominated their generation? How do they become political activists who spark the 2020-2021 demonstration?</p>
+		      <br>
+		      <p dir="ltr">Through image and sound, through the conversation and gestures of Kanya Theerawut (Siam Theerawut&rsquo;s mother), Sitanan Satsaksit (Wanchalearm Satsaksit&rsquo;s sister), and Pranee Danwattananusorn (Surachai Danwattananusorn&rsquo;s wife), we will simultaneously record the three mothers&rsquo; conversation through full frontal images and sound, via three cameras. The images will be shot in black and white with a plain white studio background. The finalized videos will be installed on flat screen tv&rsquo;s,  hung on white walls in the installation site. This is our way to explore, dismantle and challenge the legacies and leftovers of Thai crypto-colonialism.<br>
+<br>
+<strong>Credit</strong><br>
+		      Artist: Nontawat Numbenchapol and Kridpuj Dhansandors<br>
+Director of Photography : Ittipun Promkaew <br>
+Post Production : Pob Porthani, Kwanjuta Kumbunlue<br>
+Subtitle : Ann Kaewta <br>
+Still Photography : Withit Chanthamarit </p>
+              <p><br>
+                <img src="../../images/projects/achip/achip02.jpg" width="580" height="387" alt=""/><br>
+                <img src="../../images/projects/achip/achip03.jpg" width="580" height="387" alt=""/><img src="../../images/projects/achip/achip05.jpg" width="580" height="387" alt=""/><br>
+              <img src="../../images/projects/achip/achip04.jpg" width="580" height="387" alt=""/> </p>
+              <p>Installation view photo by <a href="https://www.instagram.com/marisaaroundwork/" target="_blank">Marisa Srijunplean</a><br>
+              </p>
+              <div title="Page 3">
+                <div>
+                  <div>
+                    <div>
+                      <p>&nbsp;</p>
+</div>
+                  </div>
+                </div>
+              </div>
+<p>&nbsp; </p>
+              <p>&nbsp;</p>
+              <p><br>
+                <br>
+                <br>
+                <br>
+                <br>
+              </p>
+              &nbsp;</p>
+              </p></td>
+        </div>
+		</body>
+</html>
