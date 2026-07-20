@@ -85,6 +85,13 @@ a:hover{color:#fff;background:var(--accent);}
 .copy{width:100%;max-width:var(--col);display:flex;flex-direction:column;gap:30px;}
 .para{font-family:var(--mono);color:var(--ink);margin:0;font-size:16px;line-height:1.3;text-wrap:pretty;white-space:pre-line;}
 
+/* ---------- Projects index (categories) ---------- */
+.projects-index{width:100%;max-width:var(--col);display:flex;flex-direction:column;gap:34px;margin-inline:auto;}
+.projcat{display:flex;flex-direction:column;gap:8px;}
+.projcat-h{font-family:var(--mono);font-weight:700;color:var(--ink);margin:0;
+  font-size:13px;letter-spacing:2px;text-transform:uppercase;text-align:center;
+  padding-bottom:8px;border-bottom:1px solid var(--rule);}
+
 /* ---------- Projects / Communities nav ---------- */
 .projnav{width:100%;max-width:var(--col);display:flex;flex-direction:column;
   align-items:center;gap:2px;text-align:center;margin-inline:auto;}
