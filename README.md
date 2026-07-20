@@ -22,7 +22,6 @@ projects/<slug>.html   Individual project pages (doiboy, boundary, bkky, …)
 styles.css          Digital Blue theme — Courier New + Source Serif 4, 607px column
 app.js              Vanilla JS: mobile drawer + News/Press year filter (no framework)
 assets/logo.png     Logo (Digital Blue wordmark)
-assets/media/…      Real images, original filenames/paths from the archive
 source/             Original reference files — NOT used by the live site:
                       Mobile Lab.dc.html          Claude Design component (original)
                       projects-data.js            Project detail content
@@ -30,6 +29,9 @@ source/             Original reference files — NOT used by the live site:
                       mobile-lab-design-system.html
                       uploads/, screenshots/
 ```
+
+Content is **text-only** (typographic), sourced solely from the HTML in the *Mobile Lab
+Project* folder — no content artwork/photography, only the brand logo.
 
 Plain HTML/CSS/JS with **no framework or runtime dependency** — pages open directly in a
 browser (`file://`) or over HTTP. The only external request is the Source Serif 4 web
