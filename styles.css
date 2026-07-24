@@ -35,6 +35,9 @@ a:hover{color:#fff;background:var(--accent);}
 /* ---------- hero video banner ---------- */
 .hero-banner{width:100%;height:100vh;background:#111111;overflow:hidden;flex-shrink:0;}
 .hero-banner video{width:100%;height:100%;object-fit:cover;display:block;}
+/* News landing: video fills the top; the nav bar lands just above the footer on
+   load, then sticks to the top once you scroll (header height 72 + footer ~66). */
+.hero-banner.hero-news{height:calc(100svh - 72px - 66px);}
 
 /* ---------- header ---------- */
 .site-header{
@@ -186,4 +189,5 @@ a:hover{color:#fff;background:var(--accent);}
   .emailrow,.emailrow a{font-size:17px;}
   .pgrid.pg2{grid-template-columns:1fr;}
   .site-footer{padding:20px 22px;font-size:13px;}
+  .hero-banner.hero-news{height:calc(100svh - 84px - 78px);}
 }
