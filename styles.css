@@ -46,7 +46,15 @@ a:hover{color:#fff;background:var(--accent);}
 .brand-row{display:flex;align-items:center;justify-content:space-between;gap:16px;}
 .logo{display:inline-flex;line-height:0;padding:0;background:transparent;}
 .logo:hover{background:transparent;}
-.logo img{height:46px;width:auto;}
+.logo .logo-svg{height:46px;width:auto;display:block;overflow:visible;}
+/* logo hover — blue dot expands, "M" shifts left, rest of "Mobile Lab" shifts
+   right, "project" stays put (effect C) */
+.logo .gl{transition:transform .5s cubic-bezier(.34,1.28,.5,1);}
+.logo .dot circle{transition:transform .5s cubic-bezier(.34,1.4,.5,1);transform-box:fill-box;transform-origin:center;}
+.logo:hover .top:not(.m):not(.dot){transform:translateX(15px);}
+.logo:hover .top.m{transform:translateX(-15px);}
+.logo:hover .bigdot circle{transform:scale(1.5);}
+@media (prefers-reduced-motion:reduce){.logo .gl,.logo .dot circle{transition-duration:.001ms !important;}}
 .site-nav{display:flex;flex-wrap:wrap;gap:26px;align-items:center;justify-content:flex-end;}
 .navlink{font-family:var(--mono);color:var(--accent);font-size:16px;line-height:1.35;cursor:pointer;}
 .navlink.active{font-weight:700;text-decoration:underline;}
@@ -169,7 +177,7 @@ a:hover{color:#fff;background:var(--accent);}
 @media (max-width:639px){
   .site-header{height:auto;padding:20px 22px;flex-direction:column;align-items:stretch;gap:16px;}
   .brand-row{width:100%;}
-  .logo img{height:34px;}
+  .logo .logo-svg{height:34px;}
   .site-main{padding:22px;gap:26px;}
   .page{gap:26px;}
   .entry{padding:26px 0;}
