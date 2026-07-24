@@ -185,7 +185,7 @@ a:hover{color:#fff;background:var(--accent);}
 @media (max-width:639px){
   .site-header{height:auto;padding:20px 22px;flex-direction:column;align-items:stretch;gap:16px;}
   .brand-row{width:100%;}
-  .logo .logo-svg{height:29px;}
+  .logo .logo-svg{height:25px;}
   .site-main{padding:22px;gap:26px;}
   .page{gap:26px;}
   .entry{padding:26px 0;}
