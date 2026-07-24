@@ -46,7 +46,7 @@ a:hover{color:#fff;background:var(--accent);}
   display:flex;align-items:center;justify-content:space-between;gap:40px;
   position:sticky;top:0;z-index:20;background:#fff;
 }
-.brand-row{display:flex;align-items:center;justify-content:space-between;gap:16px;}
+.brand-row{flex:1;min-width:0;display:flex;align-items:center;justify-content:space-between;gap:16px;}
 .logo{display:inline-flex;line-height:0;padding:0;background:transparent;}
 .logo:hover{background:transparent;}
 .logo .logo-svg{height:39px;width:auto;display:block;overflow:visible;}
