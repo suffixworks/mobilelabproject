@@ -30,8 +30,8 @@
       var dist = (r.top <= mid && r.bottom >= mid)
         ? 0
         : Math.min(Math.abs(r.top - mid), Math.abs(r.bottom - mid));
-      var f = Math.min(1, dist / (vh * 0.5));
-      a.style.opacity = (1 - f * 0.7).toFixed(3);
+      var f = Math.min(1, dist / (vh * 0.42));
+      a.style.opacity = (1 - f * 0.82).toFixed(3);
     }
   }
   var ticking = false;
