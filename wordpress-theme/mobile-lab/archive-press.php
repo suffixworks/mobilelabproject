@@ -21,7 +21,9 @@ get_header();
 						<div class="ml-img"><?php the_post_thumbnail( 'large' ); ?></div>
 					<?php endif; ?>
 					<h2 class="title"><?php the_title(); ?></h2>
-					<div class="entry-content"><?php the_content(); ?></div>
+					<?php // Always show the full item here — Press is read in the feed, not on a detail page.
+					$GLOBALS['more'] = 1; ?>
+					<div class="entry-content"><?php the_content( '' ); ?></div>
 				</article>
 				<?php
 				$first = false;
