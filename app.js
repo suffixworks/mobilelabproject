@@ -63,7 +63,12 @@
     pager.querySelectorAll('.yr').forEach(function (b) {
       b.addEventListener('click', function (e) { e.preventDefault(); filterYear(b.dataset.year); });
     });
-    if (years.length) filterYear(years[0]); // buttons are newest-first
+    // buttons cover every year 2010–present; default to the newest year that
+    // actually has posts (skip empty years like 2026)
+    var yearsWithData = years.filter(function (y) {
+      return Array.prototype.some.call(articles, function (a) { return a.dataset.year === y; });
+    });
+    if (years.length) filterYear(yearsWithData[0] || years[0]);
 
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
