@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>Mobile Lab — WordPress Theme Handoff</title>
+<style>
+  @page { size: A4; margin: 16mm 15mm; }
+  *{ box-sizing:border-box; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  :root{ --blue:#0000FF; --ink:#111; --muted:#555; --line:#e2e2e2; }
+  html,body{ margin:0; }
+  body{ font-family:-apple-system,"Helvetica Neue","Sarabun",Arial,sans-serif; color:var(--ink);
+    font-size:10.6pt; line-height:1.55; }
+  .mono{ font-family:"Courier New",monospace; }
+  h1{ font-family:"Courier New",monospace; font-size:20pt; margin:0 0 2px; letter-spacing:.3px; }
+  .sub{ color:var(--muted); font-size:10pt; margin:0 0 4px; }
+  .rule{ height:3px; background:var(--blue); width:54px; margin:8px 0 18px; }
+  h2{ font-family:"Courier New",monospace; font-size:12.5pt; color:var(--blue); margin:22px 0 8px;
+    padding-bottom:5px; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:9px; }
+  h2::before{ content:""; width:9px; height:9px; border-radius:50%; background:var(--blue); flex:0 0 auto; }
+  h3{ font-size:10.5pt; margin:14px 0 4px; }
+  p{ margin:0 0 8px; }
+  ul,ol{ margin:0 0 8px; padding-left:18px; } li{ margin:2px 0; }
+  table{ border-collapse:collapse; width:100%; margin:6px 0 12px; font-size:9.8pt; }
+  th,td{ border:1px solid var(--line); padding:6px 9px; text-align:left; vertical-align:top; }
+  th{ background:#f5f5ff; font-weight:700; }
+  td.k{ white-space:nowrap; font-weight:700; width:34%; }
+  code,.tag{ font-family:"Courier New",monospace; background:#f2f2f7; padding:1px 5px; border-radius:3px; font-size:9.5pt; }
+  .b{ color:var(--blue); font-weight:700; }
+  .note{ background:#f7f7fb; border-left:3px solid var(--blue); padding:9px 12px; margin:10px 0; font-size:9.8pt; }
+  .avoid-break{ break-inside:avoid; }
+  .foot{ margin-top:26px; padding-top:10px; border-top:1px solid var(--line); color:var(--muted); font-size:9pt; }
+  header.doc{ margin-bottom:6px; }
+</style>
+</head>
+<body>
+
+<header class="doc">
+  <h1>Mobile Lab — WordPress Theme</h1>
+  <p class="sub">เอกสารส่งมอบสำหรับ Developer &amp; ลูกค้า · สเปกวิดีโอ Hero · เมนู · การติดตั้ง · โครงไฟล์</p>
+  <div class="rule"></div>
+</header>
+
+<p>ธีมนี้แปลงมาจากเว็บ static ของ Mobile Lab — คงระบบดีไซน์ Digital Blue, logo hover, จุดคั่นน้ำเงิน,
+scroll fade-in, ตัวกรองปี และ hero เต็มจอ (วิดีโอ <b>หรือ</b> รูปภาพ) ไว้ทั้งหมด โดยลูกค้าแก้เนื้อหาเองได้ผ่านหลังบ้าน WordPress</p>
+
+<!-- ================= HERO VIDEO ================= -->
+<h2>Hero Video — สเปก (News &amp; Projects)</h2>
+<p>วิดีโอแสดงเป็น <b>แบนเนอร์เต็มจอ</b> (<code>object-fit: cover</code> = ถูก crop ให้เต็มกรอบ ไม่มีขอบดำ)
+เล่นแบบ <b>autoplay + muted + loop</b> อัตโนมัติ</p>
+<table class="avoid-break">
+  <tr><td class="k">Filetype / Codec</td><td><span class="b">MP4 (H.264)</span> — นามสกุล <code>.mp4</code> (มาตรฐานเว็บ เล่นได้ทุก browser)</td></tr>
+  <tr><td class="k">ความละเอียด</td><td><span class="b">1920 × 1080 px</span> (Full HD)</td></tr>
+  <tr><td class="k">อัตราส่วน</td><td><span class="b">16:9 แนวนอน</span> — เก็บ subject สำคัญไว้กลางเฟรม (ขอบอาจโดน crop)</td></tr>
+  <tr><td class="k">ขนาดไฟล์</td><td><span class="b">≤ 8 MB</span> (แนะนำ) · สูงสุดไม่เกิน <b>15 MB</b></td></tr>
+  <tr><td class="k">ความยาว</td><td>10–30 วินาที (ตัดให้ loop ต่อเนื่องเนียน)</td></tr>
+  <tr><td class="k">Frame rate</td><td>24–30 fps</td></tr>
+  <tr><td class="k">Bitrate</td><td>~3–6 Mbps (ปรับให้ได้ขนาดไฟล์ตามเป้า)</td></tr>
+  <tr><td class="k">เสียง (audio)</td><td><b>ไม่ต้องมี</b> — ตัด audio track ออก ช่วยลดขนาดไฟล์ (เล่นแบบ muted อยู่แล้ว)</td></tr>
+</table>
+<table class="avoid-break">
+  <tr><th style="width:34%">หน้า</th><th>การแสดงผล</th></tr>
+  <tr><td class="k">News (หน้าแรก)</td><td>แบนเนอร์บนสุด — วิดีโอเต็มพื้นที่ เมนูอยู่ล่างชิด footer ตอนเปิด</td></tr>
+  <tr><td class="k">Projects (หน้ารายละเอียด)</td><td>แบนเนอร์ใต้ header — เต็มจอ</td></tr>
+</table>
+
+<!-- ================= HERO IMAGE ================= -->
+<h2>กรณีไม่มีวิดีโอ — อัปรูปภาพแทนได้</h2>
+<p>ถ้ายังไม่มี/ไม่ต้องการวิดีโอ อัป <b>รูปภาพขนาดเดียวกับวิดีโอ</b> ใช้เป็น hero แทนได้เลย (แสดงเต็มจอ crop เหมือนกัน)</p>
+<table class="avoid-break">
+  <tr><td class="k">Filetype</td><td><span class="b">JPG</span> (PNG ถ้าต้องโปร่งใส · WebP ก็ได้)</td></tr>
+  <tr><td class="k">ความละเอียด</td><td><span class="b">1920 × 1080 px (16:9)</span> — เท่ากับวิดีโอ · จอ retina ใช้ 2560 × 1440 ได้</td></tr>
+  <tr><td class="k">ขนาดไฟล์</td><td>≤ <span class="b">800 KB</span> (แนะนำ) · สูงสุด ~1.5 MB</td></tr>
+</table>
+<div class="note"><b>ลำดับการใช้งาน:</b> มีวิดีโอ → ใช้วิดีโอ · ไม่มีวิดีโอแต่มีรูป → ใช้รูป · ไม่มีทั้งคู่ → พื้นทึบ<br>
+สเปกนี้จะ<b>แสดงในหลังบ้าน</b>ใต้ช่องอัปโหลด (ทั้ง Customizer สำหรับ News และ ACF สำหรับแต่ละ Project) ลูกค้าเห็นตอนอัปเลย</div>
+
+<!-- ================= MENU ================= -->
+<h2>เมนูด้านบน — เพิ่ม/แก้เองหลังบ้านได้</h2>
+<p>ทำด้วยระบบเมนูของ WordPress (<code>wp_nav_menu</code>) — ลูกค้าแก้เองได้ที่ <b>Appearance → Menus</b> โดยไม่ต้องแตะโค้ด:</p>
+<ul>
+  <li>เพิ่ม / ลบ / สลับลำดับเมนู · เปลี่ยนชื่อ</li>
+  <li>ลิงก์ไปหน้าไหนก็ได้ (Page, Post, Custom URL)</li>
+  <li>สร้างเมนู แล้ว assign ไปที่ตำแหน่ง <span class="tag">Primary</span></li>
+</ul>
+
+<!-- ================= CONTENT MODEL ================= -->
+<h2>โครงเนื้อหา (ลูกค้ากรอกที่ไหน)</h2>
+<table>
+  <tr><th style="width:34%">ส่วนของเว็บ</th><th>เก็บใน WordPress เป็น</th></tr>
+  <tr><td class="k">News</td><td><b>Posts</b> (ปกติ)</td></tr>
+  <tr><td class="k">Press</td><td>Custom Post Type <span class="tag">press</span></td></tr>
+  <tr><td class="k">Projects</td><td>CPT <span class="tag">project</span> + taxonomy <span class="tag">project_cat</span> (Features / Documentary / Installations / Performances)</td></tr>
+  <tr><td class="k">Communities</td><td>CPT <span class="tag">community</span></td></tr>
+  <tr><td class="k">About / Shop / Contact</td><td><b>Pages</b></td></tr>
+  <tr><td class="k">รูปในโพส</td><td>Featured Image</td></tr>
+  <tr><td class="k">Meta / ลิงก์วิดีโอ / แกลเลอรี / hero ของ project</td><td><b>ACF fields</b> ในหน้าแก้ไข project</td></tr>
+  <tr><td class="k">ราคา Shop</td><td>ACF “Price line” บน Page</td></tr>
+</table>
+
+<!-- ================= INSTALL ================= -->
+<h2>การติดตั้ง (สำหรับ Dev)</h2>
+<ol>
+  <li>บีบโฟลเดอร์ <code>mobile-lab/</code> เป็น <code>mobile-lab.zip</code></li>
+  <li>WP admin → <b>Appearance → Themes → Add New → Upload Theme</b> → Activate</li>
+  <li>ติดตั้ง &amp; เปิดใช้ปลั๊กอิน <b>Advanced Custom Fields (ACF)</b> — <i>Repeater (ลิงก์วิดีโอ)</i> และ <i>Gallery</i> ต้องใช้ <b>ACF PRO</b>, ที่เหลือใช้ตัวฟรีได้</li>
+  <li><b>Settings → Reading</b> → ตั้ง Homepage (front-page.php จะ render News feed เอง)</li>
+  <li><b>Settings → Permalinks</b> → กด Save (flush rewrite rules ให้ CPT)</li>
+  <li>อัปโหลดรูป/วิดีโอจริงเข้า Media แล้วกรอกเนื้อหา</li>
+</ol>
+
+<!-- ================= FILES ================= -->
+<h2>โครงไฟล์ธีม</h2>
+<table>
+  <tr><td class="k mono">style.css</td><td>theme header + สไตล์ Digital Blue ทั้งหมด + CSS สำหรับเมนู/เนื้อหา WP</td></tr>
+  <tr><td class="k mono">functions.php</td><td>setup, enqueue CSS/JS, register menu/CPT/ACF, hero helper</td></tr>
+  <tr><td class="k mono">header.php · footer.php</td><td>โลโก้ SVG (inline) · เมนูแก้ได้ · ตำแหน่ง hero · drawer มือถือ</td></tr>
+  <tr><td class="k mono">front-page.php</td><td>News feed + ตัวกรองปี</td></tr>
+  <tr><td class="k mono">archive-press.php</td><td>Press feed + ตัวกรองปี</td></tr>
+  <tr><td class="k mono">archive-project.php</td><td>Projects → 4 หมวด</td></tr>
+  <tr><td class="k mono">taxonomy-project_cat.php</td><td>รายการ project ในหมวด</td></tr>
+  <tr><td class="k mono">single-project.php</td><td>หน้า project (meta / เนื้อหา / ลิงก์วิดีโอ / แกลเลอรี)</td></tr>
+  <tr><td class="k mono">archive/single-community.php</td><td>Communities</td></tr>
+  <tr><td class="k mono">page.php · index.php</td><td>About/Shop/Contact · fallback</td></tr>
+  <tr><td class="k mono">template-parts/hero.php</td><td>hero วิดีโอ-หรือ-รูป</td></tr>
+  <tr><td class="k mono">inc/*.php</td><td>post-types · customizer (hero News) · acf-fields</td></tr>
+  <tr><td class="k mono">assets/js/app.js</td><td>drawer, ตัวกรองปี, scroll fade-in</td></tr>
+</table>
+
+<div class="note"><b>หมายเหตุ:</b> ธีมเขียนตามมาตรฐาน WordPress แต่<b>ยังไม่ได้รันบน WP จริง</b> — Dev ควรติดตั้งบน staging แล้วตรวจ notice, อาจต้องปรับเล็กน้อย (markup เมนู, ACF field keys, permalinks) ตาม setup จริง</div>
+
+<div class="foot">Mobile Lab Project · WordPress Theme Handoff · จัดทำโดย SUFFIX — repo: suffixworks/mobilelabproject (<span class="mono">wordpress-theme/mobile-lab</span>)</div>
+
+</body>
+</html>

@@ -1,0 +1,235 @@
+/*
+Theme Name: Mobile Lab
+Theme URI: https://suffixworks.github.io/mobilelabproject/
+Author: SUFFIX
+Author URI: https://suffix.works
+Description: Custom theme for Mobile Lab Project — Digital Blue design system (Courier New + Source Serif 4, blue-dot motif, full-screen hero video/image).
+Version: 1.0.0
+Requires at least: 6.0
+Requires PHP: 7.4
+License: GPL-2.0-or-later
+Text Domain: mobile-lab
+*/
+
+/* Mobile Lab Project — Digital Blue theme (static rebuild) */
+:root{
+  --accent:#0000FF;
+  --accent-dark:#0000CC;
+  --ink:#111111;
+  --body:#666666;
+  --hair:#ececec;
+  --rule:#cccccc;
+  --mono:'Courier New', Courier, monospace;
+  --serif:'Source Serif 4', 'Noto Serif', Georgia, serif;
+  --col:607px;
+  /* blue-dot cursor (same blue as the logo), thin white ring for contrast on blue hover */
+  --dot:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18'%3E%3Ccircle cx='9' cy='9' r='5.5' fill='%230000FF' stroke='%23ffffff' stroke-width='1.5'/%3E%3C/svg%3E") 9 9, auto;
+}
+*{box-sizing:border-box;}
+/* blue-dot cursor everywhere (text fields keep a caret for usability) */
+*{cursor:var(--dot) !important;}
+input,textarea{cursor:text !important;}
+[hidden]{display:none !important;}
+html,body{margin:0;padding:0;}
+html{scrollbar-gutter:stable;overflow-y:scroll;}
+body{
+  background:#fff;color:var(--body);
+  font-family:var(--mono);
+  -webkit-font-smoothing:antialiased;
+  display:flex;flex-direction:column;min-height:100vh;
+}
+img{max-width:100%;display:block;}
+strong{font-family:var(--serif);font-weight:700;color:var(--ink);}
+
+a{color:var(--accent);text-decoration:none;padding:1px 4px;
+  transition:color .25s ease, background-color .25s ease;}
+a:hover{color:#fff;background:var(--accent);}
+
+/* ---------- hero video banner ---------- */
+.hero-banner{width:100%;height:100vh;background:#111111;overflow:hidden;flex-shrink:0;}
+.hero-banner video{width:100%;height:100%;object-fit:cover;display:block;}
+/* News landing: video fills the top; the nav bar lands just above the footer on
+   load, then sticks to the top once you scroll (header height 72 + footer ~66). */
+.hero-banner.hero-news{height:calc(100svh - 72px - 66px);}
+
+/* ---------- header ---------- */
+.site-header{
+  flex-shrink:0;width:100%;height:72px;padding:0 56px;
+  border-bottom:1px solid var(--hair);
+  display:flex;align-items:center;justify-content:space-between;gap:40px;
+  position:sticky;top:0;z-index:20;background:#fff;
+}
+.brand-row{flex:1;min-width:0;display:flex;align-items:center;justify-content:space-between;gap:16px;}
+.logo{display:inline-flex;line-height:0;padding:0;background:transparent;}
+.logo:hover{background:transparent;}
+.logo .logo-svg{height:31px;width:auto;display:block;overflow:visible;}
+/* logo hover — blue dot expands, "M" shifts left, rest of "Mobile Lab" shifts
+   right, "project" stays put (effect C) */
+.logo .gl{transition:transform .5s cubic-bezier(.34,1.28,.5,1);}
+.logo .dot circle{transition:transform .5s cubic-bezier(.34,1.4,.5,1);transform-box:fill-box;transform-origin:center;}
+.logo:hover .top:not(.m):not(.dot){transform:translateX(15px);}
+.logo:hover .top.m{transform:translateX(-15px);}
+.logo:hover .bigdot circle{transform:scale(1.5);}
+@media (prefers-reduced-motion:reduce){.logo .gl,.logo .dot circle{transition-duration:.001ms !important;}}
+.site-nav{display:flex;flex-wrap:wrap;gap:26px;align-items:center;justify-content:flex-end;}
+.navlink{font-family:var(--mono);color:var(--accent);font-size:16px;line-height:1.35;cursor:pointer;}
+.navlink.active{font-weight:700;text-decoration:underline;}
+.navlink.active:hover{color:#fff;}
+
+.hamburger{display:none;align-items:center;justify-content:center;min-height:44px;padding:6px 8px;margin:0;
+  border:none;background:transparent;cursor:pointer;font-family:var(--mono);font-size:16px;line-height:1;
+  letter-spacing:1px;color:var(--accent);}
+.hamburger:hover{color:#fff;background:var(--accent);}
+
+/* ---------- main / pages ---------- */
+.site-main{
+  flex:1;min-width:0;padding:52px 56px 64px;
+  display:flex;flex-direction:column;align-items:center;
+}
+.page{flex:1;width:100%;display:flex;flex-direction:column;align-items:center;gap:40px;
+  animation:fade .35s ease;}
+.page[hidden]{display:none;}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+
+.ml-img{position:relative;width:100%;background:#f4f4f4;overflow:hidden;}
+.ml-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+.ml-img.hero{max-width:var(--col);}
+
+/* ---------- feed (News / Press / Shop / Contact) ---------- */
+.feed{width:100%;max-width:var(--col);display:flex;flex-direction:column;}
+.entry{position:relative;padding:59px 0;display:flex;flex-direction:column;gap:16px;}
+/* single blue dot between posts (≈ the "project" dot in the logo) */
+.entry::before{content:"";position:absolute;top:0;left:50%;transform:translate(-50%,-50%);
+  width:9px;height:9px;border-radius:50%;background:var(--accent);}
+.entry.first{padding-top:0;}
+.entry.first::before{display:none;}
+.date{font-family:var(--mono);font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--body);margin:0;}
+.title{font-family:var(--mono);font-weight:700;color:var(--ink);margin:0;font-size:23px;line-height:1.2;}
+.body{font-family:var(--mono);color:var(--body);margin:0;font-size:16px;line-height:1.3;text-wrap:pretty;}
+.price{font-family:var(--mono);color:var(--accent);margin:0;font-size:16px;letter-spacing:1px;}
+.emailrow{font-family:var(--mono);font-size:19px;color:var(--ink);margin:0;}
+.emailrow a{word-break:break-all;font-size:19px;}
+
+.pgrid{display:grid;grid-template-columns:1fr;gap:12px;width:100%;}
+.pgrid.pg2{grid-template-columns:1fr 1fr;}
+
+.pager{display:flex;flex-direction:row;gap:18px;flex-wrap:wrap;
+  border-top:1px solid var(--rule);padding-top:22px;margin-top:8px;}
+.yr{font-family:var(--mono);font-size:15px;letter-spacing:1px;cursor:pointer;
+  background:transparent;border:none;padding:2px 4px;color:var(--accent);}
+.yr.active{color:var(--accent);font-weight:700;text-decoration:underline;}
+.yr:hover{color:#fff;background:var(--accent);text-decoration:none;}
+
+/* ---------- About / copy ---------- */
+.copy{width:100%;max-width:var(--col);display:flex;flex-direction:column;gap:30px;}
+.para{font-family:var(--mono);color:var(--ink);margin:0;font-size:16px;line-height:1.3;text-wrap:pretty;white-space:pre-line;}
+
+/* ---------- Projects / Communities nav (centered on screen) ---------- */
+.projnav{flex:1;width:100%;max-width:var(--col);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:2px;text-align:center;margin-inline:auto;}
+.plink{font-family:var(--mono);color:var(--accent);font-size:20px;line-height:1.9;cursor:pointer;}
+.projlist{flex:1;width:100%;max-width:var(--col);display:flex;flex-direction:column;
+  align-items:stretch;margin-inline:auto;}
+.back{font-family:var(--mono);font-size:13px;letter-spacing:1px;text-transform:uppercase;
+  color:var(--body);background:none;border:none;padding:2px 6px 8px 0;cursor:pointer;align-self:flex-start;}
+.back:hover{color:#fff;background:var(--accent);}
+
+/* ---------- Project detail ---------- */
+.projdetail{width:100%;max-width:var(--col);display:flex;flex-direction:column;gap:15px;
+  text-align:left;margin-inline:auto;}
+.figure{margin:0;}
+.cap{font-family:var(--mono);color:var(--body);margin:7px 0 0;font-size:13px;line-height:1.4;font-style:italic;}
+.titlewrap{display:flex;flex-direction:column;gap:7px;margin:4px 0 2px;}
+.ptitle{font-family:var(--mono);font-weight:700;color:var(--ink);margin:0;font-size:23px;line-height:1.2;}
+.meta{font-family:var(--mono);color:var(--body);margin:0;font-size:14px;line-height:1.5;white-space:pre-line;}
+.head{font-family:var(--mono);font-weight:700;color:var(--ink);margin:12px 0 -2px;
+  font-size:13px;letter-spacing:2px;text-transform:uppercase;}
+.vlink{font-family:var(--mono);color:var(--accent);font-size:15px;letter-spacing:.5px;align-self:flex-start;}
+
+/* ---------- forms ---------- */
+.form{width:100%;max-width:var(--col);display:flex;flex-direction:column;gap:16px;
+  border-top:1px solid var(--rule);padding-top:34px;margin-top:6px;}
+.formhead{font-family:var(--mono);font-weight:700;color:var(--ink);margin:0;font-size:23px;}
+.field{display:flex;flex-direction:column;gap:6px;}
+.field label{font-family:var(--mono);font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--body);}
+.field input,.field textarea{font-family:var(--mono);font-size:16px;color:var(--ink);
+  padding:11px 12px;border:1px solid var(--rule);border-radius:0;background:#fff;outline:none;width:100%;}
+.field input:focus,.field textarea:focus{border-color:var(--accent);}
+.field textarea{min-height:110px;resize:vertical;}
+.submit{font-family:var(--mono);font-size:14px;letter-spacing:.5px;color:#fff;background:var(--accent);
+  border:none;padding:13px 24px;cursor:pointer;align-self:flex-start;}
+.submit:hover{background:var(--accent-dark);}
+
+/* ---------- footer ---------- */
+.site-footer{flex-shrink:0;width:100%;position:sticky;bottom:0;z-index:20;background:#fff;
+  padding:22px 56px;border-top:1px solid var(--hair);
+  display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:10px;
+  font-family:var(--mono);font-size:14px;letter-spacing:.3px;color:var(--body);}
+.site-footer .sep{color:var(--rule);}
+
+/* ---------- mobile drawer ---------- */
+.scrim{position:fixed;inset:0;z-index:50;background:rgba(255,255,255,.97);
+  display:flex;flex-direction:column;}
+.scrim[hidden]{display:none;}
+.drawer{position:relative;flex:1;display:flex;flex-direction:column;gap:22px;
+  padding:80px 34px;align-items:center;justify-content:center;text-align:center;}
+.drawer .close{position:absolute;top:22px;right:22px;width:44px;height:44px;border:none;
+  background:transparent;font-size:38px;line-height:1;color:var(--ink);cursor:pointer;font-family:var(--serif);}
+.drawerlink{font-family:var(--mono);color:var(--accent);font-size:28px;cursor:pointer;}
+.drawerlink.active{font-weight:700;}
+
+/* ---------- tablet ---------- */
+@media (max-width:1023px){
+  .site-header{padding:0 40px;}
+  .site-main{padding:40px 40px 56px;}
+  .site-footer{padding:22px 40px;}
+  .hamburger{display:flex;}
+  .site-nav{display:none;}
+}
+
+/* ---------- mobile ---------- */
+@media (max-width:639px){
+  .site-header{height:auto;padding:20px 22px;flex-direction:column;align-items:stretch;gap:16px;}
+  .brand-row{width:100%;}
+  .logo .logo-svg{height:25px;}
+  .site-main{padding:22px;gap:26px;}
+  .page{gap:26px;}
+  .entry{padding:44px 0;}
+  .title,.ptitle,.formhead{font-size:21px;}
+  .plink{font-size:19px;}
+  .emailrow,.emailrow a{font-size:17px;}
+  .pgrid.pg2{grid-template-columns:1fr;}
+  .site-footer{padding:20px 22px;font-size:13px;}
+  .hero-banner.hero-news{height:calc(100svh - 84px - 78px);}
+}
+
+/* ============================================================
+   WordPress integration (menus + editor content)
+   Maps wp_nav_menu / the_content markup onto the design system.
+   ============================================================ */
+
+/* editable primary menu (Appearance → Menus) */
+.site-nav ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:26px;align-items:center;justify-content:flex-end;}
+.site-nav li{margin:0;}
+.site-nav a{font-family:var(--mono);color:var(--accent);text-decoration:none;font-size:16px;line-height:1.35;padding:1px 4px;}
+.site-nav a:hover{color:#fff;background:var(--accent);}
+.site-nav .current-menu-item>a,.site-nav .current_page_item>a,.site-nav .current-menu-parent>a{font-weight:700;text-decoration:underline;}
+
+/* mobile drawer menu */
+.drawer ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:22px;align-items:center;}
+.drawer li{margin:0;}
+.drawer a{font-family:var(--mono);color:var(--accent);text-decoration:none;font-size:28px;padding:1px 4px;}
+.drawer .current-menu-item>a{font-weight:700;}
+
+/* body typed in the editor (the_content) — matches .body / project detail */
+.entry-content{display:flex;flex-direction:column;gap:12px;}
+.entry-content p{font-family:var(--mono);color:var(--body);margin:0;font-size:16px;line-height:1.5;text-wrap:pretty;}
+.entry-content h2{font-family:var(--mono);font-weight:700;color:var(--ink);font-size:23px;line-height:1.2;margin:8px 0 -2px;}
+.entry-content h3,.entry-content h4{font-family:var(--mono);font-weight:700;color:var(--ink);font-size:13px;letter-spacing:2px;text-transform:uppercase;margin:8px 0 -4px;}
+.entry-content a{color:var(--accent);}
+.entry-content strong{font-family:var(--serif);font-weight:700;color:var(--ink);}
+.entry-content ul,.entry-content ol{margin:0;padding-left:1.2em;font-family:var(--mono);color:var(--body);font-size:16px;line-height:1.5;}
+.entry-content img{max-width:100%;height:auto;display:block;}
+
+/* project detail uses the same content styling */
+.projdetail .entry-content{gap:12px;}
