@@ -83,6 +83,19 @@ scroll fade-in, ตัวกรองปี และ hero เต็มจอ (�
   <li>สร้างเมนู แล้ว assign ไปที่ตำแหน่ง <span class="tag">Primary</span></li>
 </ul>
 
+<!-- ================= FORMS / EMAIL ================= -->
+<h2>ฟอร์ม &amp; อีเมล</h2>
+<p>ฟอร์มทั้งหมด (Contact, Shop enquiry) <b>ส่งอีเมลไปที่ <span class="b">nontawat@mobilelabproject.com</span></b></p>
+<ul>
+  <li>วางฟอร์มด้วย shortcode <code>[ml_form]</code> ในหน้า (Contact / Shop) — เปลี่ยนหัวข้อ/ปุ่มได้:<br>
+      <code>[ml_form heading="Order / Enquiry" button="Send enquiry"]</code></li>
+  <li>มีกันสแปมในตัว (honeypot + nonce) · สไตล์ตรงตามดีไซน์ (คลาส <code>.form .field .submit</code>)</li>
+  <li>แก้อีเมลปลายทางได้ที่ constant <code>MOBILE_LAB_FORM_EMAIL</code> ใน <code>functions.php</code></li>
+</ul>
+<div class="note"><b>สำคัญ (deliverability):</b> <code>wp_mail()</code> บนโฮสต์ทั่วไปอาจส่งไม่ถึง/เข้า junk →
+แนะนำติดตั้งปลั๊กอิน <b>WP Mail SMTP</b> เพื่อส่งเมลได้ชัวร์ · หรือใช้ <b>Contact Form 7 / WPForms</b> แทน
+โดยตั้ง recipient = อีเมลเดียวกัน</div>
+
 <!-- ================= CONTENT MODEL ================= -->
 <h2>โครงเนื้อหา (ลูกค้ากรอกที่ไหน)</h2>
 <table>

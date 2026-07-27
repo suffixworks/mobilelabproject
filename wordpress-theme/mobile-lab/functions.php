@@ -9,6 +9,9 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 define( 'MOBILE_LAB_VERSION', '1.1.0' );
 
+// All site forms (Contact, Shop enquiry) email this address.
+define( 'MOBILE_LAB_FORM_EMAIL', 'nontawat@mobilelabproject.com' );
+
 /* ---------------------------------------------------------------------------
  * Theme setup
  * ------------------------------------------------------------------------- */
@@ -60,6 +63,7 @@ add_action( 'wp_enqueue_scripts', function () {
 require get_theme_file_path( 'inc/post-types.php' );  // Press / Project / Community CPTs + project_cat taxonomy
 require get_theme_file_path( 'inc/customizer.php' );  // global News hero (video/image)
 require get_theme_file_path( 'inc/acf-fields.php' );  // per-post fields (only runs if ACF is active)
+require get_theme_file_path( 'inc/contact-form.php' ); // [ml_form] shortcode → emails MOBILE_LAB_FORM_EMAIL
 
 /* ---------------------------------------------------------------------------
  * Hero helper — returns the video/image URLs for the current context.

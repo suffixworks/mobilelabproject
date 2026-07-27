@@ -35,6 +35,16 @@ any block content — it does not replace the PHP templates.
 | Project meta / video links / gallery / hero | **ACF fields** on the project |
 | Shop price | ACF “Price line” on the page |
 
+## Forms (email)
+All forms email **nontawat@mobilelabproject.com** (constant `MOBILE_LAB_FORM_EMAIL`
+in `functions.php`). Place the shortcode in a page’s content:
+```
+[ml_form]
+[ml_form heading="Order / Enquiry" button="Send enquiry"]
+```
+Uses `wp_mail()` with a honeypot + nonce. **For reliable delivery install
+“WP Mail SMTP”** (or use Contact Form 7 / WPForms with the same recipient).
+
 ## Menu (editable in the back-end)
 - **Appearance → Menus →** create a menu, add items (News, Press, About, …), assign
   it to the **“Primary”** location. Add / remove / reorder any time — no code.
