@@ -1,0 +1,62 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 2,
+	"settings": {
+		"appearanceTools": true,
+		"useRootPaddingAwareAlignments": true,
+		"layout": {
+			"contentSize": "607px",
+			"wideSize": "960px"
+		},
+		"color": {
+			"defaultPalette": false,
+			"defaultGradients": false,
+			"custom": true,
+			"palette": [
+				{ "slug": "accent",   "color": "#0000FF", "name": "Digital Blue" },
+				{ "slug": "accent-dark", "color": "#0000CC", "name": "Blue (dark)" },
+				{ "slug": "ink",      "color": "#111111", "name": "Ink" },
+				{ "slug": "body",     "color": "#666666", "name": "Body grey" },
+				{ "slug": "rule",     "color": "#cccccc", "name": "Divider" },
+				{ "slug": "hairline", "color": "#ececec", "name": "Hairline" },
+				{ "slug": "white",    "color": "#ffffff", "name": "White" }
+			]
+		},
+		"typography": {
+			"customFontSize": true,
+			"lineHeight": true,
+			"fontFamilies": [
+				{ "slug": "mono",  "name": "Courier New (mono)", "fontFamily": "'Courier New', Courier, monospace" },
+				{ "slug": "serif", "name": "Source Serif 4",     "fontFamily": "'Source Serif 4', 'Noto Serif', Georgia, serif" }
+			],
+			"fontSizes": [
+				{ "slug": "small",  "size": "13px", "name": "Small" },
+				{ "slug": "normal", "size": "16px", "name": "Normal" },
+				{ "slug": "large",  "size": "23px", "name": "Large (title)" }
+			]
+		},
+		"spacing": {
+			"units": [ "px", "%", "rem", "em", "vh", "vw" ]
+		}
+	},
+	"styles": {
+		"color": {
+			"background": "#ffffff",
+			"text": "#666666"
+		},
+		"typography": {
+			"fontFamily": "'Courier New', Courier, monospace",
+			"fontSize": "16px",
+			"lineHeight": "1.5"
+		},
+		"elements": {
+			"link": {
+				"color": { "text": "#0000FF" },
+				":hover": { "color": { "text": "#0000FF" } }
+			},
+			"h1": { "typography": { "fontFamily": "'Courier New', Courier, monospace", "fontWeight": "700" }, "color": { "text": "#111111" } },
+			"h2": { "typography": { "fontFamily": "'Courier New', Courier, monospace", "fontWeight": "700" }, "color": { "text": "#111111" } },
+			"h3": { "typography": { "fontFamily": "'Courier New', Courier, monospace", "fontWeight": "700" }, "color": { "text": "#111111" } }
+		}
+	}
+}

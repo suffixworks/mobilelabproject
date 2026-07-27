@@ -7,7 +7,7 @@
 
 if ( ! defined( 'ABSPATH' ) ) { exit; }
 
-define( 'MOBILE_LAB_VERSION', '1.0.0' );
+define( 'MOBILE_LAB_VERSION', '1.1.0' );
 
 /* ---------------------------------------------------------------------------
  * Theme setup
@@ -25,6 +25,14 @@ add_action( 'after_setup_theme', function () {
 
 	// Image size matching the hero (16:9) — used for the still-image fallback.
 	add_image_size( 'ml-hero', 1920, 1080, true );
+
+	// Hybrid theme: theme.json drives the block editor (brand palette, fonts,
+	// 607px content width). Load the site stylesheet into the editor so blocks
+	// preview in the real look.
+	add_theme_support( 'editor-styles' );
+	add_editor_style( 'style.css' );
+	add_theme_support( 'wp-block-styles' );
+	add_theme_support( 'responsive-embeds' );
 } );
 
 /* ---------------------------------------------------------------------------

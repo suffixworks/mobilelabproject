@@ -1,9 +1,17 @@
-# Mobile Lab — WordPress Theme
+# Mobile Lab — WordPress Theme (Hybrid)
 
-Classic PHP theme converted from the static Mobile Lab site. The Digital Blue
+**Hybrid theme** — PHP templates (full control over the custom design) **plus a
+`theme.json`** so the block editor gets the brand color palette, fonts and the
+607px content width. Converted from the static Mobile Lab site: Digital Blue
 design system, logo hover, blue-dot dividers, scroll fade-in, year filter and
 full-screen hero (video **or** image) all carry over. Content is editable by the
 client in wp-admin.
+
+### Why hybrid (not full block/FSE)?
+The design is highly custom (hero effects, exact markup). PHP templates keep it
+precise and consistent; `theme.json` adds the modern editor benefits without
+rebuilding the design as blocks. `theme.json` mainly shapes the **editor** and
+any block content — it does not replace the PHP templates.
 
 ## Install
 1. Zip the `mobile-lab/` folder → `mobile-lab.zip`.
