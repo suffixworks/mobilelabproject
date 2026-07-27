@@ -104,7 +104,7 @@ a:hover{color:#fff;background:var(--accent);}
   border-top:1px solid var(--rule);padding-top:22px;margin-top:8px;}
 .yr{font-family:var(--mono);font-size:15px;letter-spacing:1px;cursor:pointer;
   background:transparent;border:none;padding:2px 4px;color:var(--accent);}
-.yr.active{color:var(--ink);font-weight:700;text-decoration:underline;}
+.yr.active{color:var(--accent);font-weight:700;text-decoration:underline;}
 .yr:hover{color:#fff;background:var(--accent);text-decoration:none;}
 
 /* ---------- About / copy ---------- */
