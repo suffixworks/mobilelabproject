@@ -19,7 +19,8 @@ add_action( 'init', function () {
 		'has_archive'  => true,
 		'menu_icon'    => 'dashicons-format-image',
 		'supports'     => array( 'title', 'editor', 'thumbnail', 'excerpt' ),
-		'show_in_rest' => true, // block editor
+		'taxonomies'   => array( 'post_tag' ), // enable Tags on the CPTs
+		'show_in_rest' => true,                 // block editor
 	);
 
 	register_post_type( 'press', array_merge( $common, array(

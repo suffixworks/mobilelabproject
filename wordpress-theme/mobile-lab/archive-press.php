@@ -24,6 +24,7 @@ get_header();
 					<?php // Always show the full item here — Press is read in the feed, not on a detail page.
 					$GLOBALS['more'] = 1; ?>
 					<div class="entry-content"><?php the_content( '' ); ?></div>
+					<?php the_tags( '<div class="tags-dot"><span class="lbl">Tags</span>', '<span class="sep"></span>', '</div>' ); ?>
 				</article>
 				<?php
 				$first = false;
