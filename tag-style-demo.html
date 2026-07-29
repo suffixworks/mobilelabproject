@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mobile Lab — article tags (demo)</title>
+<meta name="description" content="Two on-brand styles for article tags.">
+<link rel="icon" href="./assets/logo.png">
+<style>
+  :root{--ink:#111;--body:#666;--rule:#ccc;--hair:#ececec;--accent:#0000FF;--mono:'Courier New',Courier,monospace;--col:607px;}
+  *{box-sizing:border-box;} html,body{margin:0;}
+  body{background:#fff;color:var(--body);font-family:var(--mono);-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:var(--col);margin:0 auto;padding:44px 24px 90px;}
+  h1{font-size:19px;font-weight:700;color:var(--ink);margin:0 0 6px;}
+  .lede{font-size:13px;line-height:1.6;color:var(--body);margin:0 0 8px;}
+  .lede b{color:var(--accent);}
+  .seclabel{display:flex;align-items:center;gap:10px;margin:40px 0 0;font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--body);}
+  .seclabel .k{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;background:var(--accent);color:#fff;font-weight:700;letter-spacing:0;flex:0 0 auto;}
+  .entry{border-top:1px solid var(--rule);padding:30px 0;display:flex;flex-direction:column;gap:14px;}
+  .date{font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--body);margin:0;}
+  .title{font-weight:700;color:var(--ink);margin:0;font-size:22px;line-height:1.2;}
+  .body{color:var(--body);margin:0;font-size:16px;line-height:1.4;}
+
+  /* ===== Style A — chips (outlined blue) ===== */
+  .tags-chip{display:flex;flex-wrap:wrap;gap:8px;margin-top:2px;}
+  .tags-chip a{font-family:var(--mono);font-size:12px;letter-spacing:1px;text-transform:uppercase;
+    color:var(--accent);text-decoration:none;border:1px solid var(--accent);border-radius:0;padding:3px 10px;
+    transition:color .2s,background-color .2s;}
+  .tags-chip a:hover{color:#fff;background:var(--accent);}
+
+  /* ===== Style B — inline, blue-dot separators ===== */
+  .tags-dot{display:flex;flex-wrap:wrap;align-items:center;gap:4px 0;margin-top:2px;
+    font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--body);}
+  .tags-dot .lbl{margin-right:10px;color:var(--body);}
+  .tags-dot a{font-family:var(--mono);color:var(--accent);text-decoration:none;padding:1px 4px;}
+  .tags-dot a:hover{color:#fff;background:var(--accent);}
+  .tags-dot .sep{display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--accent);margin:0 8px;flex:0 0 auto;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Article tags — 2 styles</h1>
+  <p class="lede">ตัวอย่างการใส่ <b>Tag</b> ให้บทความ (News/Press) — ใช้เนื้อหาข่าวจริง · แท็กคลิกได้ (hover ขาว-บน-น้ำเงินตามธีม) · เลือกสไตล์ที่ชอบ</p>
+
+  <!-- ================= STYLE A ================= -->
+  <p class="seclabel"><span class="k">A</span>Chip — กล่องขอบน้ำเงิน</p>
+
+  <article class="entry" style="border-top:none;padding-top:20px;">
+    <p class="date">November 2023</p>
+    <h2 class="title">DOI BOY @ NETFLIX</h2>
+    <p class="body">On 2023 November 24th, you can watch “DOI BOY” global release on NETFLIX — a new experience where everyone can easily watch it anywhere in the world.</p>
+    <div class="tags-chip">
+      <a href="#">Film</a><a href="#">DOI BOY</a><a href="#">Netflix</a><a href="#">2023</a>
+    </div>
+  </article>
+
+  <article class="entry">
+    <p class="date">March 2023</p>
+    <h2 class="title">A Chip of the Old Block @ Jim Thompson Art Center</h2>
+    <p class="body">An exhibition that leads us to explore and rethink the Cold War era in Thailand and its aftermaths through Thai and international artists.</p>
+    <div class="tags-chip">
+      <a href="#">Exhibition</a><a href="#">Installation</a><a href="#">Bangkok</a>
+    </div>
+  </article>
+
+  <!-- ================= STYLE B ================= -->
+  <p class="seclabel"><span class="k">B</span>Inline — จุดน้ำเงินคั่น</p>
+
+  <article class="entry">
+    <p class="date">November 2023</p>
+    <h2 class="title">DOI BOY @ NETFLIX</h2>
+    <p class="body">On 2023 November 24th, you can watch “DOI BOY” global release on NETFLIX — a new experience where everyone can easily watch it anywhere in the world.</p>
+    <div class="tags-dot">
+      <span class="lbl">Tags</span>
+      <a href="#">Film</a><span class="sep"></span><a href="#">DOI BOY</a><span class="sep"></span><a href="#">Netflix</a><span class="sep"></span><a href="#">2023</a>
+    </div>
+  </article>
+
+  <article class="entry">
+    <p class="date">October 2022</p>
+    <h2 class="title">An Imperial Sake Cup and I @ Tokyo Festival</h2>
+    <p class="body">Charnvit traces his personal history from the commemorative sake cup received in 1964, outlining events that ushered in social transformation around the world.</p>
+    <div class="tags-dot">
+      <span class="lbl">Tags</span>
+      <a href="#">Performance</a><span class="sep"></span><a href="#">Japan</a><span class="sep"></span><a href="#">2022</a>
+    </div>
+  </article>
+
+  <p class="lede" style="margin-top:34px;">ใน WordPress ใช้ <b>Tags</b> ที่มีอยู่แล้ว — ลูกค้าพิมพ์แท็กในช่อง Tags ตอนเขียนโพส · คลิกแท็ก = ดูโพสอื่นที่ติดแท็กเดียวกัน · บอกได้ว่าเอา <b>A หรือ B</b> เดี๋ยวใส่ลงเว็บ + theme ให้</p>
+</div>
+</body>
+</html>
