@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<title>Mobile Lab — Addendum: Article Tags</title>
+<style>
+  @page { size: A4; margin: 16mm 15mm; }
+  *{ box-sizing:border-box; -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  :root{ --blue:#0000FF; --ink:#111; --muted:#555; --line:#e2e2e2; }
+  html,body{ margin:0; }
+  body{ font-family:-apple-system,"Helvetica Neue","Sarabun",Arial,sans-serif; color:var(--ink); font-size:10.6pt; line-height:1.55; }
+  .mono{ font-family:"Courier New",monospace; }
+  h1{ font-family:"Courier New",monospace; font-size:19pt; margin:0 0 2px; }
+  .badge{ display:inline-block; background:var(--blue); color:#fff; font-family:"Courier New",monospace; font-size:8.5pt; letter-spacing:1px; padding:2px 8px; margin:0 0 6px; }
+  .sub{ color:var(--muted); font-size:10pt; margin:0 0 4px; }
+  .rule{ height:3px; background:var(--blue); width:54px; margin:8px 0 16px; }
+  h2{ font-family:"Courier New",monospace; font-size:12.5pt; color:var(--blue); margin:20px 0 8px; padding-bottom:5px; border-bottom:1px solid var(--line); display:flex; align-items:center; gap:9px; }
+  h2::before{ content:""; width:9px; height:9px; border-radius:50%; background:var(--blue); flex:0 0 auto; }
+  p{ margin:0 0 8px; } ul,ol{ margin:0 0 8px; padding-left:18px; } li{ margin:3px 0; }
+  code{ font-family:"Courier New",monospace; background:#f2f2f7; padding:1px 5px; border-radius:3px; font-size:9.3pt; }
+  pre{ font-family:"Courier New",monospace; background:#f6f6fb; border:1px solid var(--line); border-radius:5px; padding:10px 12px; font-size:9pt; line-height:1.5; overflow:auto; white-space:pre-wrap; margin:6px 0 12px; }
+  .b{ color:var(--blue); font-weight:700; }
+  .note{ background:#f7f7fb; border-left:3px solid var(--blue); padding:9px 12px; margin:10px 0; font-size:9.8pt; }
+  table{ border-collapse:collapse; width:100%; margin:6px 0 12px; font-size:9.8pt; }
+  th,td{ border:1px solid var(--line); padding:6px 9px; text-align:left; vertical-align:top; }
+  td.k{ white-space:nowrap; font-weight:700; width:32%; }
+  .demo{ border:1px solid var(--line); border-radius:5px; padding:12px 14px; margin:8px 0 12px; font-family:"Courier New",monospace; font-size:10pt; }
+  .demo .lbl{ color:var(--muted); text-transform:uppercase; letter-spacing:1.5px; font-size:9pt; margin-right:8px; }
+  .demo a{ color:var(--blue); text-decoration:none; }
+  .demo .dot{ display:inline-block; width:5px; height:5px; border-radius:50%; background:var(--blue); margin:0 7px; vertical-align:middle; }
+  .foot{ margin-top:24px; padding-top:10px; border-top:1px solid var(--line); color:var(--muted); font-size:9pt; }
+</style>
+</head>
+<body>
+<span class="badge">ADDENDUM · เพิ่มเติมจากบรีฟหลัก</span>
+<h1>Article Tags — Mobile Lab</h1>
+<p class="sub">บรีฟเพิ่มเติม (เพิ่มจากงานเดิม) · เพิ่มระบบ <b>แท็ก</b> ให้โพส News / Press · สำหรับ Developer</p>
+<div class="rule"></div>
+
+<p>เพิ่ม <b>Tag</b> ให้บทความ News/Press แสดงแบบ <b>inline คั่นด้วยจุดน้ำเงิน</b> (ตามที่เลือก) · แท็กคลิกได้ ไปหน้า tag archive</p>
+
+<h2>หน้าตา (Style)</h2>
+<div class="demo">
+  <span class="lbl">Tags</span><a href="#">DOI BOY</a><span class="dot"></span><a href="#">Netflix</a><span class="dot"></span><a href="#">Film</a><span class="dot"></span><a href="#">2023</a>
+</div>
+<ul>
+  <li>แสดง<b>ใต้เนื้อหา</b>ของแต่ละโพส</li>
+  <li>ตัวอักษร<b>สีน้ำเงิน #0000FF</b> · คั่นด้วย<b>จุดวงกลมน้ำเงิน</b> 4px · ตัวพิมพ์ใหญ่ letter-spacing เล็กน้อย</li>
+  <li>hover = ตัวขาวบนพื้นน้ำเงิน (ตามระบบดีไซน์)</li>
+</ul>
+
+<h2>สิ่งที่ต้องเพิ่มใน theme (3 จุด)</h2>
+
+<p><b>1. เปิด taxonomy <code>post_tag</code> ให้ CPT</b> — ใน <code>inc/post-types.php</code> เพิ่มใน args ของ press/project/community:</p>
+<pre>'taxonomies' =&gt; array( 'post_tag' ),   // เปิด Tags ให้ CPT (Posts มีอยู่แล้ว)</pre>
+
+<p><b>2. แสดงแท็กในลูป News/Press</b> — ใน <code>front-page.php</code> และ <code>archive-press.php</code> วางหลัง <code>.entry-content</code> (ก่อน <code>&lt;/article&gt;</code>):</p>
+<pre>&lt;?php the_tags(
+  '&lt;div class="tags-dot"&gt;&lt;span class="lbl"&gt;Tags&lt;/span&gt;',
+  '&lt;span class="sep"&gt;&lt;/span&gt;',
+  '&lt;/div&gt;'
+); ?&gt;</pre>
+
+<p><b>3. CSS</b> — เพิ่มใน <code>style.css</code> (ถ้ายังไม่มี):</p>
+<pre>.tags-dot{display:flex;flex-wrap:wrap;align-items:center;margin-top:2px;
+  font-family:var(--mono);font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--body);}
+.tags-dot .lbl{margin-right:10px;}
+.tags-dot a{font-family:var(--mono);color:var(--accent);text-decoration:none;padding:1px 4px;}
+.tags-dot a:hover{color:#fff;background:var(--accent);}
+.tags-dot .sep{display:inline-block;width:4px;height:4px;border-radius:50%;
+  background:var(--accent);margin:0 8px;flex:0 0 auto;}</pre>
+
+<div class="note"><b>อ้างอิงโค้ดพร้อมใช้:</b> ทั้ง 3 จุดนี้อยู่ใน repo แล้ว (<span class="mono">wordpress-theme/mobile-lab</span> เวอร์ชันล่าสุด) — ถ้าดึง repo ล่าสุดจะได้เลย · ถ้าทำต่อจากไฟล์เดิม ให้ก็อป 3 ส่วนบนไปแปะ</div>
+
+<h2>การใช้งาน (ลูกค้า)</h2>
+<ul>
+  <li>ตอนเขียน/แก้โพส พิมพ์แท็กในช่อง <b>Tags</b> (ด้านขวา) — เช่น <code>DOI BOY, Netflix, 2023</code></li>
+  <li>คลิกแท็กที่หน้าเว็บ → ไปหน้ารวมโพสที่ติดแท็กเดียวกัน (tag archive)</li>
+</ul>
+
+<h2>ไฟล์ที่เกี่ยวข้อง</h2>
+<table>
+  <tr><td class="k mono">inc/post-types.php</td><td>เพิ่ม <code>post_tag</code> ให้ CPT</td></tr>
+  <tr><td class="k mono">front-page.php</td><td><code>the_tags()</code> ในลูป News</td></tr>
+  <tr><td class="k mono">archive-press.php</td><td><code>the_tags()</code> ในลูป Press</td></tr>
+  <tr><td class="k mono">style.css</td><td>CSS <code>.tags-dot</code></td></tr>
+</table>
+
+<div class="foot">Mobile Lab Project · Addendum — Article Tags · SUFFIX · repo: suffixworks/mobilelabproject</div>
+</body>
+</html>
